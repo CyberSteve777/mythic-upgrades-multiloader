@@ -48,6 +48,15 @@ subprojects {
             name = 'BlameJared Maven (JEI / CraftTweaker / Bookshelf)'
             url = 'https://maven.blamejared.com'
         }
+
+        maven {
+            name = "Fuzs Mod Resources"
+            url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/"
+        }
+    }
+
+    dependencies {
+        compileOnly(annotationProcessor("io.github.llamalad7:mixinextras-common:0.3.6"))
     }
 
     tasks.withType(JavaCompile).configureEach {

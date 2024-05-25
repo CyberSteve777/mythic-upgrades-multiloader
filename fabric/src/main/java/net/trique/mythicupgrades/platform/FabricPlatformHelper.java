@@ -1,5 +1,6 @@
 package net.trique.mythicupgrades.platform;
 
+
 import net.trique.mythicupgrades.platform.services.IPlatformHelper;
 import net.fabricmc.loader.api.FabricLoader;
 

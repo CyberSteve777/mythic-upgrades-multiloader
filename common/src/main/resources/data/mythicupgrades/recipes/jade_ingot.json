@@ -1,0 +1,34 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "jade_ingot",
+  "ingredients": [
+    {
+      "item": "mythicupgrades:jade"
+    },
+    {
+      "item": "mythicupgrades:jade"
+    },
+    {
+      "item": "mythicupgrades:jade"
+    },
+    {
+      "item": "mythicupgrades:jade"
+    },
+    {
+      "item": "mythicupgrades:necoium_ingot"
+    },
+    {
+      "item": "mythicupgrades:necoium_ingot"
+    },
+    {
+      "item": "mythicupgrades:necoium_ingot"
+    },
+    {
+      "item": "mythicupgrades:necoium_ingot"
+    }
+  ],
+  "result": {
+    "item": "mythicupgrades:jade_ingot"
+  }
+}

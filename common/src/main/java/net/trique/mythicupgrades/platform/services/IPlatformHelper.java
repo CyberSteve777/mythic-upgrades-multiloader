@@ -1,5 +1,8 @@
 package net.trique.mythicupgrades.platform.services;
 
+import net.minecraftforge.common.ForgeConfigSpec;
+import net.minecraftforge.fml.config.ModConfig;
+
 public interface IPlatformHelper {
 
     /**

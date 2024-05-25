@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "mythicupgrades:block/medium_topaz_crystal_bud"
+  },
+  "render_type": "cutout"
+}
