@@ -30,9 +30,9 @@ import java.util.function.Consumer;
 import static net.trique.mythicupgrades.util.CommonFunctions.checkForItemMastery;
 
 @Mixin(LivingEntity.class)
-public abstract class LivingEntityMixin extends Entity {
+public abstract class LivingEntityCommonMixin extends Entity {
 
-    public LivingEntityMixin(EntityType<?> type, Level world) {
+    public LivingEntityCommonMixin(EntityType<?> type, Level world) {
         super(type, world);
         deflecting_damage = 0f;
         has_damage_been_deflected = false;
@@ -44,9 +44,11 @@ public abstract class LivingEntityMixin extends Entity {
     @Shadow
     public abstract Map<MobEffect, MobEffectInstance> getActiveEffectsMap();
 
-    @Unique private boolean has_damage_been_deflected;
+    @Unique
+    private boolean has_damage_been_deflected;
 
-    @Unique private float deflecting_damage;
+    @Unique
+    private float deflecting_damage;
 
     @Unique
     private BaseMythicItem lastUsed;
@@ -130,16 +132,10 @@ public abstract class LivingEntityMixin extends Entity {
                 if (attacker != null && attacker.distanceTo(this) <= 3.0f && !has_damage_been_deflected) {
                     has_damage_been_deflected = true;
                     attacker.hurt(MythicUpgradesDamageTypes.create(attacker.level(),
-                            MythicUpgradesDamageTypes.DEFLECTING_DAMAGE_TYPE, (LivingEntity)(Object)this), deflecting_damage);
+                            MythicUpgradesDamageTypes.DEFLECTING_DAMAGE_TYPE, (LivingEntity) (Object) this), deflecting_damage);
                 }
             }
         }
         has_damage_been_deflected = false;
-    }
-
-
-    @WrapWithCondition(method = "updateFallFlying", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/item/ItemStack;hurtAndBreak(ILnet/minecraft/world/entity/LivingEntity;Ljava/util/function/Consumer;)V"))
-    private <T extends LivingEntity> boolean applyChanceWithToolMasteryForTickFallFlying(ItemStack instance, int amount, T user, Consumer<T> breakCallback) {
-        return checkForItemMastery(user);
     }
 }

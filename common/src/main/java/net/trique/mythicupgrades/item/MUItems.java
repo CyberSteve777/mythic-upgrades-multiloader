@@ -15,48 +15,48 @@ import static net.trique.mythicupgrades.config.Config.*;
 import static net.trique.mythicupgrades.effect.MUEffects.*;
 
 public class MUItems {
-    private static final ItemEffectsList aquamarineArmorEffects = new ItemEffectsListBuilder().addForEquipmentBuffs(OCEAN_SHIELD, OCEAN_SHIELD_AMPLIFIER.get()).addForEquipmentBuffs(MobEffects.DOLPHINS_GRACE, 0).addForEquipmentBuffs(MobEffects.WATER_BREATHING, 0).build();
-    private static final List<Integer> aquamarineAmplifiers = List.of(OCEAN_SHIELD_AMPLIFIER.get());
+    private static final ItemEffectsList aquamarineArmorEffects = new ItemEffectsListBuilder().addForEquipmentBuffs(OCEAN_SHIELD, OCEAN_SHIELD_AMPLIFIER.getDefault()).addForEquipmentBuffs(MobEffects.DOLPHINS_GRACE, 0).addForEquipmentBuffs(MobEffects.WATER_BREATHING, 0).build();
+    private static final List<Integer> aquamarineAmplifiers = List.of(OCEAN_SHIELD_AMPLIFIER.getDefault());
 
-    private static final ItemEffectsList citrineArmorEffects = new ItemEffectsListBuilder().addForEquipmentBuffs(HINDERING, HINDERING_AMPLIFIER.get()).build();
-    private static final List<Integer> citrineAmplifiers = List.of(HINDERING_AMPLIFIER.get());
+    private static final ItemEffectsList citrineArmorEffects = new ItemEffectsListBuilder().addForEquipmentBuffs(HINDERING, HINDERING_AMPLIFIER.getDefault()).build();
+    private static final List<Integer> citrineAmplifiers = List.of(HINDERING_AMPLIFIER.getDefault());
 
-    private static final ItemEffectsList peridotArmorEffects = new ItemEffectsListBuilder().addForEquipmentBuffs(POISONOUS_THORNS, POISONOUS_THORNS_AMPLIFIER.get()).build();
-    private static final List<Integer> peridotAmplifiers = List.of(POISONOUS_THORNS_AMPLIFIER.get());
+    private static final ItemEffectsList peridotArmorEffects = new ItemEffectsListBuilder().addForEquipmentBuffs(POISONOUS_THORNS, POISONOUS_THORNS_AMPLIFIER.getDefault()).build();
+    private static final List<Integer> peridotAmplifiers = List.of(POISONOUS_THORNS_AMPLIFIER.getDefault());
 
-    private static final ItemEffectsList zirconArmorEffects = new ItemEffectsListBuilder().addForEquipmentBuffs(ICE_SHIELD, ICE_SHIELD_AMPLIFIER.get()).build();
-    private static final List<Integer> zirconAmplifiers = List.of(ICE_SHIELD_AMPLIFIER.get());
+    private static final ItemEffectsList zirconArmorEffects = new ItemEffectsListBuilder().addForEquipmentBuffs(ICE_SHIELD, ICE_SHIELD_AMPLIFIER.getDefault()).build();
+    private static final List<Integer> zirconAmplifiers = List.of(ICE_SHIELD_AMPLIFIER.getDefault());
 
-    private static final ItemEffectsList sapphireArmorEffects = new ItemEffectsListBuilder().addForEquipmentBuffs(DAMAGE_DEFLECTION, DAMAGE_DEFLECTION_AMPLIFIER.get()).build();
-    private static final List<Integer> sapphireAmplifiers = List.of(DAMAGE_DEFLECTION_AMPLIFIER.get());
+    private static final ItemEffectsList sapphireArmorEffects = new ItemEffectsListBuilder().addForEquipmentBuffs(DAMAGE_DEFLECTION, DAMAGE_DEFLECTION_AMPLIFIER.getDefault()).build();
+    private static final List<Integer> sapphireAmplifiers = List.of(DAMAGE_DEFLECTION_AMPLIFIER.getDefault());
 
-    private static final ItemEffectsList topazArmorEffects = new ItemEffectsListBuilder().addForEquipmentBuffs(ITEM_MASTERY, ITEM_MASTERY_AMPLIFIER.get()).addForEquipmentBuffs(MobEffects.FIRE_RESISTANCE, 0).build();
-    private static final List<Integer> topazAmplifiers = List.of(ITEM_MASTERY_AMPLIFIER.get());
+    private static final ItemEffectsList topazArmorEffects = new ItemEffectsListBuilder().addForEquipmentBuffs(ITEM_MASTERY, ITEM_MASTERY_AMPLIFIER.getDefault()).addForEquipmentBuffs(MobEffects.FIRE_RESISTANCE, 0).build();
+    private static final List<Integer> topazAmplifiers = List.of(ITEM_MASTERY_AMPLIFIER.getDefault());
 
-    private static final ItemEffectsList ametrineArmorEffects = new ItemEffectsListBuilder().addForEquipmentBuffs(ARCANE_AURA, ARCANE_AURA_AMPLIFIER.get()).build();
-    private static final List<Integer> ametrineAmplifiers = List.of(ARCANE_AURA_AMPLIFIER.get());
+    private static final ItemEffectsList ametrineArmorEffects = new ItemEffectsListBuilder().addForEquipmentBuffs(ARCANE_AURA, ARCANE_AURA_AMPLIFIER.getDefault()).build();
+    private static final List<Integer> ametrineAmplifiers = List.of(ARCANE_AURA_AMPLIFIER.getDefault());
 
-    private static final ItemEffectsList jadeArmorEffects = new ItemEffectsListBuilder().addForEquipmentBuffs(MobEffects.MOVEMENT_SPEED, SPEED_AMPLIFIER.get()).addForEquipmentBuffs(MobEffects.JUMP, JUMP_BOOST_AMPLIFIER.get()).build();
-    private static final List<Integer> jadeAmplifiers = List.of(SPEED_AMPLIFIER.get(), JUMP_BOOST_AMPLIFIER.get());
+    private static final ItemEffectsList jadeArmorEffects = new ItemEffectsListBuilder().addForEquipmentBuffs(MobEffects.MOVEMENT_SPEED, SPEED_AMPLIFIER.getDefault()).addForEquipmentBuffs(MobEffects.JUMP, JUMP_BOOST_AMPLIFIER.getDefault()).build();
+    private static final List<Integer> jadeAmplifiers = List.of(SPEED_AMPLIFIER.getDefault(), JUMP_BOOST_AMPLIFIER.getDefault());
 
     private static final ItemEffectsList noItemEffects = new ItemEffectsListBuilder().build();
 
-    private static final ItemEffectsList hinderingAxeItemEffects = new ItemEffectsListBuilder().addForHit(MobEffects.WEAKNESS, (int) (WEAPONS_WEAKNESS_DURATION.get() * 20), WEAPONS_WEAKNESS_AMPLIFIER.get()).addForHit(MobEffects.MOVEMENT_SLOWDOWN, (int) (WEAPONS_SLOWNESS_DURATION.get() * 20), WEAPONS_SLOWNESS_AMPLIFIER.get()).addForHit(MobEffects.HUNGER, (int) (WEAPONS_HUNGER_DURATION.get() * 20), WEAPONS_HUNGER_AMPLIFIER.get()).build();
-    private static final ItemEffectsList hinderingSwordItemEffects = new ItemEffectsListBuilder().addForHit(MobEffects.WEAKNESS, (int) (WEAPONS_WEAKNESS_DURATION.get() * 20), WEAPONS_WEAKNESS_AMPLIFIER.get()).addForHit(MobEffects.MOVEMENT_SLOWDOWN, (int) (WEAPONS_SLOWNESS_DURATION.get() * 20), WEAPONS_SLOWNESS_AMPLIFIER.get()).addForHit(MobEffects.HUNGER, (int) (WEAPONS_HUNGER_DURATION.get() * 20), WEAPONS_HUNGER_AMPLIFIER.get()).build();
+    private static final ItemEffectsList hinderingAxeItemEffects = new ItemEffectsListBuilder().addForHit(MobEffects.WEAKNESS, (int) (WEAPONS_WEAKNESS_DURATION.getDefault() * 20), WEAPONS_WEAKNESS_AMPLIFIER.getDefault()).addForHit(MobEffects.MOVEMENT_SLOWDOWN, (int) (WEAPONS_SLOWNESS_DURATION.getDefault() * 20), WEAPONS_SLOWNESS_AMPLIFIER.getDefault()).addForHit(MobEffects.HUNGER, (int) (WEAPONS_HUNGER_DURATION.getDefault() * 20), WEAPONS_HUNGER_AMPLIFIER.getDefault()).build();
+    private static final ItemEffectsList hinderingSwordItemEffects = new ItemEffectsListBuilder().addForHit(MobEffects.WEAKNESS, (int) (WEAPONS_WEAKNESS_DURATION.getDefault() * 20), WEAPONS_WEAKNESS_AMPLIFIER.getDefault()).addForHit(MobEffects.MOVEMENT_SLOWDOWN, (int) (WEAPONS_SLOWNESS_DURATION.getDefault() * 20), WEAPONS_SLOWNESS_AMPLIFIER.getDefault()).addForHit(MobEffects.HUNGER, (int) (WEAPONS_HUNGER_DURATION.getDefault() * 20), WEAPONS_HUNGER_AMPLIFIER.getDefault()).build();
 
-    private static final ItemEffectsList poisonSwordItemEffects = new ItemEffectsListBuilder().addForHit(MobEffects.POISON, (int) (WEAPONS_POISON_DURATION.get() * 20), WEAPONS_POISON_AMPLIFIER.get()).build();
-    private static final ItemEffectsList poisonAxeItemEffects = new ItemEffectsListBuilder().addForHit(MobEffects.POISON, (int) (WEAPONS_POISON_DURATION.get() * 20), WEAPONS_POISON_AMPLIFIER.get()).build();
+    private static final ItemEffectsList poisonSwordItemEffects = new ItemEffectsListBuilder().addForHit(MobEffects.POISON, (int) (WEAPONS_POISON_DURATION.getDefault() * 20), WEAPONS_POISON_AMPLIFIER.getDefault()).build();
+    private static final ItemEffectsList poisonAxeItemEffects = new ItemEffectsListBuilder().addForHit(MobEffects.POISON, (int) (WEAPONS_POISON_DURATION.getDefault() * 20), WEAPONS_POISON_AMPLIFIER.getDefault()).build();
 
-    private static final ItemEffectsList freezeAxeItemEffects = new ItemEffectsListBuilder().addForHit(MUEffects.FREEZE, (int) (WEAPONS_FREEZE_DURATION.get() * 20), 0).build();
-    private static final ItemEffectsList freezeSwordItemEffects = new ItemEffectsListBuilder().addForHit(MUEffects.FREEZE, (int) (WEAPONS_FREEZE_DURATION.get() * 20), 0).build();
+    private static final ItemEffectsList freezeAxeItemEffects = new ItemEffectsListBuilder().addForHit(MUEffects.FREEZE, (int) (WEAPONS_FREEZE_DURATION.getDefault() * 20), 0).build();
+    private static final ItemEffectsList freezeSwordItemEffects = new ItemEffectsListBuilder().addForHit(MUEffects.FREEZE, (int) (WEAPONS_FREEZE_DURATION.getDefault() * 20), 0).build();
 
-    private static final ItemEffectsList hasteAxeItemEffects = new ItemEffectsListBuilder().addForMainHand(MobEffects.DIG_SPEED, MobEffectInstance.INFINITE_DURATION, TOOLS_HASTE_AMPLIFIER.get()).build();
-    private static final ItemEffectsList hastePickaxeItemEffects = new ItemEffectsListBuilder().addForMainHand(MobEffects.DIG_SPEED, MobEffectInstance.INFINITE_DURATION, TOOLS_HASTE_AMPLIFIER.get()).build();
-    private static final ItemEffectsList hasteHoeItemEffects = new ItemEffectsListBuilder().addForMainHand(MobEffects.DIG_SPEED, MobEffectInstance.INFINITE_DURATION, TOOLS_HASTE_AMPLIFIER.get()).build();
-    private static final ItemEffectsList hasteShovelItemEffects = new ItemEffectsListBuilder().addForMainHand(MobEffects.DIG_SPEED, MobEffectInstance.INFINITE_DURATION, TOOLS_HASTE_AMPLIFIER.get()).build();
+    private static final ItemEffectsList hasteAxeItemEffects = new ItemEffectsListBuilder().addForMainHand(MobEffects.DIG_SPEED, MobEffectInstance.INFINITE_DURATION, TOOLS_HASTE_AMPLIFIER.getDefault()).build();
+    private static final ItemEffectsList hastePickaxeItemEffects = new ItemEffectsListBuilder().addForMainHand(MobEffects.DIG_SPEED, MobEffectInstance.INFINITE_DURATION, TOOLS_HASTE_AMPLIFIER.getDefault()).build();
+    private static final ItemEffectsList hasteHoeItemEffects = new ItemEffectsListBuilder().addForMainHand(MobEffects.DIG_SPEED, MobEffectInstance.INFINITE_DURATION, TOOLS_HASTE_AMPLIFIER.getDefault()).build();
+    private static final ItemEffectsList hasteShovelItemEffects = new ItemEffectsListBuilder().addForMainHand(MobEffects.DIG_SPEED, MobEffectInstance.INFINITE_DURATION, TOOLS_HASTE_AMPLIFIER.getDefault()).build();
 
-    private static final ItemEffectsList levitationAxeItemEffects = new ItemEffectsListBuilder().addForHit(MobEffects.LEVITATION, (int) (WEAPONS_LEVITATION_DURATION.get() * 20), WEAPONS_LEVITATION_AMPLIFIER.get()).build();
-    private static final ItemEffectsList levitationSwordItemEffects = new ItemEffectsListBuilder().addForHit(MobEffects.LEVITATION, (int) (WEAPONS_LEVITATION_DURATION.get() * 20), WEAPONS_LEVITATION_AMPLIFIER.get()).build();
+    private static final ItemEffectsList levitationAxeItemEffects = new ItemEffectsListBuilder().addForHit(MobEffects.LEVITATION, (int) (WEAPONS_LEVITATION_DURATION.getDefault() * 20), WEAPONS_LEVITATION_AMPLIFIER.getDefault()).build();
+    private static final ItemEffectsList levitationSwordItemEffects = new ItemEffectsListBuilder().addForHit(MobEffects.LEVITATION, (int) (WEAPONS_LEVITATION_DURATION.getDefault() * 20), WEAPONS_LEVITATION_AMPLIFIER.getDefault()).build();
 
     public static final Item AQUAMARINE = new Item(new Item.Properties());
     public static final Item AQUAMARINE_INGOT = new Item(new Item.Properties().fireResistant());
@@ -138,8 +138,8 @@ public class MUItems {
     public static final MythicEffectsAxeItem RUBY_AXE = new MythicEffectsAxeItem(MUToolMaterials.RUBY, 5, -3f, (new Item.Properties().fireResistant()), hasteAxeItemEffects, "ruby_axe.description", ChatFormatting.RED);
     public static final MythicEffectsHoeItem RUBY_HOE = new MythicEffectsHoeItem(MUToolMaterials.RUBY, -4, 0.0f, (new Item.Properties().fireResistant()), hasteHoeItemEffects, "ruby_hoe.description", ChatFormatting.RED);
 
-    public static final SapphireAxeItem SAPPHIRE_AXE = new SapphireAxeItem(5, WEAPONS_PERCENTAGE_DAMAGE_PERCENT.get(), -3.0f, (new Item.Properties().fireResistant()), new ItemEffectsList(), "sapphire_axe.description", ChatFormatting.DARK_BLUE);
-    public static final SapphireSwordItem SAPPHIRE_SWORD = new SapphireSwordItem(3, WEAPONS_PERCENTAGE_DAMAGE_PERCENT.get(), -2.4f, (new Item.Properties().fireResistant()), new ItemEffectsList(), "sapphire_sword.description", ChatFormatting.DARK_BLUE);
+    public static final SapphireAxeItem SAPPHIRE_AXE = new SapphireAxeItem(5, WEAPONS_PERCENTAGE_DAMAGE_PERCENT.getDefault(), -3.0f, (new Item.Properties().fireResistant()), new ItemEffectsList(), "sapphire_axe.description", ChatFormatting.DARK_BLUE);
+    public static final SapphireSwordItem SAPPHIRE_SWORD = new SapphireSwordItem(3, WEAPONS_PERCENTAGE_DAMAGE_PERCENT.getDefault(), -2.4f, (new Item.Properties().fireResistant()), new ItemEffectsList(), "sapphire_sword.description", ChatFormatting.DARK_BLUE);
     public static final MythicEffectsArmorItem SAPPHIRE_HELMET = new MythicEffectsArmorItem(MUArmorMaterials.SAPPHIRE, ArmorItem.Type.HELMET, new Item.Properties().fireResistant(), sapphireArmorEffects, "sapphire_helmet.description", sapphireAmplifiers, ChatFormatting.DARK_BLUE);
     public static final MythicEffectsArmorItem SAPPHIRE_CHESTPLATE = new MythicEffectsArmorItem(MUArmorMaterials.SAPPHIRE, ArmorItem.Type.CHESTPLATE, new Item.Properties().fireResistant(), sapphireArmorEffects, "sapphire_chestplate.description", sapphireAmplifiers, ChatFormatting.DARK_BLUE);
     public static final MythicEffectsArmorItem SAPPHIRE_LEGGINGS = new MythicEffectsArmorItem(MUArmorMaterials.SAPPHIRE, ArmorItem.Type.LEGGINGS, new Item.Properties().fireResistant(), sapphireArmorEffects, "sapphire_leggings.description", sapphireAmplifiers, ChatFormatting.DARK_BLUE);

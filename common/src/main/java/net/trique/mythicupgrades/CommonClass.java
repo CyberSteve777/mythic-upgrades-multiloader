@@ -3,6 +3,11 @@ package net.trique.mythicupgrades;
 import net.trique.mythicupgrades.platform.Services;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Items;
+import net.trique.mythicupgrades.registry.RegisterMUEffects;
+import net.trique.mythicupgrades.registry.RegisterMUItems;
+
+import java.util.stream.Stream;
+
 import static net.trique.mythicupgrades.config.Config.SPEC;
 
 // This class is part of the common project meaning it is shared between all supported loaders. Code written here can only
@@ -23,6 +28,8 @@ public class CommonClass {
         // we have an interface in the common code and use a loader specific implementation to delegate our call to
         // the platform specific approach.
         Services.CONFIG_REGISTER.register(SPEC);
+        RegisterMUEffects.registerEffects();
+        RegisterMUItems.registerMythicItems();
         Constants.LOG.info("Successfully applied Config");
         if (Services.PLATFORM.isModLoaded(Constants.MOD_ID)) {
 

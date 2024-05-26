@@ -16,7 +16,6 @@ public class MythicUpgrades implements ModInitializer {
         // project.
 
         // Use Fabric to bootstrap the Common mod.
-        ForgeConfigRegistry.INSTANCE.register(Constants.MOD_ID, ModConfig.Type.SERVER, Config.SPEC);
         Constants.LOG.info("Hello Fabric world!");
         CommonClass.init();
     }

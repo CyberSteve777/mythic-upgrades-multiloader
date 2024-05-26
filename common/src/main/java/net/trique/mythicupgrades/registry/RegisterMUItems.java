@@ -1,6 +1,7 @@
 package net.trique.mythicupgrades.registry;
 
 
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -11,6 +12,10 @@ import net.minecraft.world.item.ItemStack;
 import net.trique.mythicupgrades.Constants;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.stream.Stream;
 
 import static net.trique.mythicupgrades.Constants.MOD_ID;
 import static net.trique.mythicupgrades.block.MUBlocks.*;
@@ -18,122 +23,130 @@ import static net.trique.mythicupgrades.item.MUItems.*;
 
 
 public class RegisterMUItems {
-    private static final ArrayList<Item> ALL_ITEMS = new ArrayList<>();
-    private static <T extends Item> void registerItem(String name, T item) {
-        Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(MOD_ID, name), (Item) item);
+    private static final HashMap<String, Item> ALL_ITEMS = new HashMap<>();
+
+    private static <T extends Item> void addItem(String name, T item) {
+        ALL_ITEMS.put(name, item);
+    }
+
+    private static void registerItem(Map.Entry<String, Item> entry) {
+        String name = entry.getKey();
+        Item item = entry.getValue();
+        Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(MOD_ID, name), item);
     }
 
     private static void registerMUItems() {
-        registerItem("aquamarine_helmet", AQUAMARINE_HELMET);
-        registerItem("aquamarine_chestplate", AQUAMARINE_CHESTPLATE);
-        registerItem("aquamarine_leggings", AQUAMARINE_LEGGINGS);
-        registerItem("aquamarine_boots", AQUAMARINE_BOOTS);
-        registerItem("aquamarine", AQUAMARINE);
-        registerItem("aquamarine_ingot", AQUAMARINE_INGOT);
-        registerItem("aquamarine_crystal_shard", AQUAMARINE_CRYSTAL_SHARD);
-        registerItem("aquamarine_potion", AQUAMARINE_POTION);
-        registerItem("aquamarine_upgrade_smithing_template", AQUAMARINE_UPGRADE_SMITHING_TEMPLATE);
+        addItem("aquamarine_helmet", AQUAMARINE_HELMET);
+        addItem("aquamarine_chestplate", AQUAMARINE_CHESTPLATE);
+        addItem("aquamarine_leggings", AQUAMARINE_LEGGINGS);
+        addItem("aquamarine_boots", AQUAMARINE_BOOTS);
+        addItem("aquamarine", AQUAMARINE);
+        addItem("aquamarine_ingot", AQUAMARINE_INGOT);
+        addItem("aquamarine_crystal_shard", AQUAMARINE_CRYSTAL_SHARD);
+        addItem("aquamarine_potion", AQUAMARINE_POTION);
+        addItem("aquamarine_upgrade_smithing_template", AQUAMARINE_UPGRADE_SMITHING_TEMPLATE);
 
-        registerItem("citrine_axe", CITRINE_AXE);
-        registerItem("citrine_sword", CITRINE_SWORD);
-        registerItem("citrine_helmet", CITRINE_HELMET);
-        registerItem("citrine_chestplate", CITRINE_CHESTPLATE);
-        registerItem("citrine_leggings", CITRINE_LEGGINGS);
-        registerItem("citrine_boots", CITRINE_BOOTS);
-        registerItem("citrine", CITRINE);
-        registerItem("citrine_ingot", CITRINE_INGOT);
-        registerItem("citrine_crystal_shard", CITRINE_CRYSTAL_SHARD);
-        registerItem("citrine_potion", CITRINE_POTION);
-        registerItem("citrine_upgrade_smithing_template", CITRINE_UPGRADE_SMITHING_TEMPLATE);
+        addItem("citrine_axe", CITRINE_AXE);
+        addItem("citrine_sword", CITRINE_SWORD);
+        addItem("citrine_helmet", CITRINE_HELMET);
+        addItem("citrine_chestplate", CITRINE_CHESTPLATE);
+        addItem("citrine_leggings", CITRINE_LEGGINGS);
+        addItem("citrine_boots", CITRINE_BOOTS);
+        addItem("citrine", CITRINE);
+        addItem("citrine_ingot", CITRINE_INGOT);
+        addItem("citrine_crystal_shard", CITRINE_CRYSTAL_SHARD);
+        addItem("citrine_potion", CITRINE_POTION);
+        addItem("citrine_upgrade_smithing_template", CITRINE_UPGRADE_SMITHING_TEMPLATE);
 
-        registerItem("peridot_axe", PERIDOT_AXE);
-        registerItem("peridot_sword", PERIDOT_SWORD);
-        registerItem("peridot_helmet", PERIDOT_HELMET);
-        registerItem("peridot_chestplate", PERIDOT_CHESTPLATE);
-        registerItem("peridot_leggings", PERIDOT_LEGGINGS);
-        registerItem("peridot_boots", PERIDOT_BOOTS);
-        registerItem("peridot", PERIDOT);
-        registerItem("peridot_ingot", PERIDOT_INGOT);
-        registerItem("peridot_crystal_shard", PERIDOT_CRYSTAL_SHARD);
-        registerItem("peridot_potion", PERIDOT_POTION);
-        registerItem("peridot_upgrade_smithing_template", PERIDOT_UPGRADE_SMITHING_TEMPLATE);
+        addItem("peridot_axe", PERIDOT_AXE);
+        addItem("peridot_sword", PERIDOT_SWORD);
+        addItem("peridot_helmet", PERIDOT_HELMET);
+        addItem("peridot_chestplate", PERIDOT_CHESTPLATE);
+        addItem("peridot_leggings", PERIDOT_LEGGINGS);
+        addItem("peridot_boots", PERIDOT_BOOTS);
+        addItem("peridot", PERIDOT);
+        addItem("peridot_ingot", PERIDOT_INGOT);
+        addItem("peridot_crystal_shard", PERIDOT_CRYSTAL_SHARD);
+        addItem("peridot_potion", PERIDOT_POTION);
+        addItem("peridot_upgrade_smithing_template", PERIDOT_UPGRADE_SMITHING_TEMPLATE);
 
-        registerItem("zircon_helmet", ZIRCON_HELMET);
-        registerItem("zircon_chestplate", ZIRCON_CHESTPLATE);
-        registerItem("zircon_leggings", ZIRCON_LEGGINGS);
-        registerItem("zircon_boots", ZIRCON_BOOTS);
-        registerItem("zircon_axe", ZIRCON_AXE);
-        registerItem("zircon_sword", ZIRCON_SWORD);
-        registerItem("zircon", ZIRCON);
-        registerItem("zircon_ingot", ZIRCON_INGOT);
-        registerItem("zircon_crystal_shard", ZIRCON_CRYSTAL_SHARD);
-        registerItem("zircon_potion", ZIRCON_POTION);
-        registerItem("zircon_upgrade_smithing_template", ZIRCON_UPGRADE_SMITHING_TEMPLATE);
+        addItem("zircon_helmet", ZIRCON_HELMET);
+        addItem("zircon_chestplate", ZIRCON_CHESTPLATE);
+        addItem("zircon_leggings", ZIRCON_LEGGINGS);
+        addItem("zircon_boots", ZIRCON_BOOTS);
+        addItem("zircon_axe", ZIRCON_AXE);
+        addItem("zircon_sword", ZIRCON_SWORD);
+        addItem("zircon", ZIRCON);
+        addItem("zircon_ingot", ZIRCON_INGOT);
+        addItem("zircon_crystal_shard", ZIRCON_CRYSTAL_SHARD);
+        addItem("zircon_potion", ZIRCON_POTION);
+        addItem("zircon_upgrade_smithing_template", ZIRCON_UPGRADE_SMITHING_TEMPLATE);
 
-        registerItem("ruby_shovel", RUBY_SHOVEL);
-        registerItem("ruby_axe", RUBY_AXE);
-        registerItem("ruby_pickaxe", RUBY_PICKAXE);
-        registerItem("ruby_hoe", RUBY_HOE);
-        registerItem("ruby", RUBY);
-        registerItem("ruby_ingot", RUBY_INGOT);
-        registerItem("ruby_crystal_shard", RUBY_CRYSTAL_SHARD);
-        registerItem("ruby_potion", RUBY_POTION);
-        registerItem("ruby_upgrade_smithing_template", RUBY_UPGRADE_SMITHING_TEMPLATE);
+        addItem("ruby_shovel", RUBY_SHOVEL);
+        addItem("ruby_axe", RUBY_AXE);
+        addItem("ruby_pickaxe", RUBY_PICKAXE);
+        addItem("ruby_hoe", RUBY_HOE);
+        addItem("ruby", RUBY);
+        addItem("ruby_ingot", RUBY_INGOT);
+        addItem("ruby_crystal_shard", RUBY_CRYSTAL_SHARD);
+        addItem("ruby_potion", RUBY_POTION);
+        addItem("ruby_upgrade_smithing_template", RUBY_UPGRADE_SMITHING_TEMPLATE);
 
-        registerItem("sapphire_helmet", SAPPHIRE_HELMET);
-        registerItem("sapphire_chestplate", SAPPHIRE_CHESTPLATE);
-        registerItem("sapphire_leggings", SAPPHIRE_LEGGINGS);
-        registerItem("sapphire_boots", SAPPHIRE_BOOTS);
-        registerItem("sapphire_axe", SAPPHIRE_AXE);
-        registerItem("sapphire_sword", SAPPHIRE_SWORD);
-        registerItem("sapphire", SAPPHIRE);
-        registerItem("sapphire_ingot", SAPPHIRE_INGOT);
-        registerItem("sapphire_crystal_shard", SAPPHIRE_CRYSTAL_SHARD);
-        registerItem("sapphire_potion", SAPPHIRE_POTION);
-        registerItem("sapphire_upgrade_smithing_template", SAPPHIRE_UPGRADE_SMITHING_TEMPLATE);
+        addItem("sapphire_helmet", SAPPHIRE_HELMET);
+        addItem("sapphire_chestplate", SAPPHIRE_CHESTPLATE);
+        addItem("sapphire_leggings", SAPPHIRE_LEGGINGS);
+        addItem("sapphire_boots", SAPPHIRE_BOOTS);
+        addItem("sapphire_axe", SAPPHIRE_AXE);
+        addItem("sapphire_sword", SAPPHIRE_SWORD);
+        addItem("sapphire", SAPPHIRE);
+        addItem("sapphire_ingot", SAPPHIRE_INGOT);
+        addItem("sapphire_crystal_shard", SAPPHIRE_CRYSTAL_SHARD);
+        addItem("sapphire_potion", SAPPHIRE_POTION);
+        addItem("sapphire_upgrade_smithing_template", SAPPHIRE_UPGRADE_SMITHING_TEMPLATE);
 
-        registerItem("topaz_shovel", TOPAZ_SHOVEL);
-        registerItem("topaz_pickaxe", TOPAZ_PICKAXE);
-        registerItem("topaz_axe", TOPAZ_AXE);
-        registerItem("topaz_hoe", TOPAZ_HOE);
-        registerItem("topaz_sword", TOPAZ_SWORD);
-        registerItem("topaz_helmet", TOPAZ_HELMET);
-        registerItem("topaz_chestplate", TOPAZ_CHESTPLATE);
-        registerItem("topaz_leggings", TOPAZ_LEGGINGS);
-        registerItem("topaz_boots", TOPAZ_BOOTS);
-        registerItem("topaz", TOPAZ);
-        registerItem("topaz_ingot", TOPAZ_INGOT);
-        registerItem("topaz_crystal_shard", TOPAZ_CRYSTAL_SHARD);
-        registerItem("topaz_potion", TOPAZ_POTION);
-        registerItem("topaz_upgrade_smithing_template", TOPAZ_UPGRADE_SMITHING_TEMPLATE);
+        addItem("topaz_shovel", TOPAZ_SHOVEL);
+        addItem("topaz_pickaxe", TOPAZ_PICKAXE);
+        addItem("topaz_axe", TOPAZ_AXE);
+        addItem("topaz_hoe", TOPAZ_HOE);
+        addItem("topaz_sword", TOPAZ_SWORD);
+        addItem("topaz_helmet", TOPAZ_HELMET);
+        addItem("topaz_chestplate", TOPAZ_CHESTPLATE);
+        addItem("topaz_leggings", TOPAZ_LEGGINGS);
+        addItem("topaz_boots", TOPAZ_BOOTS);
+        addItem("topaz", TOPAZ);
+        addItem("topaz_ingot", TOPAZ_INGOT);
+        addItem("topaz_crystal_shard", TOPAZ_CRYSTAL_SHARD);
+        addItem("topaz_potion", TOPAZ_POTION);
+        addItem("topaz_upgrade_smithing_template", TOPAZ_UPGRADE_SMITHING_TEMPLATE);
 
-        registerItem("ametrine_axe", AMETRINE_AXE);
-        registerItem("ametrine_sword", AMETRINE_SWORD);
-        registerItem("ametrine_helmet", AMETRINE_HELMET);
-        registerItem("ametrine_chestplate", AMETRINE_CHESTPLATE);
-        registerItem("ametrine_leggings", AMETRINE_LEGGINGS);
-        registerItem("ametrine_boots", AMETRINE_BOOTS);
-        registerItem("ametrine", AMETRINE);
-        registerItem("ametrine_ingot", AMETRINE_INGOT);
-        registerItem("ametrine_crystal_shard", AMETRINE_CRYSTAL_SHARD);
-        registerItem("ametrine_potion", AMETRINE_POTION);
-        registerItem("ametrine_upgrade_smithing_template", AMETRINE_UPGRADE_SMITHING_TEMPLATE);
+        addItem("ametrine_axe", AMETRINE_AXE);
+        addItem("ametrine_sword", AMETRINE_SWORD);
+        addItem("ametrine_helmet", AMETRINE_HELMET);
+        addItem("ametrine_chestplate", AMETRINE_CHESTPLATE);
+        addItem("ametrine_leggings", AMETRINE_LEGGINGS);
+        addItem("ametrine_boots", AMETRINE_BOOTS);
+        addItem("ametrine", AMETRINE);
+        addItem("ametrine_ingot", AMETRINE_INGOT);
+        addItem("ametrine_crystal_shard", AMETRINE_CRYSTAL_SHARD);
+        addItem("ametrine_potion", AMETRINE_POTION);
+        addItem("ametrine_upgrade_smithing_template", AMETRINE_UPGRADE_SMITHING_TEMPLATE);
 
-        registerItem("jade_axe", JADE_AXE);
-        registerItem("jade_sword", JADE_SWORD);
-        registerItem("jade_helmet", JADE_HELMET);
-        registerItem("jade_chestplate", JADE_CHESTPLATE);
-        registerItem("jade_leggings", JADE_LEGGINGS);
-        registerItem("jade_boots", JADE_BOOTS);
-        registerItem("jade", JADE);
-        registerItem("jade_ingot", JADE_INGOT);
-        registerItem("jade_crystal_shard", JADE_CRYSTAL_SHARD);
-        registerItem("jade_potion", JADE_POTION);
-        registerItem("jade_upgrade_smithing_template", JADE_UPGRADE_SMITHING_TEMPLATE);
+        addItem("jade_axe", JADE_AXE);
+        addItem("jade_sword", JADE_SWORD);
+        addItem("jade_helmet", JADE_HELMET);
+        addItem("jade_chestplate", JADE_CHESTPLATE);
+        addItem("jade_leggings", JADE_LEGGINGS);
+        addItem("jade_boots", JADE_BOOTS);
+        addItem("jade", JADE);
+        addItem("jade_ingot", JADE_INGOT);
+        addItem("jade_crystal_shard", JADE_CRYSTAL_SHARD);
+        addItem("jade_potion", JADE_POTION);
+        addItem("jade_upgrade_smithing_template", JADE_UPGRADE_SMITHING_TEMPLATE);
 
-        registerItem("raw_necoium", RAW_NECOIUM);
-        registerItem("necoium_ingot", NECOIUM_INGOT);
-        registerItem("necoium_nugget", NECOIUM_NUGGET);
+        addItem("raw_necoium", RAW_NECOIUM);
+        addItem("necoium_ingot", NECOIUM_INGOT);
+        addItem("necoium_nugget", NECOIUM_NUGGET);
+        ALL_ITEMS.entrySet().forEach(RegisterMUItems::registerItem);
     }
 
     private static void registerMUItemGroup() {

@@ -10,7 +10,7 @@
     "CrossBowItemMixin",
     "FishingRodItemMixin",
     "FlintAndSteelMixin",
-    "LivingEntityMixin",
+    "LivingEntityCommonMixin",
     "MiningToolItemMixin",
     "MobEntityMixin",
     "OnAStickItemMixin",
