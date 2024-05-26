@@ -1,7 +1,6 @@
 package net.trique.mythicupgrades.registry;
 
 
-import com.mojang.datafixers.util.Pair;
 import net.minecraft.core.Registry;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.network.chat.Component;
@@ -9,13 +8,12 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.level.block.Block;
 import net.trique.mythicupgrades.Constants;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
-import java.util.stream.Stream;
 
 import static net.trique.mythicupgrades.Constants.MOD_ID;
 import static net.trique.mythicupgrades.block.MUBlocks.*;
@@ -23,7 +21,9 @@ import static net.trique.mythicupgrades.item.MUItems.*;
 
 
 public class RegisterMUItems {
-    private static final HashMap<String, Item> ALL_ITEMS = new HashMap<>();
+    public static final HashMap<String, Item> ALL_ITEMS = new HashMap<>();
+    public static final ArrayList<Item> TOOLS = new ArrayList<>();
+    public static final ArrayList<Item> MICS = new ArrayList<>();
 
     private static <T extends Item> void addItem(String name, T item) {
         ALL_ITEMS.put(name, item);
@@ -35,7 +35,126 @@ public class RegisterMUItems {
         Registry.register(BuiltInRegistries.ITEM, new ResourceLocation(MOD_ID, name), item);
     }
 
-    private static void registerMUItems() {
+
+    private static void setTools() {
+        TOOLS.add(RUBY_SHOVEL);
+        TOOLS.add(RUBY_PICKAXE);
+        TOOLS.add(RUBY_AXE);
+        TOOLS.add(RUBY_HOE);
+        TOOLS.add(TOPAZ_SHOVEL);
+        TOOLS.add(TOPAZ_PICKAXE);
+        TOOLS.add(TOPAZ_AXE);
+        TOOLS.add(TOPAZ_HOE);
+        TOOLS.add(TOPAZ_SWORD);
+        TOOLS.add(TOPAZ_HELMET);
+        TOOLS.add(TOPAZ_CHESTPLATE);
+        TOOLS.add(TOPAZ_LEGGINGS);
+        TOOLS.add(TOPAZ_BOOTS);
+        TOOLS.add(CITRINE_AXE);
+        TOOLS.add(CITRINE_SWORD);
+        TOOLS.add(CITRINE_HELMET);
+        TOOLS.add(CITRINE_CHESTPLATE);
+        TOOLS.add(CITRINE_LEGGINGS);
+        TOOLS.add(CITRINE_BOOTS);
+        TOOLS.add(PERIDOT_AXE);
+        TOOLS.add(PERIDOT_SWORD);
+        TOOLS.add(PERIDOT_HELMET);
+        TOOLS.add(PERIDOT_CHESTPLATE);
+        TOOLS.add(PERIDOT_LEGGINGS);
+        TOOLS.add(PERIDOT_BOOTS);
+        TOOLS.add(JADE_AXE);
+        TOOLS.add(JADE_SWORD);
+        TOOLS.add(JADE_HELMET);
+        TOOLS.add(JADE_CHESTPLATE);
+        TOOLS.add(JADE_LEGGINGS);
+        TOOLS.add(JADE_BOOTS);
+        TOOLS.add(AQUAMARINE_HELMET);
+        TOOLS.add(AQUAMARINE_CHESTPLATE);
+        TOOLS.add(AQUAMARINE_LEGGINGS);
+        TOOLS.add(AQUAMARINE_BOOTS);
+        TOOLS.add(ZIRCON_AXE);
+        TOOLS.add(ZIRCON_SWORD);
+        TOOLS.add(ZIRCON_HELMET);
+        TOOLS.add(ZIRCON_CHESTPLATE);
+        TOOLS.add(ZIRCON_LEGGINGS);
+        TOOLS.add(ZIRCON_BOOTS);
+        TOOLS.add(SAPPHIRE_AXE);
+        TOOLS.add(SAPPHIRE_SWORD);
+        TOOLS.add(SAPPHIRE_HELMET);
+        TOOLS.add(SAPPHIRE_CHESTPLATE);
+        TOOLS.add(SAPPHIRE_LEGGINGS);
+        TOOLS.add(SAPPHIRE_BOOTS);
+        TOOLS.add(AMETRINE_AXE);
+        TOOLS.add(AMETRINE_SWORD);
+        TOOLS.add(AMETRINE_HELMET);
+        TOOLS.add(AMETRINE_CHESTPLATE);
+        TOOLS.add(AMETRINE_LEGGINGS);
+        TOOLS.add(AMETRINE_BOOTS);
+    }
+
+    private static void setMics() {
+        MICS.add(RUBY);
+        MICS.add(RUBY_INGOT);
+        MICS.add(RUBY_CRYSTAL_SHARD);
+        MICS.add(RUBY_POTION);
+        MICS.add(RUBY_UPGRADE_SMITHING_TEMPLATE);
+
+        MICS.add(TOPAZ);
+        MICS.add(TOPAZ_INGOT);
+        MICS.add(TOPAZ_CRYSTAL_SHARD);
+        MICS.add(TOPAZ_POTION);
+        MICS.add(TOPAZ_UPGRADE_SMITHING_TEMPLATE);
+
+        MICS.add(CITRINE);
+        MICS.add(CITRINE_INGOT);
+        MICS.add(CITRINE_CRYSTAL_SHARD);
+        MICS.add(CITRINE_POTION);
+        MICS.add(CITRINE_UPGRADE_SMITHING_TEMPLATE);
+
+        MICS.add(PERIDOT);
+        MICS.add(PERIDOT_INGOT);
+        MICS.add(PERIDOT_CRYSTAL_SHARD);
+        MICS.add(PERIDOT_POTION);
+        MICS.add(PERIDOT_UPGRADE_SMITHING_TEMPLATE);
+
+        MICS.add(JADE);
+        MICS.add(JADE_INGOT);
+        MICS.add(JADE_CRYSTAL_SHARD);
+        MICS.add(JADE_POTION);
+        MICS.add(JADE_UPGRADE_SMITHING_TEMPLATE);
+
+        MICS.add(AQUAMARINE);
+        MICS.add(AQUAMARINE_INGOT);
+        MICS.add(AQUAMARINE_CRYSTAL_SHARD);
+        MICS.add(AQUAMARINE_POTION);
+        MICS.add(AQUAMARINE_UPGRADE_SMITHING_TEMPLATE);
+
+        MICS.add(ZIRCON);
+        MICS.add(ZIRCON_INGOT);
+        MICS.add(ZIRCON_CRYSTAL_SHARD);
+        MICS.add(ZIRCON_POTION);
+        MICS.add(ZIRCON_UPGRADE_SMITHING_TEMPLATE);
+
+        MICS.add(SAPPHIRE);
+        MICS.add(SAPPHIRE_INGOT);
+        MICS.add(SAPPHIRE_CRYSTAL_SHARD);
+        MICS.add(SAPPHIRE_POTION);
+        MICS.add(SAPPHIRE_UPGRADE_SMITHING_TEMPLATE);
+
+        MICS.add(AMETRINE);
+        MICS.add(AMETRINE_INGOT);
+        MICS.add(AMETRINE_CRYSTAL_SHARD);
+        MICS.add(AMETRINE_POTION);
+        MICS.add(AMETRINE_UPGRADE_SMITHING_TEMPLATE);
+
+        MICS.add(RAW_NECOIUM);
+        MICS.add(NECOIUM_INGOT);
+        MICS.add(NECOIUM_NUGGET);
+    }
+
+
+
+    private static void setMUItemsForRegisrty() {
         addItem("aquamarine_helmet", AQUAMARINE_HELMET);
         addItem("aquamarine_chestplate", AQUAMARINE_CHESTPLATE);
         addItem("aquamarine_leggings", AQUAMARINE_LEGGINGS);
@@ -146,199 +265,12 @@ public class RegisterMUItems {
         addItem("raw_necoium", RAW_NECOIUM);
         addItem("necoium_ingot", NECOIUM_INGOT);
         addItem("necoium_nugget", NECOIUM_NUGGET);
-        ALL_ITEMS.entrySet().forEach(RegisterMUItems::registerItem);
     }
 
-    private static void registerMUItemGroup() {
-        CreativeModeTab MYTHICTOOLSGROUP = CreativeModeTab.builder(null, -1).title(Component.literal("Mythic Upgrades: Combat & Tools"))
-                .icon(() -> new ItemStack(JADE_AXE)).displayItems((displayContext, entries) -> {
-                    entries.accept(RUBY_SHOVEL);
-                    entries.accept(RUBY_PICKAXE);
-                    entries.accept(RUBY_AXE);
-                    entries.accept(RUBY_HOE);
-
-                    entries.accept(TOPAZ_SHOVEL);
-                    entries.accept(TOPAZ_PICKAXE);
-                    entries.accept(TOPAZ_AXE);
-                    entries.accept(TOPAZ_HOE);
-                    entries.accept(TOPAZ_SWORD);
-                    entries.accept(TOPAZ_HELMET);
-                    entries.accept(TOPAZ_CHESTPLATE);
-                    entries.accept(TOPAZ_LEGGINGS);
-                    entries.accept(TOPAZ_BOOTS);
-
-                    entries.accept(CITRINE_AXE);
-                    entries.accept(CITRINE_SWORD);
-                    entries.accept(CITRINE_HELMET);
-                    entries.accept(CITRINE_CHESTPLATE);
-                    entries.accept(CITRINE_LEGGINGS);
-                    entries.accept(CITRINE_BOOTS);
-
-                    entries.accept(PERIDOT_AXE);
-                    entries.accept(PERIDOT_SWORD);
-                    entries.accept(PERIDOT_HELMET);
-                    entries.accept(PERIDOT_CHESTPLATE);
-                    entries.accept(PERIDOT_LEGGINGS);
-                    entries.accept(PERIDOT_BOOTS);
-
-                    entries.accept(JADE_AXE);
-                    entries.accept(JADE_SWORD);
-                    entries.accept(JADE_HELMET);
-                    entries.accept(JADE_CHESTPLATE);
-                    entries.accept(JADE_LEGGINGS);
-                    entries.accept(JADE_BOOTS);
-
-                    entries.accept(AQUAMARINE_HELMET);
-                    entries.accept(AQUAMARINE_CHESTPLATE);
-                    entries.accept(AQUAMARINE_LEGGINGS);
-                    entries.accept(AQUAMARINE_BOOTS);
-
-                    entries.accept(ZIRCON_AXE);
-                    entries.accept(ZIRCON_SWORD);
-                    entries.accept(ZIRCON_HELMET);
-                    entries.accept(ZIRCON_CHESTPLATE);
-                    entries.accept(ZIRCON_LEGGINGS);
-                    entries.accept(ZIRCON_BOOTS);
-
-                    entries.accept(SAPPHIRE_AXE);
-                    entries.accept(SAPPHIRE_SWORD);
-                    entries.accept(SAPPHIRE_HELMET);
-                    entries.accept(SAPPHIRE_CHESTPLATE);
-                    entries.accept(SAPPHIRE_LEGGINGS);
-                    entries.accept(SAPPHIRE_BOOTS);
-
-                    entries.accept(AMETRINE_AXE);
-                    entries.accept(AMETRINE_SWORD);
-                    entries.accept(AMETRINE_HELMET);
-                    entries.accept(AMETRINE_CHESTPLATE);
-                    entries.accept(AMETRINE_LEGGINGS);
-                    entries.accept(AMETRINE_BOOTS);
-                }).build();
-        Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, new ResourceLocation(Constants.MOD_ID, "mythictoolsgroup"), MYTHICTOOLSGROUP);
-
-        CreativeModeTab MYTHICMISCGROUP = CreativeModeTab.builder(null, -1).title(Component.literal("Mythic Upgrades: Misc"))
-                .icon(() -> new ItemStack(JADE)).displayItems((displayContext, entries) -> {
-                    entries.accept(RUBY);
-                    entries.accept(RUBY_INGOT);
-                    entries.accept(RUBY_CRYSTAL_SHARD);
-                    entries.accept(RUBY_POTION);
-                    entries.accept(RUBY_UPGRADE_SMITHING_TEMPLATE);
-
-                    entries.accept(TOPAZ);
-                    entries.accept(TOPAZ_INGOT);
-                    entries.accept(TOPAZ_CRYSTAL_SHARD);
-                    entries.accept(TOPAZ_POTION);
-                    entries.accept(TOPAZ_UPGRADE_SMITHING_TEMPLATE);
-
-                    entries.accept(CITRINE);
-                    entries.accept(CITRINE_INGOT);
-                    entries.accept(CITRINE_CRYSTAL_SHARD);
-                    entries.accept(CITRINE_POTION);
-                    entries.accept(CITRINE_UPGRADE_SMITHING_TEMPLATE);
-
-                    entries.accept(PERIDOT);
-                    entries.accept(PERIDOT_INGOT);
-                    entries.accept(PERIDOT_CRYSTAL_SHARD);
-                    entries.accept(PERIDOT_POTION);
-                    entries.accept(PERIDOT_UPGRADE_SMITHING_TEMPLATE);
-
-                    entries.accept(JADE);
-                    entries.accept(JADE_INGOT);
-                    entries.accept(JADE_CRYSTAL_SHARD);
-                    entries.accept(JADE_POTION);
-                    entries.accept(JADE_UPGRADE_SMITHING_TEMPLATE);
-
-                    entries.accept(AQUAMARINE);
-                    entries.accept(AQUAMARINE_INGOT);
-                    entries.accept(AQUAMARINE_CRYSTAL_SHARD);
-                    entries.accept(AQUAMARINE_POTION);
-                    entries.accept(AQUAMARINE_UPGRADE_SMITHING_TEMPLATE);
-
-                    entries.accept(ZIRCON);
-                    entries.accept(ZIRCON_INGOT);
-                    entries.accept(ZIRCON_CRYSTAL_SHARD);
-                    entries.accept(ZIRCON_POTION);
-                    entries.accept(ZIRCON_UPGRADE_SMITHING_TEMPLATE);
-
-                    entries.accept(SAPPHIRE);
-                    entries.accept(SAPPHIRE_INGOT);
-                    entries.accept(SAPPHIRE_CRYSTAL_SHARD);
-                    entries.accept(SAPPHIRE_POTION);
-                    entries.accept(SAPPHIRE_UPGRADE_SMITHING_TEMPLATE);
-
-                    entries.accept(AMETRINE);
-                    entries.accept(AMETRINE_INGOT);
-                    entries.accept(AMETRINE_CRYSTAL_SHARD);
-                    entries.accept(AMETRINE_POTION);
-                    entries.accept(AMETRINE_UPGRADE_SMITHING_TEMPLATE);
-
-                    entries.accept(RAW_NECOIUM);
-                    entries.accept(NECOIUM_INGOT);
-                    entries.accept(NECOIUM_NUGGET);
-                }).build();
-        Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, new ResourceLocation(Constants.MOD_ID, "mythicmiscgroup"), MYTHICMISCGROUP);
-
-        CreativeModeTab MYTHICBLOCKGROUP = CreativeModeTab.builder(null, -1).title(Component.literal("Mythic Upgrades: Blocks"))
-                .icon(() -> new ItemStack(JADE_BLOCK)).displayItems((displayContext, entries) -> {
-                    entries.accept(RUBY_BLOCK);
-                    entries.accept(RUBY_ORE);
-                    entries.accept(RUBY_CRYSTAL_BLOCK);
-                    entries.accept(RUBY_CRYSTAL_CLUSTER);
-
-                    entries.accept(TOPAZ_BLOCK);
-                    entries.accept(TOPAZ_ORE);
-                    entries.accept(TOPAZ_CRYSTAL_BLOCK);
-                    entries.accept(TOPAZ_CRYSTAL_CLUSTER);
-
-                    entries.accept(CITRINE_BLOCK);
-                    entries.accept(CITRINE_ORE);
-                    entries.accept(DEEPSLATE_CITRINE_ORE);
-                    entries.accept(CITRINE_CRYSTAL_BLOCK);
-                    entries.accept(CITRINE_CRYSTAL_CLUSTER);
-
-                    entries.accept(PERIDOT_BLOCK);
-                    entries.accept(PERIDOT_ORE);
-                    entries.accept(DEEPSLATE_PERIDOT_ORE);
-                    entries.accept(PERIDOT_CRYSTAL_BLOCK);
-                    entries.accept(PERIDOT_CRYSTAL_CLUSTER);
-
-                    entries.accept(JADE_BLOCK);
-                    entries.accept(JADE_ORE);
-                    entries.accept(JADE_CRYSTAL_BLOCK);
-                    entries.accept(JADE_CRYSTAL_CLUSTER);
-
-                    entries.accept(AQUAMARINE_BLOCK);
-                    entries.accept(AQUAMARINE_ORE);
-                    entries.accept(DEEPSLATE_AQUAMARINE_ORE);
-                    entries.accept(AQUAMARINE_CRYSTAL_BLOCK);
-                    entries.accept(AQUAMARINE_CRYSTAL_CLUSTER);
-
-                    entries.accept(ZIRCON_BLOCK);
-                    entries.accept(ZIRCON_ORE);
-                    entries.accept(DEEPSLATE_ZIRCON_ORE);
-                    entries.accept(ZIRCON_CRYSTAL_BLOCK);
-                    entries.accept(ZIRCON_CRYSTAL_CLUSTER);
-
-                    entries.accept(SAPPHIRE_BLOCK);
-                    entries.accept(SAPPHIRE_ORE);
-                    entries.accept(SAPPHIRE_CRYSTAL_BLOCK);
-                    entries.accept(SAPPHIRE_CRYSTAL_CLUSTER);
-
-                    entries.accept(AMETRINE_BLOCK);
-                    entries.accept(AMETRINE_ORE);
-                    entries.accept(AMETRINE_CRYSTAL_BLOCK);
-                    entries.accept(AMETRINE_CRYSTAL_CLUSTER);
-
-                    entries.accept(RAW_NECOIUM_BLOCK);
-                    entries.accept(NECOIUM_BLOCK);
-                    entries.accept(NECOIUM_ORE);
-                }).build();
-        Registry.register(BuiltInRegistries.CREATIVE_MODE_TAB, new ResourceLocation(Constants.MOD_ID, "mythicblockgroup"), MYTHICBLOCKGROUP);
-    }
-
-    public static void registerMythicItems() {
-        registerMUItems();
-        registerMUItemGroup();
+    public static void setMythicItems() {
+        setMUItemsForRegisrty();
+        setMics();
+        setTools();
         Constants.LOG.info("Registering Mythic Items for " + MOD_ID);
     }
 }
