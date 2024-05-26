@@ -1,12 +1,11 @@
 package net.trique.mythicupgrades;
 
+import net.trique.mythicupgrades.block.MUBlocks;
 import net.trique.mythicupgrades.platform.Services;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.item.Items;
 import net.trique.mythicupgrades.registry.RegisterMUEffects;
 import net.trique.mythicupgrades.registry.RegisterMUItems;
-
-import java.util.stream.Stream;
 
 import static net.trique.mythicupgrades.config.Config.SPEC;
 
@@ -28,8 +27,12 @@ public class CommonClass {
         // we have an interface in the common code and use a loader specific implementation to delegate our call to
         // the platform specific approach.
         Services.CONFIG_REGISTER.register(SPEC);
-        RegisterMUEffects.registerEffects();
-        RegisterMUItems.registerMythicItems();
+        MUBlocks.setMythicBlocks();
+        RegisterMUEffects.setEffects();
+        RegisterMUItems.setMythicItems();
+        Services.REGISTRY_HELPER.registerBlocks();
+        Services.REGISTRY_HELPER.registerEffects();
+        Services.REGISTRY_HELPER.registerItems();
         Constants.LOG.info("Successfully applied Config");
         if (Services.PLATFORM.isModLoaded(Constants.MOD_ID)) {
 
