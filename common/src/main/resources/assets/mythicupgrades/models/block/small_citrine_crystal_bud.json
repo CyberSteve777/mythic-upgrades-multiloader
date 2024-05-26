@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "mythicupgrades:block/small_citrine_crystal_bud"
+  },
+  "render_type": "cutout"
+}
