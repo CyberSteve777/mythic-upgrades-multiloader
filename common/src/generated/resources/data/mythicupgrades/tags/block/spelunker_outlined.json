@@ -1,0 +1,19 @@
+{
+  "values": [
+    "#c:ores",
+    "#c:chests",
+    "#c:clusters",
+    "#c:barrels",
+    "minecraft:raw_copper_block",
+    "minecraft:raw_iron_block",
+    "minecraft:raw_gold_block",
+    "minecraft:iron_block",
+    "minecraft:gold_block",
+    "minecraft:lapis_block",
+    "minecraft:diamond_block",
+    "minecraft:emerald_block",
+    "minecraft:netherite_block",
+    "minecraft:decorated_pot",
+    "mythicupgrades:raw_necoium_block"
+  ]
+}

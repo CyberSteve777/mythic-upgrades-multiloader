@@ -12,11 +12,14 @@
         "sources": "https://github.com/FabricMC/fabric-example-mod"
     },
     "license": "${license}",
-    "icon": "${mod_id}.png",
+    "icon": "assets/mythicupgrades/icon.png",
     "environment": "*",
     "entrypoints": {
         "main": [
-            "com.example.examplemod.ExampleMod"
+          "net.trique.mythicupgrades.MUFabric"
+        ],
+        "client": [
+            "net.trique.mythicupgrades.MUFabricClient"
         ]
     },
     "mixins": [
