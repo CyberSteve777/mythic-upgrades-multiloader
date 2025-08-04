@@ -17,6 +17,8 @@ import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.common.NeoForge;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.server.ServerStoppedEvent;
+import net.neoforged.neoforge.event.server.ServerStoppingEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
@@ -41,7 +43,7 @@ public class MUNeoForge {
         // This method is invoked by the NeoForge mod loader when it is ready
         // to load your mod. You can access NeoForge and Common code in this
         // project.
-        ModLoadingContext.get().getActiveContainer().registerConfig(ModConfig.Type.SERVER, MUConfig.CONFIG_SPEC);
+        ModLoadingContext.get().getActiveContainer().registerConfig(ModConfig.Type.COMMON, MUConfig.CONFIG_SPEC);
         // Use NeoForge to bootstrap the Common mod.
         Constants.LOGGER.info("Hello NeoForge world!");
         MUCommon.init();
@@ -69,78 +71,47 @@ public class MUNeoForge {
                 }
             });
         });
-        registrar.playToClient(AquamarineConfigPacket.TYPE, AquamarineConfigPacket.CODEC, ((packet, ctx) -> {
-            ctx.enqueueWork(() -> MUConfigHelper.updateAquamarineValues(packet));
+        registrar.playBidirectional(AquamarineConfigPacket.TYPE, AquamarineConfigPacket.CODEC, ((packet, ctx) -> {
+            ctx.enqueueWork(() -> {
+                if (Services.PLATFORM.isClient()) MUConfigHelper.updateAquamarineValues(packet);
+                else MUConfigHelper.cachePlayerAquamarineValues(ctx.player().getUUID(), packet);
+            });
         }));
-        registrar.playToClient(PeridotConfigPacket.TYPE, PeridotConfigPacket.CODEC, ((packet, ctx) -> {
-            ctx.enqueueWork(() -> MUConfigHelper.updatePeridotValues(packet));
+        registrar.playBidirectional(PeridotConfigPacket.TYPE, PeridotConfigPacket.CODEC, ((packet, ctx) -> {
+            ctx.enqueueWork(() -> {
+                if (Services.PLATFORM.isClient()) MUConfigHelper.updatePeridotValues(packet);
+                else MUConfigHelper.cachePlayerPeridotValues(ctx.player().getUUID(), packet);
+            });
         }));
-        registrar.playToClient(TopazConfigPacket.TYPE, TopazConfigPacket.CODEC, ((packet, ctx) -> {
-            ctx.enqueueWork(() -> MUConfigHelper.updateTopazValues(packet));
+        registrar.playBidirectional(TopazConfigPacket.TYPE, TopazConfigPacket.CODEC, ((packet, ctx) -> {
+            ctx.enqueueWork(() -> {
+                if (Services.PLATFORM.isClient()) MUConfigHelper.updateTopazValues(packet);
+                else MUConfigHelper.cachePlayerTopazValues(ctx.player().getUUID(), packet);
+            });
         }));
-        registrar.playToClient(SapphireConfigPacket.TYPE, SapphireConfigPacket.CODEC, ((packet, ctx) -> {
-            ctx.enqueueWork(() -> MUConfigHelper.updateSapphireValues(packet));
+        registrar.playBidirectional(SapphireConfigPacket.TYPE, SapphireConfigPacket.CODEC, ((packet, ctx) -> {
+            ctx.enqueueWork(() -> {
+                if (Services.PLATFORM.isClient()) MUConfigHelper.updateSapphireValues(packet);
+                else MUConfigHelper.cachePlayerSapphireValues(ctx.player().getUUID(), packet);
+            });
         }));
-        registrar.playToClient(RubyConfigPacket.TYPE, RubyConfigPacket.CODEC, ((packet, ctx) -> {
-            ctx.enqueueWork(() -> MUConfigHelper.updateRubyValues(packet));
+        registrar.playBidirectional(RubyConfigPacket.TYPE, RubyConfigPacket.CODEC, ((packet, ctx) -> {
+            ctx.enqueueWork(() -> {
+                if (Services.PLATFORM.isClient()) MUConfigHelper.updateRubyValues(packet);
+                else MUConfigHelper.cachePlayerRubyValues(ctx.player().getUUID(), packet);
+            });
         }));
-        registrar.playToClient(JadeConfigPacket.TYPE, JadeConfigPacket.CODEC, ((packet, ctx) -> {
-            ctx.enqueueWork(() -> MUConfigHelper.updateJadeValues(packet));
+        registrar.playBidirectional(JadeConfigPacket.TYPE, JadeConfigPacket.CODEC, ((packet, ctx) -> {
+            ctx.enqueueWork(() -> {
+                if (Services.PLATFORM.isClient()) MUConfigHelper.updateJadeValues(packet);
+                else MUConfigHelper.cachePlayerJadeValues(ctx.player().getUUID(), packet);
+            });
         }));
-        registrar.playToClient(AmetrineConfigPacket.TYPE, AmetrineConfigPacket.CODEC, ((packet, ctx) -> {
-            ctx.enqueueWork(() -> MUConfigHelper.updateAmetrineValues(packet));
+        registrar.playBidirectional(AmetrineConfigPacket.TYPE, AmetrineConfigPacket.CODEC, ((packet, ctx) -> {
+            ctx.enqueueWork(() -> {
+                if (Services.PLATFORM.isClient()) MUConfigHelper.updateAmetrineValues(packet);
+                else MUConfigHelper.cachePlayerAmetrineValues(ctx.player().getUUID(), packet);
+            });
         }));
-    }
-
-    private void syncOnJoin(final PlayerEvent.PlayerLoggedInEvent event) {
-        AmetrineConfigPacket ametrineConfigPacket = new AmetrineConfigPacket(
-                CONFIG.tools_levitation_duration.get(),
-                CONFIG.tools_levitation_amplifier.get(),
-                CONFIG.arcane_aura_levitation_duration.get(),
-                CONFIG.arcane_aura_amplifier.get()
-        );
-        JadeConfigPacket jadeConfigPacket = new JadeConfigPacket(
-                CONFIG.tools_bouncer_jump_boost_duration.get(),
-                CONFIG.tools_bouncer_amplifier.get(),
-                CONFIG.speed_amplifier.get(),
-                CONFIG.jump_boost_amplifier.get()
-        );
-        RubyConfigPacket rubyConfigPacket = new RubyConfigPacket(
-                CONFIG.tools_haste_amplifier.get(),
-                CONFIG.spelunker_amplifier.get()
-        );
-        SapphireConfigPacket sapphireConfigPacket = new SapphireConfigPacket(
-                CONFIG.tools_percentage_damage_percent.get(),
-                CONFIG.damage_deflection_amplifier.get()
-        );
-        TopazConfigPacket topazConfigPacket = new TopazConfigPacket(
-                CONFIG.topaz_tools_fire_seconds.get(),
-                CONFIG.item_mastery_amplifier.get()
-        );
-        AquamarineConfigPacket aquamarineConfigPacket = new AquamarineConfigPacket(
-                CONFIG.tools_freeze_duration.get(),
-                CONFIG.ice_shield_slowness_duration.get(),
-                CONFIG.ice_shield_amplifier.get()
-        );
-        PeridotConfigPacket peridotConfigPacket = new PeridotConfigPacket(
-                CONFIG.tools_effects_amplifier.get(),
-                CONFIG.tools_poison_duration.get(),
-                CONFIG.tools_nausea_duration.get(),
-                CONFIG.poisonous_thorns_amplifier.get(),
-                CONFIG.poisonous_thorns_poison_duration.get(),
-                CONFIG.poisonous_thorns_nausea_duration.get()
-        );
-
-        MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
-        if (server != null && server.isDedicatedServer() && event.getEntity() instanceof
-                ServerPlayer player) {
-            PacketDistributor.sendToPlayer(player, aquamarineConfigPacket);
-            PacketDistributor.sendToPlayer(player, topazConfigPacket);
-            PacketDistributor.sendToPlayer(player, peridotConfigPacket);
-            PacketDistributor.sendToPlayer(player, rubyConfigPacket);
-            PacketDistributor.sendToPlayer(player, sapphireConfigPacket);
-            PacketDistributor.sendToPlayer(player, jadeConfigPacket);
-            PacketDistributor.sendToPlayer(player, ametrineConfigPacket);
-        }
     }
 }

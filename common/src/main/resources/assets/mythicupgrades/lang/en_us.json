@@ -1,5 +1,5 @@
 {
-  "mythicupgrades.configuration.section.mythicupgrades.server.toml.title": "Mythic Upgrades equipment effects config",
+  "mythicupgrades.configuration.section.mythicupgrades.common.toml.title": "Mythic Upgrades equipment effects config",
   "mythicupgrades.aquamarine_ice_shield_slowness_duration": "Armor's Ice Shield Slowness Duration",
   "mythicupgrades.aquamarine_ice_shield_amplifier": "Armor's Ice Shield Amplifier",
   "mythicupgrades.aquamarine_tools_freeze_duration": "Tools' Freeze Duration",

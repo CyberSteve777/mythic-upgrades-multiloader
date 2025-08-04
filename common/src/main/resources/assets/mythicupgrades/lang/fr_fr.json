@@ -1,5 +1,5 @@
 {
-  "mythicupgrades.configuration.section.mythicupgrades.server.toml.title": "Mythic Upgrades equipment buff config",
+  "mythicupgrades.configuration.section.mythicupgrades.common.toml.title": "Mythic Upgrades equipment buff config",
   "mythicupgrades.aquamarine_ice_shield_slowness_duration": "Durée de lenteur du bouclier de glace de l'armure",
   "mythicupgrades.aquamarine_ice_shield_amplifier": "Amplificateur du bouclier de glace de l'armure",
   "mythicupgrades.aquamarine_tools_freeze_duration": "Durée de gel des outils",

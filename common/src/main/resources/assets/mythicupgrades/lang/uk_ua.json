@@ -1,5 +1,5 @@
 {
-  "mythicupgrades.configuration.section.mythicupgrades.server.toml.title": "Mythic Upgrades equipment effects config",
+  "mythicupgrades.configuration.section.mythicupgrades.common.toml.title": "Mythic Upgrades equipment effects config",
   "mythicupgrades.aquamarine_ice_shield_slowness_duration": "Тривалість Повільності Льодового Щита",
   "mythicupgrades.aquamarine_ice_shield_amplifier": "Підсилювач Льодового Щита Броні",
   "mythicupgrades.aquamarine_tools_freeze_duration": " Тривалість Замороження Інструментів",

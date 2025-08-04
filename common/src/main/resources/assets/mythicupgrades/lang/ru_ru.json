@@ -1,5 +1,5 @@
 {
-  "mythicupgrades.configuration.section.mythicupgrades.common.server.title": "Конфигурация эффектов снаряжения Mythic Upgrades",
+  "mythicupgrades.configuration.section.mythicupgrades.common.toml.title": "Конфигурация эффектов снаряжения Mythic Upgrades",
   "mythicupgrades.aquamarine_ice_shield_slowness_duration": "Длительность замедления от эффекта\"Ледяной щит\" (броня)",
   "mythicupgrades.aquamarine_ice_shield_amplifier": "Сила эффекта \"Ледяной щит\" (броня)",
   "mythicupgrades.aquamarine_tools_freeze_duration": "Длительность заморозки от инструментов",
