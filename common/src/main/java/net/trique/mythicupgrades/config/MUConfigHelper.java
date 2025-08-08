@@ -1,7 +1,6 @@
 package net.trique.mythicupgrades.config;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
-import it.unimi.dsi.fastutil.objects.Object2ObjectMaps;
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.trique.mythicupgrades.networking.packet.config.*;
@@ -16,7 +15,7 @@ import static net.trique.mythicupgrades.registry.ItemRegistry.*;
 
 public class MUConfigHelper {
 
-    private static final Object2ObjectMap<UUID, MUConfigCache> PLAYER_CACHE = Object2ObjectMaps.emptyMap();
+    private static final Object2ObjectOpenHashMap<UUID, MUConfigCache> PLAYER_CACHE = new Object2ObjectOpenHashMap<>();
 
     public static void updateJadeValues(JadeConfigPacket packet) {
         ItemEffectsList jadeArmorEffects = new ItemEffectsList.Builder().addForEquipmentBuffs(MobEffects.MOVEMENT_SPEED, packet.speed_amplifier()).addForEquipmentBuffs(MobEffects.JUMP, packet.jump_boost_amplifier()).build();
@@ -142,43 +141,50 @@ public class MUConfigHelper {
     }
 
 
-    public static void cachePlayerAquamarineValues(UUID playerId, AquamarineConfigPacket packet) {
+    public static void cachePlayerAquamarineValues(AquamarineClientConfigPacket packet) {
+        UUID playerId = packet.playerId();
         MUConfigCache cache = PLAYER_CACHE.getOrDefault(playerId, new MUConfigCache());
         cache.processAquamarinePacket(packet);
         PLAYER_CACHE.put(playerId, cache);
     }
 
-    public static void cachePlayerTopazValues(UUID playerId, TopazConfigPacket packet) {
+    public static void cachePlayerTopazValues(TopazClientConfigPacket packet) {
+        UUID playerId = packet.playerId();
         MUConfigCache cache = PLAYER_CACHE.getOrDefault(playerId, new MUConfigCache());
         cache.processTopazPacket(packet);
         PLAYER_CACHE.put(playerId, cache);
     }
 
-    public static void cachePlayerPeridotValues(UUID playerId, PeridotConfigPacket packet) {
+    public static void cachePlayerPeridotValues(PeridotClientConfigPacket packet) {
+        UUID playerId = packet.playerId();
         MUConfigCache cache = PLAYER_CACHE.getOrDefault(playerId, new MUConfigCache());
         cache.processPeridotPacket(packet);
         PLAYER_CACHE.put(playerId, cache);
     }
 
-    public static void cachePlayerRubyValues(UUID playerId, RubyConfigPacket packet) {
+    public static void cachePlayerRubyValues(RubyClientConfigPacket packet) {
+        UUID playerId = packet.playerId();
         MUConfigCache cache = PLAYER_CACHE.getOrDefault(playerId, new MUConfigCache());
         cache.processRubyPacket(packet);
         PLAYER_CACHE.put(playerId, cache);
     }
 
-    public static void cachePlayerSapphireValues(UUID playerId, SapphireConfigPacket packet) {
+    public static void cachePlayerSapphireValues(SapphireClientConfigPacket packet) {
+        UUID playerId = packet.playerId();
         MUConfigCache cache = PLAYER_CACHE.getOrDefault(playerId, new MUConfigCache());
         cache.processSapphirePacket(packet);
         PLAYER_CACHE.put(playerId, cache);
     }
 
-    public static void cachePlayerAmetrineValues(UUID playerId, AmetrineConfigPacket packet) {
+    public static void cachePlayerAmetrineValues(AmetrineClientConfigPacket packet) {
+        UUID playerId = packet.playerId();
         MUConfigCache cache = PLAYER_CACHE.getOrDefault(playerId, new MUConfigCache());
         cache.processAmetrinePacket(packet);
         PLAYER_CACHE.put(playerId, cache);
     }
 
-    public static void cachePlayerJadeValues(UUID playerId, JadeConfigPacket packet) {
+    public static void cachePlayerJadeValues(JadeClientConfigPacket packet) {
+        UUID playerId = packet.playerId();
         MUConfigCache cache = PLAYER_CACHE.getOrDefault(playerId, new MUConfigCache());
         cache.processJadePacket(packet);
         PLAYER_CACHE.put(playerId, cache);

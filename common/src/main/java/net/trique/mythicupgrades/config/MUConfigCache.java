@@ -35,7 +35,7 @@ public class MUConfigCache {
     private int jump_boost_amplifier;
 
 
-    public void processAquamarinePacket(AquamarineConfigPacket packet) {
+    public void processAquamarinePacket(AquamarineClientConfigPacket packet) {
         tools_freeze_duration = packet.tools_freeze_duration();
         ice_shield_amplifier = packet.ice_shield_amplifier();
         ice_shield_slowness_duration = packet.ice_shield_slowness_duration();
@@ -45,7 +45,7 @@ public class MUConfigCache {
                 ice_shield_amplifier);
     }
 
-    public void processTopazPacket(TopazConfigPacket packet) {
+    public void processTopazPacket(TopazClientConfigPacket packet) {
         topaz_tools_fire_seconds = packet.topaz_tools_fire_seconds();
         item_mastery_amplifier = packet.item_mastery_amplifier();
     }
@@ -53,7 +53,7 @@ public class MUConfigCache {
         return new TopazConfigPacket(topaz_tools_fire_seconds, item_mastery_amplifier);
     }
 
-    public void processPeridotPacket(PeridotConfigPacket packet) {
+    public void processPeridotPacket(PeridotClientConfigPacket packet) {
         poisonous_thorns_amplifier = packet.poisonous_thorns_amplifier();
         poisonous_thorns_nausea_duration = packet.poisonous_thorns_nausea_duration();
         poisonous_thorns_poison_duration = packet.poisonous_thorns_poison_duration();
@@ -66,7 +66,7 @@ public class MUConfigCache {
                 poisonous_thorns_amplifier, poisonous_thorns_poison_duration, poisonous_thorns_nausea_duration);
     }
 
-    public void processSapphirePacket(SapphireConfigPacket packet) {
+    public void processSapphirePacket(SapphireClientConfigPacket packet) {
         tools_percentage_damage_percent = packet.tools_percentage_damage_percent();
         damage_deflection_amplifier = packet.damage_deflection_amplifier();
     }
@@ -74,7 +74,7 @@ public class MUConfigCache {
         return new SapphireConfigPacket(tools_percentage_damage_percent, damage_deflection_amplifier);
     }
 
-    public void processRubyPacket(RubyConfigPacket packet) {
+    public void processRubyPacket(RubyClientConfigPacket packet) {
         spelunker_amplifier = packet.spelunker_amplifier();
         tools_haste_amplifier = packet.tools_haste_amplifier();
     }
@@ -82,7 +82,7 @@ public class MUConfigCache {
         return new RubyConfigPacket(tools_haste_amplifier, spelunker_amplifier);
     }
 
-    public void processAmetrinePacket(AmetrineConfigPacket packet) {
+    public void processAmetrinePacket(AmetrineClientConfigPacket packet) {
         tools_levitation_amplifier = packet.tools_levitation_amplifier();
         tools_levitation_duration = packet.tools_levitation_duration();
         arcane_aura_amplifier = packet.arcane_aura_amplifier();
@@ -93,7 +93,7 @@ public class MUConfigCache {
                 arcane_aura_levitation_duration, arcane_aura_amplifier);
     }
 
-    public void processJadePacket(JadeConfigPacket packet) {
+    public void processJadePacket(JadeClientConfigPacket packet) {
         tools_bouncer_amplifier = packet.tools_bouncer_amplifier();
         speed_amplifier = packet.speed_amplifier();
         tools_bouncer_jump_boost_duration = packet.tools_bouncer_jump_boost_duration();

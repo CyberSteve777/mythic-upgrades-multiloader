@@ -16,36 +16,43 @@ public class ClientJoinEventsHandler {
 
     @SubscribeEvent
     private static void sendClientValues(ClientPlayerNetworkEvent.LoggingIn event) {
-        AmetrineConfigPacket ametrineConfigPacket = new AmetrineConfigPacket(
+        AmetrineClientConfigPacket ametrineClientConfigPacket = new AmetrineClientConfigPacket(
+                event.getPlayer().getUUID(),
                 CONFIG.tools_levitation_duration.get(),
                 CONFIG.tools_levitation_amplifier.get(),
                 CONFIG.arcane_aura_levitation_duration.get(),
                 CONFIG.arcane_aura_amplifier.get()
         );
-        JadeConfigPacket jadeConfigPacket = new JadeConfigPacket(
+        JadeClientConfigPacket jadeClientConfigPacket = new JadeClientConfigPacket(
+                event.getPlayer().getUUID(),
                 CONFIG.tools_bouncer_jump_boost_duration.get(),
                 CONFIG.tools_bouncer_amplifier.get(),
                 CONFIG.speed_amplifier.get(),
                 CONFIG.jump_boost_amplifier.get()
         );
-        RubyConfigPacket rubyConfigPacket = new RubyConfigPacket(
+        RubyClientConfigPacket rubyClientConfigPacket = new RubyClientConfigPacket(
+                event.getPlayer().getUUID(),
                 CONFIG.tools_haste_amplifier.get(),
                 CONFIG.spelunker_amplifier.get()
         );
-        SapphireConfigPacket sapphireConfigPacket = new SapphireConfigPacket(
+        SapphireClientConfigPacket sapphireClientConfigPacket = new SapphireClientConfigPacket(
+                event.getPlayer().getUUID(),
                 CONFIG.tools_percentage_damage_percent.get(),
                 CONFIG.damage_deflection_amplifier.get()
         );
-        TopazConfigPacket topazConfigPacket = new TopazConfigPacket(
+        TopazClientConfigPacket topazClientConfigPacket = new TopazClientConfigPacket(
+                event.getPlayer().getUUID(),
                 CONFIG.topaz_tools_fire_seconds.get(),
                 CONFIG.item_mastery_amplifier.get()
         );
-        AquamarineConfigPacket aquamarineConfigPacket = new AquamarineConfigPacket(
+        AquamarineClientConfigPacket aquamarineClientConfigPacket = new AquamarineClientConfigPacket(
+                event.getPlayer().getUUID(),
                 CONFIG.tools_freeze_duration.get(),
                 CONFIG.ice_shield_slowness_duration.get(),
                 CONFIG.ice_shield_amplifier.get()
         );
-        PeridotConfigPacket peridotConfigPacket = new PeridotConfigPacket(
+        PeridotClientConfigPacket peridotClientConfigPacket = new PeridotClientConfigPacket(
+                event.getPlayer().getUUID(),
                 CONFIG.tools_effects_amplifier.get(),
                 CONFIG.tools_poison_duration.get(),
                 CONFIG.tools_nausea_duration.get(),
@@ -53,8 +60,8 @@ public class ClientJoinEventsHandler {
                 CONFIG.poisonous_thorns_poison_duration.get(),
                 CONFIG.poisonous_thorns_nausea_duration.get()
         );
-        PacketDistributor.sendToServer(peridotConfigPacket, aquamarineConfigPacket,
-                topazConfigPacket, sapphireConfigPacket, rubyConfigPacket, jadeConfigPacket,
-                ametrineConfigPacket);
+        PacketDistributor.sendToServer(peridotClientConfigPacket, topazClientConfigPacket,
+                aquamarineClientConfigPacket, sapphireClientConfigPacket, rubyClientConfigPacket,
+                ametrineClientConfigPacket, jadeClientConfigPacket);
     }
 }

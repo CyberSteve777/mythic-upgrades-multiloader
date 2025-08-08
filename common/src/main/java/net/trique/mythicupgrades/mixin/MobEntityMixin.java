@@ -48,9 +48,8 @@ public abstract class MobEntityMixin extends LivingEntity {
         if (wasAttacked) {
             if (target instanceof LivingEntity entity) {
                 Item weapon = this.getItemBySlot(EquipmentSlot.MAINHAND).getItem();
-                boolean sapphire_weapon = weapon instanceof VirtualSapphireTool;
-                if (sapphire_weapon) {
-                    double percent = ((VirtualSapphireTool) weapon).getPercent();
+                if (weapon instanceof VirtualSapphireTool sapphire_weapon) {
+                    double percent = sapphire_weapon.getPercent();
                     DamageSource source = MUDamageTypes.percentage_damage(this);
                     float dmg = (float) percent / 100f;
                     if (entity.invulnerableTime <= 10) {

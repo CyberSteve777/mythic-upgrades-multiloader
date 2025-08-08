@@ -64,9 +64,8 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     @Inject(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
     private void applySapphirePercentageDamage(Entity entity, CallbackInfo ci, @Local(ordinal = 2) float h) {
         Item weapon = getItemBySlot(EquipmentSlot.MAINHAND).getItem();
-        boolean sapphire_weapon = weapon instanceof VirtualSapphireTool;
-        if (sapphire_weapon) {
-            double percent = ((VirtualSapphireTool) weapon).getPercent();
+        if (weapon instanceof VirtualSapphireTool sapphire_weapon) {
+            double percent = sapphire_weapon.getPercent();
             DamageSource source = MUDamageTypes.percentage_damage(this);
             float dmg = ((float) percent / 100f) * h * h;
             if (entity.invulnerableTime <= 10) {
@@ -89,9 +88,8 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     private void applySapphirePercentageDamageOnSweeping(Entity entity, CallbackInfo ci,
                                                          @Local(ordinal = 0) LivingEntity livingEntity) {
         Item weapon = getItemBySlot(EquipmentSlot.MAINHAND).getItem();
-        boolean sapphire_weapon = weapon instanceof VirtualSapphireTool;
-        if (sapphire_weapon) {
-            double percent = ((VirtualSapphireTool) weapon).getPercent();
+        if (weapon instanceof VirtualSapphireTool sapphire_weapon) {
+            double percent = sapphire_weapon.getPercent();
             DamageSource source = MUDamageTypes.percentage_damage(this);
             float dmg = ((float) percent / 200f) * (0.7f + 0.1f * getEnchantmentLevel(Enchantments.SWEEPING_EDGE, this.level(), getItemBySlot(EquipmentSlot.MAINHAND)));
             if (livingEntity.invulnerableTime <= 10) {
