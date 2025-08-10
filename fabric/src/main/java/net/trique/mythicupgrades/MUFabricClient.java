@@ -5,6 +5,7 @@ import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.fabricmc.fabric.api.blockrenderlayer.v1.BlockRenderLayerMap;
 import net.fabricmc.fabric.api.client.event.lifecycle.v1.ClientTickEvents;
+import net.fabricmc.fabric.api.client.networking.v1.ClientLoginConnectionEvents;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.client.particle.v1.ParticleFactoryRegistry;
 import net.fabricmc.fabric.api.client.rendering.v1.WorldRenderEvents;
@@ -41,6 +42,24 @@ public class MUFabricClient implements ClientModInitializer {
             }
         });
         addConfigPacketsReceivers();
+        ClientLoginConnectionEvents.INIT.register(((handler, client) -> {
+            MUConfigHelper.cachePlayerTopazValues();
+            MUConfigHelper.cachePlayerAquamarineValues();
+            MUConfigHelper.cachePlayerPeridotValues();
+            MUConfigHelper.cachePlayerSapphireValues();
+            MUConfigHelper.cachePlayerRubyValues();
+            MUConfigHelper.cachePlayerJadeValues();
+            MUConfigHelper.cachePlayerAmetrineValues();
+        }));
+        ClientLoginConnectionEvents.DISCONNECT.register(((handler, client) -> {
+            MUConfigHelper.updatePeridotValues(MUConfigHelper.getPlayerPeridotCache());
+            MUConfigHelper.updateTopazValues(MUConfigHelper.getPlayerTopazCache());
+            MUConfigHelper.updateAquamarineValues(MUConfigHelper.getPlayerAquamarineCache());
+            MUConfigHelper.updateSapphireValues(MUConfigHelper.getPlayerSapphireCache());
+            MUConfigHelper.updateRubyValues(MUConfigHelper.getPlayerRubyCache());
+            MUConfigHelper.updateJadeValues(MUConfigHelper.getPlayerJadePacket());
+            MUConfigHelper.updateAmetrineValues(MUConfigHelper.getPlayerAmetrinePacket());
+        }));
         ClientTickEvents.START_CLIENT_TICK.register((client ->
                 SpelunkerEffectRenderer.clientFillRenderPositions(client.player)));
         WorldRenderEvents.AFTER_TRANSLUCENT.register(worldRenderContext ->

@@ -29,7 +29,7 @@ public class MUFabric implements ModInitializer {
         // project.
 
         // Use Fabric to bootstrap the Common mod.
-        NeoForgeConfigRegistry.INSTANCE.register(Constants.MOD_ID, ModConfig.Type.SERVER, MUConfig.CONFIG_SPEC);
+        NeoForgeConfigRegistry.INSTANCE.register(Constants.MOD_ID, ModConfig.Type.COMMON, MUConfig.CONFIG_SPEC);
 
         Constants.LOGGER.info("Hello Fabric world!");
         MUCommon.init();
@@ -48,7 +48,7 @@ public class MUFabric implements ModInitializer {
         PayloadTypeRegistry.playS2C().register(JadeConfigPacket.TYPE, JadeConfigPacket.CODEC);
 
         setupSyncOnChange();
-//        setupSyncOnJoin();
+        setupSyncOnJoin();
     }
 
     public static void setupSyncOnChange() {
