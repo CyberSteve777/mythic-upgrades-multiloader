@@ -6,6 +6,7 @@ import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
+import net.neoforged.neoforge.event.server.ServerLifecycleEvent;
 import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.server.ServerLifecycleHooks;
 import net.trique.mythicupgrades.Constants;
@@ -64,22 +65,6 @@ public class ServerConfigEventsHandler {
             PacketDistributor.sendToPlayer(player, aquamarineConfigPacket,
                     topazConfigPacket, peridotConfigPacket, rubyConfigPacket,
                     sapphireConfigPacket, jadeConfigPacket, ametrineConfigPacket);
-        }
-    }
-
-    @SubscribeEvent
-    private static void syncOnLogout(final PlayerEvent.PlayerLoggedOutEvent event) {
-        MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
-        if (server != null && server.isDedicatedServer() && event.getEntity() instanceof
-                ServerPlayer player) {
-            UUID playerId = player.getUUID();
-            PacketDistributor.sendToPlayer(player, MUConfigHelper.getPlayerAquamarinePacket(playerId),
-                    MUConfigHelper.getPlayerTopazPacket(playerId),
-                    MUConfigHelper.getPlayerPeridotPacket(playerId),
-                    MUConfigHelper.getPlayerRubyPacket(playerId),
-                    MUConfigHelper.getPlayerSapphirePacket(playerId),
-                    MUConfigHelper.getPlayerJadePacket(playerId),
-                    MUConfigHelper.getPlayerAmetrinePacket(playerId));
         }
     }
 }

@@ -83,27 +83,5 @@ public class MUNeoForge {
         registrar.playToClient(AmetrineConfigPacket.TYPE, AmetrineConfigPacket.CODEC, ((packet, ctx) -> {
             ctx.enqueueWork(() -> MUConfigHelper.updateAmetrineValues(packet));
         }));
-
-        registrar.playToServer(AquamarineClientConfigPacket.TYPE, AquamarineClientConfigPacket.CODEC, ((packet, ctx) -> {
-            ctx.enqueueWork(() -> MUConfigHelper.cachePlayerAquamarineValues(packet));
-        }));
-        registrar.playToServer(PeridotClientConfigPacket.TYPE, PeridotClientConfigPacket.CODEC, ((packet, ctx) -> {
-            ctx.enqueueWork(() -> MUConfigHelper.cachePlayerPeridotValues(packet));
-        }));
-        registrar.playToServer(TopazClientConfigPacket.TYPE, TopazClientConfigPacket.CODEC, ((packet, ctx) -> {
-            ctx.enqueueWork(() -> MUConfigHelper.cachePlayerTopazValues(packet));
-        }));
-        registrar.playToServer(SapphireClientConfigPacket.TYPE, SapphireClientConfigPacket.CODEC, ((packet, ctx) -> {
-            ctx.enqueueWork(() -> MUConfigHelper.cachePlayerSapphireValues(packet));
-        }));
-        registrar.playToServer(RubyClientConfigPacket.TYPE, RubyClientConfigPacket.CODEC, ((packet, ctx) -> {
-            ctx.enqueueWork(() -> MUConfigHelper.cachePlayerRubyValues(packet));
-        }));
-        registrar.playToServer(JadeClientConfigPacket.TYPE, JadeClientConfigPacket.CODEC, ((packet, ctx) -> {
-            ctx.enqueueWork(() -> MUConfigHelper.cachePlayerJadeValues(packet));
-        }));
-        registrar.playToServer(AmetrineClientConfigPacket.TYPE, AmetrineClientConfigPacket.CODEC, ((packet, ctx) -> {
-            ctx.enqueueWork(() -> MUConfigHelper.cachePlayerAmetrineValues(packet));
-        }));
     }
 }

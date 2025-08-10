@@ -1,21 +1,18 @@
 package net.trique.mythicupgrades.config;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.trique.mythicupgrades.networking.packet.config.*;
 import net.trique.mythicupgrades.util.ItemEffectsList;
 
 import java.util.List;
-import java.util.UUID;
 
-import static net.trique.mythicupgrades.config.MUConfig.*;
 import static net.trique.mythicupgrades.registry.EffectRegistry.*;
 import static net.trique.mythicupgrades.registry.ItemRegistry.*;
 
 public class MUConfigHelper {
 
-    private static final Object2ObjectOpenHashMap<UUID, MUConfigCache> PLAYER_CACHE = new Object2ObjectOpenHashMap<>();
+    private static final MUConfigCache PLAYER_CACHE = new MUConfigCache();
 
     public static void updateJadeValues(JadeConfigPacket packet) {
         ItemEffectsList jadeArmorEffects = new ItemEffectsList.Builder().addForEquipmentBuffs(MobEffects.MOVEMENT_SPEED, packet.speed_amplifier()).addForEquipmentBuffs(MobEffects.JUMP, packet.jump_boost_amplifier()).build();
@@ -140,119 +137,60 @@ public class MUConfigHelper {
         AMETRINE_BOOTS.get().setNewEffects(ametrineArmorEffects, ametrineAmplifiers);
     }
 
-
-    public static void cachePlayerAquamarineValues(AquamarineClientConfigPacket packet) {
-        UUID playerId = packet.playerId();
-        MUConfigCache cache = PLAYER_CACHE.getOrDefault(playerId, new MUConfigCache());
-        cache.processAquamarinePacket(packet);
-        PLAYER_CACHE.put(playerId, cache);
+    public static void cachePlayerAquamarineValues() {
+        PLAYER_CACHE.cacheAquamarineValues();
     }
 
-    public static void cachePlayerTopazValues(TopazClientConfigPacket packet) {
-        UUID playerId = packet.playerId();
-        MUConfigCache cache = PLAYER_CACHE.getOrDefault(playerId, new MUConfigCache());
-        cache.processTopazPacket(packet);
-        PLAYER_CACHE.put(playerId, cache);
+    public static void cachePlayerTopazValues() {
+        PLAYER_CACHE.cacheTopazValues();
     }
 
-    public static void cachePlayerPeridotValues(PeridotClientConfigPacket packet) {
-        UUID playerId = packet.playerId();
-        MUConfigCache cache = PLAYER_CACHE.getOrDefault(playerId, new MUConfigCache());
-        cache.processPeridotPacket(packet);
-        PLAYER_CACHE.put(playerId, cache);
+    public static void cachePlayerPeridotValues() {
+        PLAYER_CACHE.cachePeridotValues();
     }
 
-    public static void cachePlayerRubyValues(RubyClientConfigPacket packet) {
-        UUID playerId = packet.playerId();
-        MUConfigCache cache = PLAYER_CACHE.getOrDefault(playerId, new MUConfigCache());
-        cache.processRubyPacket(packet);
-        PLAYER_CACHE.put(playerId, cache);
+    public static void cachePlayerRubyValues() {
+        PLAYER_CACHE.cacheRubyValues();
     }
 
-    public static void cachePlayerSapphireValues(SapphireClientConfigPacket packet) {
-        UUID playerId = packet.playerId();
-        MUConfigCache cache = PLAYER_CACHE.getOrDefault(playerId, new MUConfigCache());
-        cache.processSapphirePacket(packet);
-        PLAYER_CACHE.put(playerId, cache);
+    public static void cachePlayerSapphireValues() {
+        PLAYER_CACHE.cacheSapphireValues();
     }
 
-    public static void cachePlayerAmetrineValues(AmetrineClientConfigPacket packet) {
-        UUID playerId = packet.playerId();
-        MUConfigCache cache = PLAYER_CACHE.getOrDefault(playerId, new MUConfigCache());
-        cache.processAmetrinePacket(packet);
-        PLAYER_CACHE.put(playerId, cache);
+    public static void cachePlayerAmetrineValues() {
+        PLAYER_CACHE.cacheAmetrineValues();
     }
 
-    public static void cachePlayerJadeValues(JadeClientConfigPacket packet) {
-        UUID playerId = packet.playerId();
-        MUConfigCache cache = PLAYER_CACHE.getOrDefault(playerId, new MUConfigCache());
-        cache.processJadePacket(packet);
-        PLAYER_CACHE.put(playerId, cache);
+    public static void cachePlayerJadeValues() {
+        PLAYER_CACHE.cacheJadeValues();
     }
 
-    public static AquamarineConfigPacket getPlayerAquamarinePacket(UUID playerId) {
-        if (PLAYER_CACHE.containsKey(playerId)) {
-            return PLAYER_CACHE.get(playerId).makeAquamarinePacket();
-        }
-        return new AquamarineConfigPacket(CONFIG.tools_freeze_duration.getDefault(),
-                CONFIG.ice_shield_slowness_duration.getDefault(),
-                CONFIG.ice_shield_amplifier.getDefault());
+    public static AquamarineConfigPacket getPlayerAquamarineCache() {
+        return PLAYER_CACHE.makeAquamarinePacket();
     }
 
-    public static TopazConfigPacket getPlayerTopazPacket(UUID playerId) {
-        if (PLAYER_CACHE.containsKey(playerId)) {
-            return PLAYER_CACHE.get(playerId).makeTopazPacket();
-        }
-        return new TopazConfigPacket(CONFIG.topaz_tools_fire_seconds.getDefault(),
-                CONFIG.item_mastery_amplifier.getDefault());
+    public static TopazConfigPacket getPlayerTopazCache() {
+        return PLAYER_CACHE.makeTopazPacket();
     }
 
-    public static PeridotConfigPacket getPlayerPeridotPacket(UUID playerId) {
-        if (PLAYER_CACHE.containsKey(playerId)) {
-            return PLAYER_CACHE.get(playerId).makePeridotPacket();
-        }
-        return new PeridotConfigPacket(CONFIG.tools_effects_amplifier.getDefault(),
-                CONFIG.tools_poison_duration.getDefault(),
-                CONFIG.tools_nausea_duration.getDefault(),
-                CONFIG.poisonous_thorns_amplifier.getDefault(),
-                CONFIG.poisonous_thorns_poison_duration.getDefault(),
-                CONFIG.poisonous_thorns_nausea_duration.getDefault());
+    public static PeridotConfigPacket getPlayerPeridotCache() {
+        return PLAYER_CACHE.makePeridotPacket();
     }
 
-    public static SapphireConfigPacket getPlayerSapphirePacket(UUID playerId) {
-        if (PLAYER_CACHE.containsKey(playerId)) {
-            return PLAYER_CACHE.get(playerId).makeSapphirePacket();
-        }
-        return new SapphireConfigPacket(CONFIG.tools_percentage_damage_percent.getDefault(),
-                CONFIG.damage_deflection_amplifier.getDefault());
+    public static SapphireConfigPacket getPlayerSapphireCache() {
+        return PLAYER_CACHE.makeSapphirePacket();
     }
 
-    public static RubyConfigPacket getPlayerRubyPacket(UUID playerId) {
-        if (PLAYER_CACHE.containsKey(playerId)) {
-            return PLAYER_CACHE.get(playerId).makeRubyPacket();
-        }
-        return new RubyConfigPacket(CONFIG.tools_haste_amplifier.getDefault(),
-                CONFIG.spelunker_amplifier.getDefault());
+    public static RubyConfigPacket getPlayerRubyCache() {
+        return PLAYER_CACHE.makeRubyPacket();
     }
 
 
-    public static AmetrineConfigPacket getPlayerAmetrinePacket(UUID playerId) {
-        if (PLAYER_CACHE.containsKey(playerId)) {
-            return PLAYER_CACHE.get(playerId).makeAmetrinePacket();
-        }
-        return new AmetrineConfigPacket(CONFIG.tools_levitation_duration.getDefault(),
-                CONFIG.tools_levitation_amplifier.getDefault(),
-                CONFIG.arcane_aura_levitation_duration.getDefault(),
-                CONFIG.arcane_aura_amplifier.getDefault());
+    public static AmetrineConfigPacket getPlayerAmetrinePacket() {
+        return PLAYER_CACHE.makeAmetrinePacket();
     }
 
-    public static JadeConfigPacket getPlayerJadePacket(UUID playerId) {
-        if (PLAYER_CACHE.containsKey(playerId)) {
-            return PLAYER_CACHE.get(playerId).makeJadePacket();
-        }
-        return new JadeConfigPacket(CONFIG.tools_bouncer_jump_boost_duration.getDefault(),
-                CONFIG.tools_bouncer_amplifier.getDefault(),
-                CONFIG.speed_amplifier.getDefault(),
-                CONFIG.jump_boost_amplifier.getDefault());
+    public static JadeConfigPacket getPlayerJadePacket() {
+        return PLAYER_CACHE.makeJadePacket();
     }
 }
