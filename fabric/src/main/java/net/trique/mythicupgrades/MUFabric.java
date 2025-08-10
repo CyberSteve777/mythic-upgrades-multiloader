@@ -29,7 +29,7 @@ public class MUFabric implements ModInitializer {
         // project.
 
         // Use Fabric to bootstrap the Common mod.
-        NeoForgeConfigRegistry.INSTANCE.register(Constants.MOD_ID, ModConfig.Type.COMMON, MUConfig.CONFIG_SPEC);
+        NeoForgeConfigRegistry.INSTANCE.register(Constants.MOD_ID, ModConfig.Type.COMMON, CONFIG_SPEC);
 
         Constants.LOGGER.info("Hello Fabric world!");
         MUCommon.init();
