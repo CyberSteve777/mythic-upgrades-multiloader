@@ -3,6 +3,14 @@ plugins {
     id 'fabric-loom'
 }
 
+// Add the Terraformers maven repo to your repositories block
+repositories {
+    maven {
+        name = "Terraformers"
+        url = "https://maven.terraformersmc.com/"
+    }
+}
+
 dependencies {
     minecraft "com.mojang:minecraft:${minecraft_version}"
     mappings loom.layered {
@@ -12,6 +20,7 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
     modApi "fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${configApiVer}"
+    modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}")
 }
 
 loom {
