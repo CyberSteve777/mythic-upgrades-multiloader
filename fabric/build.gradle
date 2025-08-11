@@ -20,7 +20,7 @@ dependencies {
     modImplementation "net.fabricmc:fabric-loader:${fabric_loader_version}"
     modImplementation "net.fabricmc.fabric-api:fabric-api:${fabric_version}"
     modApi "fuzs.forgeconfigapiport:forgeconfigapiport-fabric:${configApiVer}"
-    modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}")
+    modRuntimeOnly("com.terraformersmc:modmenu:${project.modmenu_version}")
 }
 
 loom {
