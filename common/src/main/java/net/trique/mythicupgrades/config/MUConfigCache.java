@@ -5,6 +5,7 @@ import net.trique.mythicupgrades.networking.packet.config.*;
 
 
 import static net.trique.mythicupgrades.config.MUConfig.CONFIG;
+import static net.trique.mythicupgrades.config.MUConfig.CONFIG_SPEC;
 
 public class MUConfigCache {
     private double tools_freeze_duration;
@@ -36,6 +37,39 @@ public class MUConfigCache {
     private int tools_bouncer_amplifier;
     private int speed_amplifier;
     private int jump_boost_amplifier;
+
+
+    public MUConfigCache() {
+        tools_freeze_duration = CONFIG.tools_freeze_duration.getDefault();
+        ice_shield_amplifier = CONFIG.ice_shield_amplifier.getDefault();
+        ice_shield_slowness_duration = CONFIG.ice_shield_slowness_duration.getDefault();
+
+        topaz_tools_fire_seconds = CONFIG.topaz_tools_fire_seconds.getDefault();
+        item_mastery_amplifier = CONFIG.item_mastery_amplifier.getDefault();
+
+        poisonous_thorns_amplifier = CONFIG.poisonous_thorns_amplifier.getDefault();
+        poisonous_thorns_nausea_duration = CONFIG.poisonous_thorns_nausea_duration.getDefault();
+        poisonous_thorns_poison_duration = CONFIG.poisonous_thorns_poison_duration.getDefault();
+        tools_effects_amplifier = CONFIG.tools_effects_amplifier.getDefault();
+        tools_nausea_duration = CONFIG.tools_nausea_duration.getDefault();
+        tools_poison_duration = CONFIG.tools_poison_duration.getDefault();
+
+        tools_percentage_damage_percent = CONFIG.tools_percentage_damage_percent.getDefault();
+        damage_deflection_amplifier = CONFIG.damage_deflection_amplifier.getDefault();
+
+        spelunker_amplifier = CONFIG.spelunker_amplifier.getDefault();
+        tools_haste_amplifier = CONFIG.tools_haste_amplifier.getDefault();
+
+        tools_levitation_amplifier = CONFIG.tools_levitation_amplifier.getDefault();
+        tools_levitation_duration = CONFIG.tools_levitation_duration.getDefault();
+        arcane_aura_amplifier = CONFIG.arcane_aura_amplifier.getDefault();
+        arcane_aura_levitation_duration = CONFIG.arcane_aura_levitation_duration.getDefault();
+
+        tools_bouncer_amplifier = CONFIG.tools_bouncer_amplifier.getDefault();
+        speed_amplifier = CONFIG.speed_amplifier.getDefault();
+        tools_bouncer_jump_boost_duration = CONFIG.tools_bouncer_jump_boost_duration.getDefault();
+        jump_boost_amplifier = CONFIG.jump_boost_amplifier.getDefault();
+    }
 
 
     public void cacheAquamarineValues() {
