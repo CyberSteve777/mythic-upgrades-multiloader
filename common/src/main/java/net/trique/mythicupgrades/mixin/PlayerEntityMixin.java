@@ -17,11 +17,13 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.enchantment.Enchantments;
 import net.minecraft.world.level.Level;
+import net.trique.mythicupgrades.item.base.BaseMythicItem;
 import net.trique.mythicupgrades.registry.MUDamageTypes;
 import net.trique.mythicupgrades.item.base.BaseMythicToolItem;
 import net.trique.mythicupgrades.item.base.VirtualSapphireTool;
 import net.trique.mythicupgrades.item.materials.MUToolMaterials;
 import net.trique.mythicupgrades.item.mythic_impl.common.MythicEffectsSwordItem;
+import net.trique.mythicupgrades.util.CommonFunctions;
 import net.trique.mythicupgrades.util.EffectMeta;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -42,6 +44,15 @@ public abstract class PlayerEntityMixin extends LivingEntity {
 
     protected void percentHit(Entity entity) {
 
+    }
+
+    @Inject(method = "attack", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/world/entity/Entity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
+    private void handleEffects(Entity target, CallbackInfo ci, @Local(ordinal = 4) boolean flag3) {
+        if (flag3) {
+            if (target instanceof LivingEntity entity && this.getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof BaseMythicItem item) {
+                CommonFunctions.addStatusEffects(entity, item.getOnHitEffectsForEnemy(), this);
+            }
+        }
     }
 
 
