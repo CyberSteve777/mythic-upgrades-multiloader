@@ -53,9 +53,9 @@ public class MUFabric implements ModInitializer {
 
     public static void setupSyncOnChange() {
         NeoForgeModConfigEvents.reloading(Constants.MOD_ID).register((config) -> {
-            if (config.getSpec().equals(CONFIG_SPEC) && CONFIG_SPEC.isLoaded()) {
+            if (config.getSpec().equals(CONFIG_SPEC)) {
                 MinecraftServer server = MinecraftServerInstance.getInstance();
-                if (server != null && server.isDedicatedServer()) {
+                if (server != null) {
                     for (ServerPlayer player: PlayerLookup.all(server)) {
                         AmetrineConfigPacket ametrineConfigPacket = new AmetrineConfigPacket(
                                 CONFIG.tools_levitation_duration.get(),
@@ -109,7 +109,7 @@ public class MUFabric implements ModInitializer {
 
     public static void setupSyncOnJoin() {
         ServerPlayConnectionEvents.JOIN.register(((handler, sender, server) -> {
-            if (server != null && server.isDedicatedServer()) {
+            if (server != null) {
                 ServerPlayer player = handler.getPlayer();
                 AmetrineConfigPacket ametrineConfigPacket = new AmetrineConfigPacket(
                         CONFIG.tools_levitation_duration.get(),

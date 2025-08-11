@@ -56,14 +56,10 @@ public class ConfigLoadingEventsHandler {
                     CONFIG.poisonous_thorns_nausea_duration.get()
             );
             MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
-            if (server != null && server.isDedicatedServer()) {
-                PacketDistributor.sendToAllPlayers(aquamarineConfigPacket);
-                PacketDistributor.sendToAllPlayers(topazConfigPacket);
-                PacketDistributor.sendToAllPlayers(peridotConfigPacket);
-                PacketDistributor.sendToAllPlayers(rubyConfigPacket);
-                PacketDistributor.sendToAllPlayers(sapphireConfigPacket);
-                PacketDistributor.sendToAllPlayers(jadeConfigPacket);
-                PacketDistributor.sendToAllPlayers(ametrineConfigPacket);
+            if (server != null) {
+                PacketDistributor.sendToAllPlayers(aquamarineConfigPacket,
+                        topazConfigPacket, peridotConfigPacket, rubyConfigPacket,
+                        sapphireConfigPacket, jadeConfigPacket, ametrineConfigPacket);
             }
         }
     }

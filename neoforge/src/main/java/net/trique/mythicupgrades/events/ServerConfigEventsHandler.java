@@ -60,7 +60,7 @@ public class ServerConfigEventsHandler {
                 CONFIG.poisonous_thorns_nausea_duration.get()
         );
         MinecraftServer server = ServerLifecycleHooks.getCurrentServer();
-        if (server != null && server.isDedicatedServer() && event.getEntity() instanceof
+        if (server != null && event.getEntity() instanceof
                 ServerPlayer player) {
             PacketDistributor.sendToPlayer(player, aquamarineConfigPacket,
                     topazConfigPacket, peridotConfigPacket, rubyConfigPacket,
