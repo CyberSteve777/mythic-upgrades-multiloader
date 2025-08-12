@@ -11,13 +11,6 @@ public final class MinecraftServerInstance {
         return INSTANCE;
     }
 
-    public static MinecraftServer getInstanceOrThrow() {
-        if (INSTANCE == null) {
-            throw new IllegalStateException("Server not yet available!");
-        }
-        return INSTANCE;
-    }
-
     // Register events to update the server instance
     public static void initialize() {
         ServerLifecycleEvents.SERVER_STARTING.register(instance -> INSTANCE = instance);
