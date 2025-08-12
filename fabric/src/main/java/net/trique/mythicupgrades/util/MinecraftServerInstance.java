@@ -12,7 +12,7 @@ public final class MinecraftServerInstance {
     }
 
     // Register events to update the server instance
-    public static void initialize() {
+    public static void registerLifecycleEvents() {
         ServerLifecycleEvents.SERVER_STARTING.register(instance -> INSTANCE = instance);
         ServerLifecycleEvents.SERVER_STOPPED.register(instance -> INSTANCE = null);
     }

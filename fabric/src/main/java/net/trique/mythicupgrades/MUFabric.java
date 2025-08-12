@@ -33,7 +33,7 @@ public class MUFabric implements ModInitializer {
 
         Constants.LOGGER.info("Hello Fabric world!");
         MUCommon.init();
-        MinecraftServerInstance.initialize();
+        MinecraftServerInstance.registerLifecycleEvents();
         MUFeatureGeneration.generateFeatures();
         MULootTableModifiers.modifyLootTables();
         MUResourcePacks.addPacks();
