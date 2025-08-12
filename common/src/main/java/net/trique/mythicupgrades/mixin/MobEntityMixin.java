@@ -15,7 +15,6 @@ import net.trique.mythicupgrades.item.materials.MUToolMaterials;
 import net.trique.mythicupgrades.platform.Services;
 import net.trique.mythicupgrades.util.CommonFunctions;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
@@ -25,7 +24,6 @@ import static net.trique.mythicupgrades.registry.EffectRegistry.*;
 
 @Mixin(Mob.class)
 public abstract class MobEntityMixin extends LivingEntity {
-    @Shadow private LivingEntity target;
 
     protected MobEntityMixin(EntityType<? extends LivingEntity> entityType, Level world) {
         super(entityType, world);
@@ -33,12 +31,19 @@ public abstract class MobEntityMixin extends LivingEntity {
 
 
     @Inject(method = "doHurtTarget", at = @At(value = "RETURN"))
-    private void handleEffects(Entity target, CallbackInfoReturnable<Boolean> cir) {
+    private void applyEffectsOnHitForSelf(Entity target, CallbackInfoReturnable<Boolean> cir) {
         boolean wasAttacked = cir.getReturnValue();
-        if (wasAttacked) {
-            if (target instanceof LivingEntity entity && this.getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof BaseMythicItem item) {
-                CommonFunctions.addStatusEffects(entity, item.getOnHitEffectsForEnemy(), this);
-            }
+        if (wasAttacked && this.getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof BaseMythicItem item) {
+            CommonFunctions.addStatusEffects(this, item.getOnHitEffectsForSelf(), this);
+        }
+    }
+
+    @Inject(method = "doHurtTarget", at = @At(value = "RETURN"))
+    private void applyEffectsOnHitForEnemy(Entity target, CallbackInfoReturnable<Boolean> cir) {
+        boolean wasAttacked = cir.getReturnValue();
+        if (wasAttacked && target instanceof LivingEntity entity &&
+                this.getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof BaseMythicItem item) {
+            CommonFunctions.addStatusEffects(entity, item.getOnHitEffectsForEnemy(), entity);
         }
     }
 

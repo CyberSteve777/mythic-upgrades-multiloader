@@ -47,11 +47,17 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     }
 
     @Inject(method = "attack", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/world/entity/Entity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
-    private void handleEffects(Entity target, CallbackInfo ci, @Local(ordinal = 4) boolean flag3) {
-        if (flag3) {
-            if (target instanceof LivingEntity entity && this.getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof BaseMythicItem item) {
-                CommonFunctions.addStatusEffects(entity, item.getOnHitEffectsForEnemy(), this);
-            }
+    private void applyEffectsOnHitForSelf(Entity target, CallbackInfo ci, @Local(ordinal = 4) boolean flag3) {
+        if (flag3 && this.getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof BaseMythicItem item) {
+            CommonFunctions.addStatusEffects(this, item.getOnHitEffectsForSelf(), this);
+        }
+    }
+
+    @Inject(method = "attack", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/world/entity/Entity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
+    private void applyEffectsOnHitForEnemy(Entity target, CallbackInfo ci, @Local(ordinal = 4) boolean flag3) {
+        if (flag3 && target instanceof LivingEntity entity &&
+                this.getItemBySlot(EquipmentSlot.MAINHAND).getItem() instanceof BaseMythicItem item) {
+            CommonFunctions.addStatusEffects(entity, item.getOnHitEffectsForEnemy(), this);
         }
     }
 
