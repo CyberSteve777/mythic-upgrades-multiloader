@@ -22,10 +22,10 @@ public class MUCommon {
 //        DataComponentRegistry.init();
         MUConfigHelper.initCaches();
         EffectRegistry.init();
-        BlockRegistry.init();
-        ItemRegistry.init();
         MUArmorMaterials.init();
         ArmorSetRegistry.init();
+        ItemRegistry.init();
+        BlockRegistry.init();
         CreativeTabRegistry.init();
         ParticleRegistry.init();
         MUDamageTypes.init();

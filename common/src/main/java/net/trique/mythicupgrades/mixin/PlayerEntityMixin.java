@@ -1,5 +1,7 @@
 package net.trique.mythicupgrades.mixin;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
 import me.cybersteve.equiplib.item.handheld.base.IEffectHandHeldItem;
 import net.minecraft.core.Holder;
@@ -50,12 +52,11 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     }
 
 
-    @Inject(method = "attack", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/world/entity/LivingEntity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
-    private void applyEffectsOnSweeping(Entity target, CallbackInfo ci, @Local LivingEntity livingEntity,
-                                        @Local DamageSource source, @Local(ordinal = 7) float f5) {
+    @WrapOperation(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/LivingEntity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
+    private boolean applyEffectsOnSweeping(LivingEntity target, DamageSource source, float amount, Operation<Boolean> original) {
         Item weapon = this.getItemBySlot(EquipmentSlot.MAINHAND).getItem();
         if (weapon instanceof SwordItem && weapon instanceof IEffectHandHeldItem sword) {
-            for (var effectEntry : sword.getEffectsForSelfWhenHit(source, f5).data().entrySet()) {
+            for (var effectEntry : sword.getEffectsForSelfWhenHit(source, amount).data().entrySet()) {
                 Holder<MobEffect> effect = effectEntry.getKey();
                 EffectMeta meta = effectEntry.getValue();
                 int duration = meta.duration();
@@ -64,9 +65,10 @@ public abstract class PlayerEntityMixin extends LivingEntity {
                 boolean showIcon = meta.showIcon();
                 boolean showParticles = meta.showParticles();
                 double sweeping_amplifier = this.getAttributeValue(Attributes.SWEEPING_DAMAGE_RATIO);
-                livingEntity.addEffect(new MobEffectInstance(effect, duration, Math.max(0, (int) (amplifier - 0.75 + sweeping_amplifier)), ambient, showParticles, showIcon));
+                target.addEffect(new MobEffectInstance(effect, duration, Math.max(0, (int) (amplifier - 0.75 + sweeping_amplifier)), ambient, showParticles, showIcon));
             }
         }
+        return original.call(target, source, amount);
     }
 
     @Inject(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
@@ -111,14 +113,15 @@ public abstract class PlayerEntityMixin extends LivingEntity {
         }
     }
 
-    @Inject(method = "attack", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/world/entity/Entity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
-    private void applyBouncerEffect(Entity entity, CallbackInfo ci) {
+    @WrapOperation(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
+    private boolean applyBouncerEffect(Entity target, DamageSource source, float amount, Operation<Boolean> original) {
         if (this.hasEffect(BOUNCER)) {
             int ampl = this.getEffect(BOUNCER).getAmplifier();
             JadeData data = MUConfigHelper.getJadeValues();
             this.addEffect(new MobEffectInstance(MobEffects.JUMP, (int)
                     (data.tools_bouncer_jump_boost_duration() * 20), ampl));
         }
+        return original.call(target, source, amount);
     }
 
     @Inject(method = "attack", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"))

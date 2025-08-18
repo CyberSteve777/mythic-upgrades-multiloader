@@ -18,8 +18,10 @@ public class ArmorSetRegistry {
     public static final RegistryObject<EffectArmorSet, AmetrineArmorSet> AMETRINE_SET = ARMOR_SET_REGISTRY.register(
             "ametrine_set", () -> new AmetrineArmorSet(new ArmorSet.Builder()
                     .addArmorMaterials(MUArmorMaterials.AMETRINE)
-                    .addArmorItems(AMETRINE_HELMET::get, AMETRINE_CHESTPLATE::get,
-                            AMETRINE_LEGGINGS::get, AMETRINE_BOOTS::get)
+                    .addHelmets(AMETRINE_HELMET::get)
+                    .addChestPlates(AMETRINE_CHESTPLATE::get)
+                    .addLeggings(AMETRINE_LEGGINGS::get)
+                    .addBoots(AMETRINE_BOOTS::get)
                     .build()
             )
     );
@@ -27,8 +29,10 @@ public class ArmorSetRegistry {
     public static final RegistryObject<EffectArmorSet, AquamarineArmorSet> AQUAMARINE_SET = ARMOR_SET_REGISTRY.register(
             "aquamarine_set", () -> new AquamarineArmorSet(new ArmorSet.Builder()
                     .addArmorMaterials(MUArmorMaterials.AQUAMARINE)
-                    .addArmorItems(AQUAMARINE_HELMET::get, AQUAMARINE_CHESTPLATE::get,
-                            AQUAMARINE_LEGGINGS::get, AQUAMARINE_BOOTS::get)
+                    .addHelmets(AMETRINE_HELMET::get)
+                    .addChestPlates(AMETRINE_CHESTPLATE::get)
+                    .addLeggings(AMETRINE_LEGGINGS::get)
+                    .addBoots(AMETRINE_BOOTS::get)
                     .build()
             )
     );
@@ -36,8 +40,10 @@ public class ArmorSetRegistry {
     public static final RegistryObject<EffectArmorSet, JadeArmorSet> JADE_SET = ARMOR_SET_REGISTRY.register(
             "jade_set", () -> new JadeArmorSet(new ArmorSet.Builder()
                     .addArmorMaterials(MUArmorMaterials.JADE)
-                    .addArmorItems(JADE_HELMET::get, JADE_CHESTPLATE::get,
-                            JADE_LEGGINGS::get, JADE_BOOTS::get)
+                    .addHelmets(JADE_HELMET::get)
+                    .addChestPlates(JADE_CHESTPLATE::get)
+                    .addLeggings(JADE_LEGGINGS::get)
+                    .addBoots(JADE_BOOTS::get)
                     .build()
             )
     );
@@ -45,8 +51,10 @@ public class ArmorSetRegistry {
     public static final RegistryObject<EffectArmorSet, PeridotArmorSet> PERIDOT_SET = ARMOR_SET_REGISTRY.register(
             "peridot_set", () -> new PeridotArmorSet(new ArmorSet.Builder()
                     .addArmorMaterials(MUArmorMaterials.PERIDOT)
-                    .addArmorItems(PERIDOT_HELMET::get, PERIDOT_CHESTPLATE::get,
-                            PERIDOT_LEGGINGS::get, PERIDOT_BOOTS::get)
+                    .addHelmets(PERIDOT_HELMET::get)
+                    .addChestPlates(PERIDOT_CHESTPLATE::get)
+                    .addLeggings(PERIDOT_LEGGINGS::get)
+                    .addBoots(PERIDOT_BOOTS::get)
                     .build()
             )
     );
@@ -54,8 +62,10 @@ public class ArmorSetRegistry {
     public static final RegistryObject<EffectArmorSet, RubyArmorSet> RUBY_SET = ARMOR_SET_REGISTRY.register(
             "ruby_set", () -> new RubyArmorSet(new ArmorSet.Builder()
                     .addArmorMaterials(MUArmorMaterials.RUBY)
-                    .addArmorItems(RUBY_HELMET::get, RUBY_CHESTPLATE::get,
-                            RUBY_LEGGINGS::get, RUBY_BOOTS::get)
+                    .addHelmets(RUBY_HELMET::get)
+                    .addChestPlates(RUBY_CHESTPLATE::get)
+                    .addLeggings(RUBY_LEGGINGS::get)
+                    .addBoots(RUBY_BOOTS::get)
                     .build()
             )
     );
@@ -63,8 +73,10 @@ public class ArmorSetRegistry {
     public static final RegistryObject<EffectArmorSet, SapphireArmorSet> SAPPHIRE_SET = ARMOR_SET_REGISTRY.register(
             "sapphire_set", () -> new SapphireArmorSet(new ArmorSet.Builder()
                     .addArmorMaterials(MUArmorMaterials.SAPPHIRE)
-                    .addArmorItems(SAPPHIRE_HELMET::get, SAPPHIRE_CHESTPLATE::get,
-                            SAPPHIRE_LEGGINGS::get, SAPPHIRE_BOOTS::get)
+                    .addHelmets(SAPPHIRE_HELMET::get)
+                    .addChestPlates(SAPPHIRE_CHESTPLATE::get)
+                    .addLeggings(SAPPHIRE_LEGGINGS::get)
+                    .addBoots(SAPPHIRE_BOOTS::get)
                     .build()
             )
     );
@@ -72,8 +84,10 @@ public class ArmorSetRegistry {
     public static final RegistryObject<EffectArmorSet, TopazArmorSet> TOPAZ_SET = ARMOR_SET_REGISTRY.register(
             "topaz_set", () -> new TopazArmorSet(new ArmorSet.Builder()
                     .addArmorMaterials(MUArmorMaterials.TOPAZ)
-                    .addArmorItems(TOPAZ_HELMET::get, TOPAZ_CHESTPLATE::get,
-                            TOPAZ_LEGGINGS::get, TOPAZ_BOOTS::get)
+                    .addHelmets(TOPAZ_HELMET::get)
+                    .addChestPlates(TOPAZ_CHESTPLATE::get)
+                    .addLeggings(TOPAZ_LEGGINGS::get)
+                    .addBoots(TOPAZ_BOOTS::get)
                     .build()
             )
     );

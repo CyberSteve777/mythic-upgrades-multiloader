@@ -1,5 +1,7 @@
 package net.trique.mythicupgrades.mixin;
 
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -50,14 +52,15 @@ public abstract class MobEntityMixin extends LivingEntity {
         }
     }
 
-    @Inject(method = "doHurtTarget", at = @At(value = "INVOKE_ASSIGN", target = "Lnet/minecraft/world/entity/Entity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
-    private void applyBouncerEffect(Entity entity, CallbackInfoReturnable<Boolean> cir) {
+    @WrapOperation(method = "doHurtTarget", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"))
+    private boolean applyBouncerEffect(Entity target, DamageSource source, float amount, Operation<Boolean> original) {
         if (this.hasEffect(BOUNCER)) {
             int ampl = this.getEffect(BOUNCER).getAmplifier();
             JadeData data = MUConfigHelper.getJadeValues();
             this.addEffect(new MobEffectInstance(MobEffects.JUMP, (int)
                     (data.tools_bouncer_jump_boost_duration() * 20), ampl));
         }
+        return original.call(target, source, amount);
     }
 
     @Inject(method = "doHurtTarget", at = @At(value = "INVOKE", target = "Lnet/minecraft/world/entity/Entity;hurt(Lnet/minecraft/world/damagesource/DamageSource;F)Z"))

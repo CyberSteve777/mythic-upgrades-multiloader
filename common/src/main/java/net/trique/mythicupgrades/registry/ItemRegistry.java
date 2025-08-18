@@ -19,7 +19,6 @@ import net.trique.mythicupgrades.item.misc.MythicPotionItem;
 import net.trique.mythicupgrades.registration.RegistrationProvider;
 import net.trique.mythicupgrades.registration.RegistryObject;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static net.minecraft.world.effect.MobEffects.*;
