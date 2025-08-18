@@ -33,63 +33,6 @@ public class CommonFunctions {
         return EnchantmentHelper.getItemEnchantmentLevel(enchantmentEntry, stack);
     }
 
-    public static boolean checkStatusEffects(LivingEntity entity, Object2ObjectMap<Holder<MobEffect>, EffectMeta> effects) {
-        for (Holder<MobEffect> effect : effects.keySet()) {
-            MobEffectInstance instance = entity.getEffect(effect);
-            EffectMeta meta = effects.get(effect);
-            if (instance != null) {
-                if ((instance.isInfiniteDuration() && instance.getAmplifier() != meta.amplifier()) || instance.getAmplifier() < meta.amplifier()) {
-                    return true;
-                }
-            } else {
-                return true;
-            }
-        }
-        return false;
-    }
-    public static void addStatusEffects(LivingEntity entity, Object2ObjectMap<Holder<MobEffect>, EffectMeta> effects, LivingEntity attacker) {
-        for (Holder<MobEffect> effect : effects.keySet()) {
-            EffectMeta meta = effects.get(effect);
-            if (effect != null && !effect.value().isInstantenous()) {
-                if (entity.hasEffect(effect)) {
-                    entity.removeEffect(effect);
-                }
-                entity.addEffect(new MobEffectInstance(effect, meta.duration(), meta.amplifier(),
-                        meta.ambient(), meta.showParticles(), meta.showIcon()), attacker);
-            }
-        }
-    }
-
-    public static void addStatusEffects(LivingEntity entity, Object2ObjectMap<Holder<MobEffect>, EffectMeta> effects) {
-        addStatusEffects(entity, effects, null);
-    }
-
-    public static boolean hasCorrectArmorOn(LivingEntity entity, ArmorMaterial material) {
-        ArrayList<EquipmentSlot> slots = new ArrayList<>(Arrays.asList(EquipmentSlot.HEAD, EquipmentSlot.CHEST, EquipmentSlot.LEGS, EquipmentSlot.FEET));
-        for (EquipmentSlot slot : slots) {
-            ItemStack stack = entity.getItemBySlot(slot);
-            if (stack.isEmpty()) {
-                return false;
-            }
-            if (!(stack.getItem() instanceof ArmorItem)) {
-                return false;
-            }
-            if (!((ArmorItem) stack.getItem()).getMaterial().value().equals(material)) {
-                return false;
-            }
-        }
-        return true;
-    }
-    public static void removeMythicInfiniteEffects(LivingEntity entity, Object2ObjectMap<Holder<MobEffect>, EffectMeta> effects) {
-        for (Holder<MobEffect> effect : effects.keySet()) {
-            EffectMeta meta = effects.get(effect);
-            if (effect != null && entity.hasEffect(effect) && entity.getEffect(effect).isInfiniteDuration() &&
-            entity.getEffect(effect).getAmplifier() == meta.amplifier()) {
-                entity.removeEffect(effect);
-            }
-        }
-    }
-
     public static String arabicToRom(int num){
         num += 1;
         int [] a = {1, 4, 5, 9, 10, 40, 50, 90, 100, 400, 500, 900, 1000};

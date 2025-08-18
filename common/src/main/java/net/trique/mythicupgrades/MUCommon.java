@@ -1,5 +1,7 @@
 package net.trique.mythicupgrades;
 
+import me.cybersteve.equiplib.registry.EffectArmorSetRegistry;
+import net.trique.mythicupgrades.config.MUConfigHelper;
 import net.trique.mythicupgrades.item.materials.MUArmorMaterials;
 import net.trique.mythicupgrades.platform.Services;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -17,11 +19,13 @@ public class MUCommon {
     // code that gets invoked by the entry point of the loader specific projects.
     public static void init() {
         Constants.LOGGER.info("Hello from Common init on {}! we are currently in a {} environment!", Services.PLATFORM.getPlatformName(), Services.PLATFORM.getEnvironmentName());
-        DataComponentRegistry.init();
+//        DataComponentRegistry.init();
+        MUConfigHelper.initCaches();
         EffectRegistry.init();
         BlockRegistry.init();
         ItemRegistry.init();
         MUArmorMaterials.init();
+        ArmorSetRegistry.init();
         CreativeTabRegistry.init();
         ParticleRegistry.init();
         MUDamageTypes.init();

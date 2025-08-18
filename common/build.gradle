@@ -27,6 +27,7 @@ dependencies {
     compileOnly group: 'io.github.llamalad7', name: 'mixinextras-common', version: '0.4.1'
     annotationProcessor group: 'io.github.llamalad7', name: 'mixinextras-common', version: '0.4.1'
     api "fuzs.forgeconfigapiport:forgeconfigapiport-common-neoforgeapi:${configApiVer}"
+    compileOnly "me.cybersteve:equiplib-common:${equipLibVer}"
 }
 
 configurations {

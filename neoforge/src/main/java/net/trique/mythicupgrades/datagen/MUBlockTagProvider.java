@@ -70,22 +70,67 @@ public class MUBlockTagProvider extends BlockTagsProvider {
         tag(MUBlockTags.INCORRECT_FOR_TOPAZ_TOOL);
         tag(MUBlockTags.INCORRECT_FOR_AQUAMARINE_TOOL);
 
+        tag(MUBlockTags.STORAGE_BLOCKS_AQUAMARINE)
+                .add(AQUAMARINE_BLOCK.get());
+        tag(MUBlockTags.STORAGE_BLOCKS_TOPAZ)
+                .add(TOPAZ_BLOCK.get());
+        tag(MUBlockTags.STORAGE_BLOCKS_PERIDOT)
+                .add(PERIDOT_BLOCK.get());
+        tag(MUBlockTags.STORAGE_BLOCKS_RUBY)
+                .add(RUBY_BLOCK.get());
+        tag(MUBlockTags.STORAGE_BLOCKS_SAPPHIRE)
+                .add(SAPPHIRE_BLOCK.get());
+        tag(MUBlockTags.STORAGE_BLOCKS_JADE)
+                .add(JADE_BLOCK.get());
+        tag(MUBlockTags.STORAGE_BLOCKS_AMETRINE)
+                .add(AMETRINE_BLOCK.get());
+        tag(MUBlockTags.STORAGE_BLOCKS_NECOIUM)
+                .add(NECOIUM_BLOCK.get());
+        tag(MUBlockTags.STORAGE_BLOCKS_RAW_NECOIUM)
+                .add(RAW_NECOIUM_BLOCK.get());
+
+
+        tag(Tags.Blocks.STORAGE_BLOCKS)
+                .addTags(
+                        MUBlockTags.STORAGE_BLOCKS_AQUAMARINE,
+                        MUBlockTags.STORAGE_BLOCKS_TOPAZ,
+                        MUBlockTags.STORAGE_BLOCKS_PERIDOT,
+                        MUBlockTags.STORAGE_BLOCKS_RUBY,
+                        MUBlockTags.STORAGE_BLOCKS_SAPPHIRE,
+                        MUBlockTags.STORAGE_BLOCKS_JADE,
+                        MUBlockTags.STORAGE_BLOCKS_AMETRINE,
+                        MUBlockTags.STORAGE_BLOCKS_NECOIUM,
+                        MUBlockTags.STORAGE_BLOCKS_RAW_NECOIUM
+                );
+
         tag(MUBlockTags.SPELUNKER_OUTLINED).addTags(
-                BlockTags.create(Tags.Blocks.ORES.location()),
-                BlockTags.create(Tags.Blocks.CHESTS.location()),
-                BlockTags.create(Tags.Blocks.CLUSTERS.location()),
-                BlockTags.create(Tags.Blocks.BARRELS.location())
-        ).add(Blocks.RAW_COPPER_BLOCK,
-                Blocks.RAW_IRON_BLOCK,
-                Blocks.RAW_GOLD_BLOCK,
-                Blocks.IRON_BLOCK,
-                Blocks.GOLD_BLOCK,
-                Blocks.LAPIS_BLOCK,
-                Blocks.DIAMOND_BLOCK,
-                Blocks.EMERALD_BLOCK,
-                Blocks.NETHERITE_BLOCK,
-                Blocks.DECORATED_POT,
-                RAW_NECOIUM_BLOCK.get()
+                Tags.Blocks.ORES,
+                Tags.Blocks.CHESTS,
+                Tags.Blocks.BARRELS,
+                Tags.Blocks.CLUSTERS,
+                Tags.Blocks.STORAGE_BLOCKS_COAL,
+                Tags.Blocks.STORAGE_BLOCKS_EMERALD,
+                Tags.Blocks.STORAGE_BLOCKS_DIAMOND,
+                Tags.Blocks.STORAGE_BLOCKS_COPPER,
+                Tags.Blocks.STORAGE_BLOCKS_GOLD,
+                Tags.Blocks.STORAGE_BLOCKS_REDSTONE,
+                Tags.Blocks.STORAGE_BLOCKS_IRON,
+                Tags.Blocks.STORAGE_BLOCKS_LAPIS,
+                Tags.Blocks.STORAGE_BLOCKS_NETHERITE,
+                Tags.Blocks.STORAGE_BLOCKS_RAW_COPPER,
+                Tags.Blocks.STORAGE_BLOCKS_RAW_GOLD,
+                Tags.Blocks.STORAGE_BLOCKS_RAW_IRON,
+                MUBlockTags.STORAGE_BLOCKS_AQUAMARINE,
+                MUBlockTags.STORAGE_BLOCKS_TOPAZ,
+                MUBlockTags.STORAGE_BLOCKS_PERIDOT,
+                MUBlockTags.STORAGE_BLOCKS_RUBY,
+                MUBlockTags.STORAGE_BLOCKS_SAPPHIRE,
+                MUBlockTags.STORAGE_BLOCKS_JADE,
+                MUBlockTags.STORAGE_BLOCKS_AMETRINE,
+                MUBlockTags.STORAGE_BLOCKS_NECOIUM,
+                MUBlockTags.STORAGE_BLOCKS_RAW_NECOIUM
+        ).add(
+                Blocks.DECORATED_POT
         );
     }
 }

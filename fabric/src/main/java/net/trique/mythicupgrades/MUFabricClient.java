@@ -15,8 +15,8 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.trique.mythicupgrades.config.MUConfigHelper;
-import net.trique.mythicupgrades.networking.packet.config.*;
-import net.trique.mythicupgrades.networking.packet.particle.PercentAnimationPacket;
+import net.trique.mythicupgrades.networking.packet.MUConfigPacket;
+import net.trique.mythicupgrades.networking.packet.PercentAnimationPacket;
 import net.trique.mythicupgrades.particle.PercentParticle;
 import net.trique.mythicupgrades.registry.ParticleRegistry;
 import net.trique.mythicupgrades.util.SpelunkerEffectRenderer;
@@ -43,22 +43,10 @@ public class MUFabricClient implements ClientModInitializer {
         });
         addConfigPacketsReceivers();
         ClientLoginConnectionEvents.INIT.register(((handler, client) -> {
-            MUConfigHelper.cachePlayerTopazValues();
-            MUConfigHelper.cachePlayerAquamarineValues();
-            MUConfigHelper.cachePlayerPeridotValues();
-            MUConfigHelper.cachePlayerSapphireValues();
-            MUConfigHelper.cachePlayerRubyValues();
-            MUConfigHelper.cachePlayerJadeValues();
-            MUConfigHelper.cachePlayerAmetrineValues();
+            MUConfigHelper.cacheValuesBeforeJoin();
         }));
         ClientLoginConnectionEvents.DISCONNECT.register(((handler, client) -> {
-            MUConfigHelper.updatePeridotValues(MUConfigHelper.getPlayerPeridotCache());
-            MUConfigHelper.updateTopazValues(MUConfigHelper.getPlayerTopazCache());
-            MUConfigHelper.updateAquamarineValues(MUConfigHelper.getPlayerAquamarineCache());
-            MUConfigHelper.updateSapphireValues(MUConfigHelper.getPlayerSapphireCache());
-            MUConfigHelper.updateRubyValues(MUConfigHelper.getPlayerRubyCache());
-            MUConfigHelper.updateJadeValues(MUConfigHelper.getPlayerJadePacket());
-            MUConfigHelper.updateAmetrineValues(MUConfigHelper.getPlayerAmetrinePacket());
+            MUConfigHelper.restoreClientValues();
         }));
         ClientTickEvents.START_CLIENT_TICK.register((client ->
                 SpelunkerEffectRenderer.clientFillRenderPositions(client.player)));
@@ -68,19 +56,8 @@ public class MUFabricClient implements ClientModInitializer {
     }
 
     public static void addConfigPacketsReceivers() {
-        ClientPlayNetworking.registerGlobalReceiver(AquamarineConfigPacket.TYPE, ((payload, context) ->
-                MUConfigHelper.updateAquamarineValues(payload)));
-        ClientPlayNetworking.registerGlobalReceiver(TopazConfigPacket.TYPE, ((payload, context) ->
-                MUConfigHelper.updateTopazValues(payload)));
-        ClientPlayNetworking.registerGlobalReceiver(PeridotConfigPacket.TYPE, ((payload, context) ->
-                MUConfigHelper.updatePeridotValues(payload)));
-        ClientPlayNetworking.registerGlobalReceiver(RubyConfigPacket.TYPE, ((payload, context) ->
-                MUConfigHelper.updateRubyValues(payload)));
-        ClientPlayNetworking.registerGlobalReceiver(SapphireConfigPacket.TYPE, ((payload, context) ->
-                MUConfigHelper.updateSapphireValues(payload)));
-        ClientPlayNetworking.registerGlobalReceiver(JadeConfigPacket.TYPE, ((payload, context) ->
-                MUConfigHelper.updateJadeValues(payload)));
-        ClientPlayNetworking.registerGlobalReceiver(AmetrineConfigPacket.TYPE, (payload, context) ->
-                MUConfigHelper.updateAmetrineValues(payload));
+        ClientPlayNetworking.registerGlobalReceiver(MUConfigPacket.TYPE, ((payload, context) -> {
+            MUConfigHelper.updateValuesOnJoin(payload);
+        }));
     }
 }

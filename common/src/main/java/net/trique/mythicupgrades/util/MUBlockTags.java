@@ -16,6 +16,16 @@ public class MUBlockTags {
     public static TagKey<Block> INCORRECT_FOR_SAPPHIRE_TOOL = create("incorrect_for_sapphire_tool");
     public static TagKey<Block> INCORRECT_FOR_TOPAZ_TOOL = create("incorrect_for_topaz_tool");
 
+    public static TagKey<Block> STORAGE_BLOCKS_AMETRINE = create("storage_blocks/ametrine");
+    public static TagKey<Block> STORAGE_BLOCKS_AQUAMARINE = create("storage_blocks/aquamarine");
+    public static TagKey<Block> STORAGE_BLOCKS_JADE = create("storage_blocks/jade");
+    public static TagKey<Block> STORAGE_BLOCKS_PERIDOT = create("storage_blocks/peridot");
+    public static TagKey<Block> STORAGE_BLOCKS_RUBY = create("storage_blocks/ruby");
+    public static TagKey<Block> STORAGE_BLOCKS_SAPPHIRE = create("storage_blocks/sapphire");
+    public static TagKey<Block> STORAGE_BLOCKS_TOPAZ = create("storage_blocks/topaz");
+    public static TagKey<Block> STORAGE_BLOCKS_NECOIUM = create("storage_blocks/necoium");
+    public static TagKey<Block> STORAGE_BLOCKS_RAW_NECOIUM = create("storage_blocks/raw_necoium");
+
     public static TagKey<Block> SPELUNKER_OUTLINED = create("spelunker_outlined");
 
 

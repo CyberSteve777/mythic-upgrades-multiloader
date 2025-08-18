@@ -46,6 +46,10 @@ repositories {
         name = "Fuzs Mod Resources"
         url = "https://raw.githubusercontent.com/Fuzss/modresources/main/maven/"
     }
+    maven {
+        name = "Cloudsmith"
+        url = "https://dl.cloudsmith.io/public/cyberworkspace/equiplib/maven"
+    }
 }
 
 // Declare capabilities on the outgoing configurations.

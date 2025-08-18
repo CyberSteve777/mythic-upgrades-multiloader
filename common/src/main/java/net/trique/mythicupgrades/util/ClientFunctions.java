@@ -1,5 +1,8 @@
 package net.trique.mythicupgrades.util;
 
+import me.cybersteve.equiplib.item.armor.base.IEffectArmorItemExtension;
+import me.cybersteve.equiplib.util.ArmorHooks;
+import me.cybersteve.equiplib.util.CommonHooks;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
@@ -18,9 +21,8 @@ public class ClientFunctions {
         if (player != null) {
             MutableComponent defaultArmorTooltip = Component.translatable("defaultArmorTooltip.description").withStyle(ChatFormatting.GRAY).
                     withStyle(ChatFormatting.ITALIC);
-            ArrayList<ItemStack> toCheck = new ArrayList<>();
-            player.getArmorSlots().forEach(toCheck::add);
-            if (CommonFunctions.hasCorrectArmorOn(player, material) && toCheck.contains(stack)) {
+            if (stack.getItem() instanceof IEffectArmorItemExtension armorItem &&
+                    ArmorHooks.hasFullEffectSetArmorOn(player, armorItem.getEffectArmorSet())) {
                 tooltips.add(successTooltip.withStyle(color));
             } else {
                 tooltips.add(defaultArmorTooltip);

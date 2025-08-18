@@ -13,24 +13,12 @@ public class ClientConfigEventsHandler {
 
     @SubscribeEvent
     private static void cacheClientValues(ClientPlayerNetworkEvent.LoggingIn event) {
-        MUConfigHelper.cachePlayerTopazValues();
-        MUConfigHelper.cachePlayerAquamarineValues();
-        MUConfigHelper.cachePlayerPeridotValues();
-        MUConfigHelper.cachePlayerSapphireValues();
-        MUConfigHelper.cachePlayerRubyValues();
-        MUConfigHelper.cachePlayerJadeValues();
-        MUConfigHelper.cachePlayerAmetrineValues();
+        MUConfigHelper.cacheValuesBeforeJoin();
     }
 
 
     @SubscribeEvent
     private static void loadClientValues(ClientPlayerNetworkEvent.LoggingOut event) {
-        MUConfigHelper.updatePeridotValues(MUConfigHelper.getPlayerPeridotCache());
-        MUConfigHelper.updateTopazValues(MUConfigHelper.getPlayerTopazCache());
-        MUConfigHelper.updateAquamarineValues(MUConfigHelper.getPlayerAquamarineCache());
-        MUConfigHelper.updateSapphireValues(MUConfigHelper.getPlayerSapphireCache());
-        MUConfigHelper.updateRubyValues(MUConfigHelper.getPlayerRubyCache());
-        MUConfigHelper.updateJadeValues(MUConfigHelper.getPlayerJadePacket());
-        MUConfigHelper.updateAmetrineValues(MUConfigHelper.getPlayerAmetrinePacket());
+        MUConfigHelper.restoreClientValues();
     }
 }

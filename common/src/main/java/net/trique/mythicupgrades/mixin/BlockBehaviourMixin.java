@@ -4,13 +4,13 @@ import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.world.entity.ExperienceOrb;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.item.crafting.SingleRecipeInput;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.storage.loot.LootParams;
 import net.minecraft.world.level.storage.loot.parameters.LootContextParams;
-import net.trique.mythicupgrades.item.base.BaseMythicToolItem;
 import net.trique.mythicupgrades.item.materials.MUToolMaterials;
 import org.apache.commons.lang3.tuple.Pair;
 import org.spongepowered.asm.mixin.Mixin;
@@ -24,8 +24,8 @@ public abstract class BlockBehaviourMixin {
     @ModifyReturnValue(method = "getDrops", at = @At(value = "RETURN"))
     private List<ItemStack> smeltLoot(List<ItemStack> original, BlockState blockState, LootParams.Builder builder) {
         ItemStack tool = builder.getParameter(LootContextParams.TOOL);
-        if (tool.getItem() instanceof BaseMythicToolItem item &&
-                item.getMythicMaterial().equals(MUToolMaterials.TOPAZ)) {
+        if (tool.getItem() instanceof TieredItem item &&
+                item.getTier().equals(MUToolMaterials.TOPAZ)) {
             List<Pair<ItemStack, Float>> list = original.stream().map(
                     stack -> builder.getLevel().getRecipeManager().getRecipeFor(RecipeType.SMELTING, new SingleRecipeInput(stack), builder.getLevel())
                                     .map(holder -> {

@@ -20,8 +20,8 @@ import net.trique.mythicupgrades.client.HiResPackSource;
 import net.trique.mythicupgrades.config.MUConfig;
 import net.trique.mythicupgrades.config.MUConfigHelper;
 import net.trique.mythicupgrades.loot.ModLootModifiers;
-import net.trique.mythicupgrades.networking.packet.config.*;
-import net.trique.mythicupgrades.networking.packet.particle.PercentAnimationPacket;
+import net.trique.mythicupgrades.networking.packet.MUConfigPacket;
+import net.trique.mythicupgrades.networking.packet.PercentAnimationPacket;
 import net.trique.mythicupgrades.platform.Services;
 import net.trique.mythicupgrades.registry.ParticleRegistry;
 
@@ -62,26 +62,8 @@ public class MUNeoForge {
                 }
             });
         });
-        registrar.playToClient(AquamarineConfigPacket.TYPE, AquamarineConfigPacket.CODEC, ((packet, ctx) -> {
-            ctx.enqueueWork(() -> MUConfigHelper.updateAquamarineValues(packet));
-        }));
-        registrar.playToClient(PeridotConfigPacket.TYPE, PeridotConfigPacket.CODEC, ((packet, ctx) -> {
-            ctx.enqueueWork(() -> MUConfigHelper.updatePeridotValues(packet));
-        }));
-        registrar.playToClient(TopazConfigPacket.TYPE, TopazConfigPacket.CODEC, ((packet, ctx) -> {
-            ctx.enqueueWork(() -> MUConfigHelper.updateTopazValues(packet));
-        }));
-        registrar.playToClient(SapphireConfigPacket.TYPE, SapphireConfigPacket.CODEC, ((packet, ctx) -> {
-            ctx.enqueueWork(() -> MUConfigHelper.updateSapphireValues(packet));
-        }));
-        registrar.playToClient(RubyConfigPacket.TYPE, RubyConfigPacket.CODEC, ((packet, ctx) -> {
-            ctx.enqueueWork(() -> MUConfigHelper.updateRubyValues(packet));
-        }));
-        registrar.playToClient(JadeConfigPacket.TYPE, JadeConfigPacket.CODEC, ((packet, ctx) -> {
-            ctx.enqueueWork(() -> MUConfigHelper.updateJadeValues(packet));
-        }));
-        registrar.playToClient(AmetrineConfigPacket.TYPE, AmetrineConfigPacket.CODEC, ((packet, ctx) -> {
-            ctx.enqueueWork(() -> MUConfigHelper.updateAmetrineValues(packet));
+        registrar.playToClient(MUConfigPacket.TYPE, MUConfigPacket.CODEC, ((packet, ctx) -> {
+            ctx.enqueueWork(() -> MUConfigHelper.updateValuesOnJoin(packet));
         }));
     }
 }

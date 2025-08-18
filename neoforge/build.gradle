@@ -5,6 +5,7 @@ plugins {
 
 dependencies {
     api "fuzs.forgeconfigapiport:forgeconfigapiport-common-neoforgeapi:${configApiVer}"
+    implementation "me.cybersteve:equiplib-neoforge:${equipLibVer}"
 }
 
 neoForge {

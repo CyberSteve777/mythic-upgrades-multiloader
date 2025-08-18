@@ -8,7 +8,8 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-
+import net.trique.mythicupgrades.config.MUConfigHelper;
+import net.trique.mythicupgrades.config.gem_data.AquamarineData;
 
 
 public class IceShieldEffect extends MobEffect {
@@ -23,9 +24,10 @@ public class IceShieldEffect extends MobEffect {
             if (livingEntity.hurtTime == 9) {
                 if (attacker instanceof LivingEntity entity && !attacker.equals(livingEntity) &&
                         !(entity instanceof Player player && (player.isCreative() || player.isSpectator()))) {
+                    AquamarineData data = MUConfigHelper.getAquamarineValues();
                     entity.playSound(SoundEvents.PLAYER_HURT_FREEZE, 1.0f, livingEntity.getVoicePitch());
                     entity.addEffect(new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN,
-                            5 * 20, amplifier), livingEntity);
+                            (int)(data.ice_shield_slowness_duration() * 20), amplifier), livingEntity);
                 }
             }
         }
