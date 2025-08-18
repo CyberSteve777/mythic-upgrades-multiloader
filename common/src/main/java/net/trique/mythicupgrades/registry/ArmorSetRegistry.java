@@ -13,7 +13,7 @@ import static net.trique.mythicupgrades.registry.ItemRegistry.*;
 
 public class ArmorSetRegistry {
     private static final RegistrationProvider<EffectArmorSet> ARMOR_SET_REGISTRY = RegistrationProvider.get(
-            EffectArmorSetRegistry.REGISTRY.getRegistryKey(), Constants.MOD_ID);
+            EffectArmorSetRegistry.REGISTRY, Constants.MOD_ID);
 
     public static final RegistryObject<EffectArmorSet, AmetrineArmorSet> AMETRINE_SET = ARMOR_SET_REGISTRY.register(
             "ametrine_set", () -> new AmetrineArmorSet(new ArmorSet.Builder()
