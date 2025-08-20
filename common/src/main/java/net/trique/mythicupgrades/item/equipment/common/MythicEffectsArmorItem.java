@@ -18,18 +18,18 @@ import java.util.function.Supplier;
 
 public class MythicEffectsArmorItem extends ArmorItem implements IEffectArmorItemExtension {
 
-    protected final Supplier<EffectArmorSet> effectArmorSet;
+    protected final EffectArmorSet effectArmorSet;
     protected final String tooltipSB;
     protected final ChatFormatting color;
     protected Supplier<List<Integer>> effectAmplifiers;
 
     public MythicEffectsArmorItem(Holder<ArmorMaterial> material, Type type, Properties settings,
                                   String tooltipSB, Supplier<List<Integer>> effectAmplifiers,
-                                  ChatFormatting color, Supplier<EffectArmorSet> effectArmorSetSupplier) {
+                                  ChatFormatting color, EffectArmorSet effectArmorSet) {
         super(material, type, settings);
         this.tooltipSB = tooltipSB;
         this.color = color;
-        this.effectArmorSet = effectArmorSetSupplier;
+        this.effectArmorSet = effectArmorSet;
         this.effectAmplifiers = effectAmplifiers;
     }
 
@@ -42,6 +42,6 @@ public class MythicEffectsArmorItem extends ArmorItem implements IEffectArmorIte
 
     @Override
     public EffectArmorSet getEffectArmorSet() {
-        return effectArmorSet.get();
+        return effectArmorSet;
     }
 }

@@ -1,6 +1,5 @@
 package net.trique.mythicupgrades.effect_armor_set;
 
-import me.cybersteve.equiplib.item.armor.base.ArmorSet;
 import me.cybersteve.equiplib.item.armor.base.EffectArmorSet;
 import me.cybersteve.equiplib.util.EffectList;
 import net.minecraft.world.damagesource.DamageSource;
@@ -11,10 +10,11 @@ import net.trique.mythicupgrades.config.gem_data.JadeData;
 
 import static net.minecraft.world.effect.MobEffects.JUMP;
 import static net.minecraft.world.effect.MobEffects.MOVEMENT_SPEED;
+import static net.trique.mythicupgrades.util.CommonFunctions.getLoc;
 
 public class JadeArmorSet extends EffectArmorSet {
-    public JadeArmorSet(ArmorSet armorSet) {
-        super(armorSet);
+    public JadeArmorSet() {
+        super(getLoc("jade_set"));
     }
 
     @Override

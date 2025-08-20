@@ -1,6 +1,5 @@
 package net.trique.mythicupgrades.effect_armor_set;
 
-import me.cybersteve.equiplib.item.armor.base.ArmorSet;
 import me.cybersteve.equiplib.item.armor.base.EffectArmorSet;
 import me.cybersteve.equiplib.util.EffectList;
 import net.minecraft.world.damagesource.DamageSource;
@@ -11,10 +10,11 @@ import net.trique.mythicupgrades.config.gem_data.TopazData;
 
 import static net.minecraft.world.effect.MobEffects.FIRE_RESISTANCE;
 import static net.trique.mythicupgrades.registry.EffectRegistry.ITEM_MASTERY;
+import static net.trique.mythicupgrades.util.CommonFunctions.getLoc;
 
 public class TopazArmorSet extends EffectArmorSet {
-    public TopazArmorSet(ArmorSet armorSet) {
-        super(armorSet);
+    public TopazArmorSet() {
+        super(getLoc("topaz_set"));
     }
 
     @Override

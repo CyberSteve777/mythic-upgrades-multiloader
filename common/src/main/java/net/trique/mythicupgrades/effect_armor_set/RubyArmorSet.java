@@ -1,6 +1,5 @@
 package net.trique.mythicupgrades.effect_armor_set;
 
-import me.cybersteve.equiplib.item.armor.base.ArmorSet;
 import me.cybersteve.equiplib.item.armor.base.EffectArmorSet;
 import me.cybersteve.equiplib.util.EffectList;
 import net.minecraft.world.damagesource.DamageSource;
@@ -10,10 +9,11 @@ import net.trique.mythicupgrades.config.MUConfigHelper;
 import net.trique.mythicupgrades.config.gem_data.RubyData;
 
 import static net.trique.mythicupgrades.registry.EffectRegistry.SPELUNKER;
+import static net.trique.mythicupgrades.util.CommonFunctions.getLoc;
 
 public class RubyArmorSet extends EffectArmorSet {
-    public RubyArmorSet(ArmorSet armorSet) {
-        super(armorSet);
+    public RubyArmorSet() {
+        super(getLoc("ruby_set"));
     }
 
     @Override

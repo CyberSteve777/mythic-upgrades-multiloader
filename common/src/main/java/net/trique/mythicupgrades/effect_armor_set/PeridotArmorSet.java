@@ -1,6 +1,5 @@
 package net.trique.mythicupgrades.effect_armor_set;
 
-import me.cybersteve.equiplib.item.armor.base.ArmorSet;
 import me.cybersteve.equiplib.item.armor.base.EffectArmorSet;
 import me.cybersteve.equiplib.util.EffectList;
 import net.minecraft.world.damagesource.DamageSource;
@@ -10,10 +9,11 @@ import net.trique.mythicupgrades.config.MUConfigHelper;
 import net.trique.mythicupgrades.config.gem_data.PeridotData;
 
 import static net.trique.mythicupgrades.registry.EffectRegistry.POISONOUS_THORNS;
+import static net.trique.mythicupgrades.util.CommonFunctions.getLoc;
 
 public class PeridotArmorSet extends EffectArmorSet {
-    public PeridotArmorSet(ArmorSet armorSet) {
-        super(armorSet);
+    public PeridotArmorSet() {
+        super(getLoc("peridot_set"));
     }
 
     @Override

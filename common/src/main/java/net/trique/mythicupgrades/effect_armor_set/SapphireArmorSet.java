@@ -1,6 +1,5 @@
 package net.trique.mythicupgrades.effect_armor_set;
 
-import me.cybersteve.equiplib.item.armor.base.ArmorSet;
 import me.cybersteve.equiplib.item.armor.base.EffectArmorSet;
 import me.cybersteve.equiplib.util.EffectList;
 import net.minecraft.world.damagesource.DamageSource;
@@ -10,10 +9,11 @@ import net.trique.mythicupgrades.config.MUConfigHelper;
 import net.trique.mythicupgrades.config.gem_data.SapphireData;
 
 import static net.trique.mythicupgrades.registry.EffectRegistry.DAMAGE_DEFLECTION;
+import static net.trique.mythicupgrades.util.CommonFunctions.getLoc;
 
 public class SapphireArmorSet extends EffectArmorSet {
-    public SapphireArmorSet(ArmorSet armorSet) {
-        super(armorSet);
+    public SapphireArmorSet() {
+        super(getLoc("sapphire_set"));
     }
 
     @Override
