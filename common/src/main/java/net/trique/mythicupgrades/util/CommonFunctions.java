@@ -1,17 +1,12 @@
 package net.trique.mythicupgrades.util;
 
-import it.unimi.dsi.fastutil.objects.Object2ObjectMap;
 import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
-import net.minecraft.world.effect.MobEffect;
-import net.minecraft.world.effect.MobEffectInstance;
-import net.minecraft.world.entity.EquipmentSlot;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -55,5 +50,9 @@ public class CommonFunctions {
             return RANDOM.nextFloat() <= 0.1f * (user.getEffect(EffectRegistry.ITEM_MASTERY).getAmplifier() + 1);
         }
         return false;
+    }
+
+    public static ResourceLocation getLoc(String key) {
+        return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, key);
     }
 }
