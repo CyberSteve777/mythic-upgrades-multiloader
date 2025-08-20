@@ -6,7 +6,7 @@ import net.minecraft.data.tags.DamageTypeTagsProvider;
 import net.minecraft.tags.DamageTypeTags;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.trique.mythicupgrades.Constants;
-import net.trique.mythicupgrades.registry.MUDamageTypes;
+import net.trique.mythicupgrades.util.MUDamageTypes;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.concurrent.CompletableFuture;

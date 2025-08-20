@@ -1,4 +1,4 @@
-package net.trique.mythicupgrades.registry;
+package net.trique.mythicupgrades.util;
 
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;

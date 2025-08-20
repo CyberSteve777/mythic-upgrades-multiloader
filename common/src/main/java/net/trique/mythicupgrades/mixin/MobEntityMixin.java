@@ -13,7 +13,7 @@ import net.trique.mythicupgrades.config.MUConfigHelper;
 import net.trique.mythicupgrades.config.gem_data.JadeData;
 import net.trique.mythicupgrades.config.gem_data.SapphireData;
 import net.trique.mythicupgrades.config.gem_data.TopazData;
-import net.trique.mythicupgrades.registry.MUDamageTypes;
+import net.trique.mythicupgrades.util.MUDamageTypes;
 import net.trique.mythicupgrades.item.materials.MUToolMaterials;
 import net.trique.mythicupgrades.platform.Services;
 

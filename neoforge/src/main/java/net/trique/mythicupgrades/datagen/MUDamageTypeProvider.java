@@ -11,7 +11,7 @@ import net.minecraft.world.damagesource.DamageType;
 import net.minecraft.world.damagesource.DeathMessageType;
 import net.neoforged.neoforge.common.data.DatapackBuiltinEntriesProvider;
 import net.trique.mythicupgrades.Constants;
-import net.trique.mythicupgrades.registry.MUDamageTypes;
+import net.trique.mythicupgrades.util.MUDamageTypes;
 
 import java.util.Set;
 import java.util.concurrent.CompletableFuture;
