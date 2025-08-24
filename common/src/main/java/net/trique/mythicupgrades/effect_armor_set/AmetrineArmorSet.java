@@ -1,9 +1,8 @@
 package net.trique.mythicupgrades.effect_armor_set;
 
-import me.cybersteve.equiplib.item.armor.base.EffectArmorSet;
+import me.cybersteve.equiplib.armorset.impl.FullEffectArmorSet;
 import me.cybersteve.equiplib.util.EffectList;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.trique.mythicupgrades.config.MUConfigHelper;
 import net.trique.mythicupgrades.config.gem_data.AmetrineData;
@@ -11,25 +10,23 @@ import net.trique.mythicupgrades.config.gem_data.AmetrineData;
 import static net.trique.mythicupgrades.registry.EffectRegistry.ARCANE_AURA;
 import static net.trique.mythicupgrades.util.CommonFunctions.getLoc;
 
-public class AmetrineArmorSet extends EffectArmorSet {
+public class AmetrineArmorSet extends FullEffectArmorSet {
     public AmetrineArmorSet() {
-        super(getLoc("ametrine_set"));
+        super(getLoc("ametrine_set"),
+                AmetrineArmorSet::getActualEffects,
+                AmetrineArmorSet::getFiller,
+                AmetrineArmorSet::getFiller);
     }
 
-    @Override
-    public EffectList getEffectsWhenWearing(LivingEntity entity) {
+    private static EffectList getActualEffects(LivingEntity entity) {
         AmetrineData data = MUConfigHelper.getAmetrineValues();
-        return new EffectList.Builder().addPartiallyVisibleEffect(ARCANE_AURA, MobEffectInstance.INFINITE_DURATION,
-                data.arcane_aura_amplifier()).build();
+        return new EffectList.Builder()
+                .addInfiniteEffect(ARCANE_AURA, data.arcane_aura_amplifier(),
+                        true, false, true)
+                .build();
     }
 
-    @Override
-    public EffectList getEffectsForSelfWhenHit(DamageSource source, float amount) {
-        return EffectList.EMPTY;
-    }
-
-    @Override
-    public EffectList getEffectsForAttackerWhenHit(DamageSource source, float amount) {
-        return EffectList.EMPTY;
+    private static EffectList getFiller(DamageSource source, LivingEntity target, float amount) {
+        return EffectList.getEmptyList();
     }
 }

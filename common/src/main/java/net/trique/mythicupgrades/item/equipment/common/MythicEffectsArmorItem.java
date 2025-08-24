@@ -1,6 +1,6 @@
 package net.trique.mythicupgrades.item.equipment.common;
 
-import me.cybersteve.equiplib.item.armor.base.EffectArmorSet;
+import me.cybersteve.equiplib.armorset.base.EffectArmorSet;
 import me.cybersteve.equiplib.item.armor.base.IEffectArmorItemExtension;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;

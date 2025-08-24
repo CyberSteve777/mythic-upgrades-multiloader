@@ -9,7 +9,7 @@ import net.trique.mythicupgrades.registration.RegistrationProvider;
 import net.trique.mythicupgrades.registration.RegistryObject;
 
 public class ParticleRegistry {
-    public static final RegistrationProvider<ParticleType<?>> PARTICLE_TYPES = RegistrationProvider.get(Registries.PARTICLE_TYPE, Constants.MOD_ID);
+    protected static final RegistrationProvider<ParticleType<?>> PARTICLE_TYPES = RegistrationProvider.get(Registries.PARTICLE_TYPE, Constants.MOD_ID);
 
     public static final RegistryObject<ParticleType<?>, SimpleParticleType> PERCENT_PARTICLE = PARTICLE_TYPES.register("percent_particle", Services.PARTICLE_HELPER::getSimpleParticle);
 

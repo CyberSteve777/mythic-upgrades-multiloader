@@ -130,7 +130,7 @@ public class BlockRegistry {
 
 
     public static void init() {
-        Constants.LOGGER.info("Registering blocks for mythic upgrades");
+        Constants.LOGGER.info("Registering blocks for Mythic Upgrades...");
     }
 
 

@@ -56,7 +56,7 @@ public abstract class PlayerEntityMixin extends LivingEntity {
     private boolean applyEffectsOnSweeping(LivingEntity target, DamageSource source, float amount, Operation<Boolean> original) {
         Item weapon = this.getItemBySlot(EquipmentSlot.MAINHAND).getItem();
         if (weapon instanceof SwordItem && weapon instanceof IEffectHandHeldItem sword) {
-            for (var effectEntry : sword.getEffectsForSelfWhenHit(source, amount).data().entrySet()) {
+            for (var effectEntry : sword.getEffectsForTargetOnAttack(source, this, amount).data().entrySet()) {
                 Holder<MobEffect> effect = effectEntry.getKey();
                 EffectMeta meta = effectEntry.getValue();
                 int duration = meta.duration();

@@ -1,4 +1,4 @@
-package net.trique.mythicupgrades.events;
+package net.trique.mythicupgrades.event;
 
 
 import net.minecraft.server.MinecraftServer;
@@ -15,7 +15,7 @@ import net.trique.mythicupgrades.networking.packet.MUConfigPacket;
 import static net.trique.mythicupgrades.config.MUConfig.CONFIG;
 
 @EventBusSubscriber(modid = Constants.MOD_ID)
-public class ServerConfigEventsHandler {
+public class ServerConfigEventHandler {
 
     @SubscribeEvent
     private static void syncOnJoin(final PlayerEvent.PlayerLoggedInEvent event) {

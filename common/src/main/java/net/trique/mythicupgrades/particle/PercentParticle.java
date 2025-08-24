@@ -40,17 +40,12 @@ public class PercentParticle extends TextureSheetParticle {
         return ParticleRenderType.PARTICLE_SHEET_OPAQUE;
     }
 
-    public static class Provider implements ParticleProvider<SimpleParticleType> {
-        private final SpriteSet sprite;
-
-        public Provider(SpriteSet spriteSet) {
-            this.sprite = spriteSet;
-        }
+    public record Provider(SpriteSet sprite) implements ParticleProvider<SimpleParticleType> {
 
         public Particle createParticle(SimpleParticleType simpleParticleType, ClientLevel clientLevel, double d, double e, double f, double g, double h, double i) {
-            PercentParticle critParticle = new PercentParticle(clientLevel, d, e, f, g, h, i);
-            critParticle.pickSprite(this.sprite);
-            return critParticle;
+                PercentParticle critParticle = new PercentParticle(clientLevel, d, e, f, g, h, i);
+                critParticle.pickSprite(this.sprite);
+                return critParticle;
+            }
         }
-    }
 }

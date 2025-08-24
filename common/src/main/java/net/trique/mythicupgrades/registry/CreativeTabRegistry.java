@@ -16,7 +16,7 @@ import static net.trique.mythicupgrades.registry.ItemRegistry.*;
 public class CreativeTabRegistry {
     public static void init() {}
 
-    public static final RegistrationProvider<CreativeModeTab> CREATIVE_MODE_TABS = RegistrationProvider.get(Registries.CREATIVE_MODE_TAB, Constants.MOD_ID);
+    protected static final RegistrationProvider<CreativeModeTab> CREATIVE_MODE_TABS = RegistrationProvider.get(Registries.CREATIVE_MODE_TAB, Constants.MOD_ID);
 
 
     public static final RegistryObject<CreativeModeTab, CreativeModeTab> BLOCKS_TAB = CREATIVE_MODE_TABS.register(Constants.MOD_ID + "_blocks_tab", () -> CreativeModeTab.builder(CreativeModeTab.Row.TOP, 0)

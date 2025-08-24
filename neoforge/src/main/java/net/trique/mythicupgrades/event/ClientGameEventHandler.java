@@ -1,4 +1,4 @@
-package net.trique.mythicupgrades.events;
+package net.trique.mythicupgrades.event;
 
 
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -13,7 +13,7 @@ import net.trique.mythicupgrades.util.ClientFunctions;
 import net.trique.mythicupgrades.util.SpelunkerEffectRenderer;
 
 @EventBusSubscriber(modid = Constants.MOD_ID, value = Dist.CLIENT)
-public class ClientGameEventsHandler {
+public class ClientGameEventHandler {
 
         @SubscribeEvent
     public static void renderList(final RenderLevelStageEvent event) {

@@ -20,11 +20,12 @@ public class EffectRegistry {
     public static final Holder<MobEffect> ARCANE_AURA;
     public static final Holder<MobEffect> BOUNCER;
     public static final Holder<MobEffect> SPELUNKER;
-    public static final RegistrationProvider<MobEffect> EFFECTS = RegistrationProvider.get(Registries.MOB_EFFECT, Constants.MOD_ID);
+
+    protected static final RegistrationProvider<MobEffect> EFFECTS = RegistrationProvider.get(Registries.MOB_EFFECT, Constants.MOD_ID);
 
 
-    public static Holder<MobEffect> registerEffect(String name, Supplier<MobEffect> effectSupplier) {
-        RegistryObject<MobEffect, MobEffect> effectObject = EFFECTS.register(name, effectSupplier);
+    public static <T extends MobEffect> Holder<MobEffect> registerEffect(String name, Supplier<T> effectSupplier) {
+        RegistryObject<MobEffect, T> effectObject = EFFECTS.register(name, effectSupplier);
         return effectObject.asHolder();
     }
 

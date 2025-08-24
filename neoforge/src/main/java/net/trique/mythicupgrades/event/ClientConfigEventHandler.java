@@ -1,4 +1,4 @@
-package net.trique.mythicupgrades.events;
+package net.trique.mythicupgrades.event;
 
 
 import net.neoforged.api.distmarker.Dist;
@@ -9,7 +9,7 @@ import net.trique.mythicupgrades.Constants;
 import net.trique.mythicupgrades.config.MUConfigHelper;
 
 @EventBusSubscriber(modid = Constants.MOD_ID, value = Dist.CLIENT)
-public class ClientConfigEventsHandler {
+public class ClientConfigEventHandler {
 
     @SubscribeEvent
     private static void cacheClientValues(ClientPlayerNetworkEvent.LoggingIn event) {

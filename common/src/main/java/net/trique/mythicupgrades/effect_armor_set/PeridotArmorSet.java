@@ -1,9 +1,8 @@
 package net.trique.mythicupgrades.effect_armor_set;
 
-import me.cybersteve.equiplib.item.armor.base.EffectArmorSet;
+import me.cybersteve.equiplib.armorset.impl.FullEffectArmorSet;
 import me.cybersteve.equiplib.util.EffectList;
 import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.trique.mythicupgrades.config.MUConfigHelper;
 import net.trique.mythicupgrades.config.gem_data.PeridotData;
@@ -11,28 +10,23 @@ import net.trique.mythicupgrades.config.gem_data.PeridotData;
 import static net.trique.mythicupgrades.registry.EffectRegistry.POISONOUS_THORNS;
 import static net.trique.mythicupgrades.util.CommonFunctions.getLoc;
 
-public class PeridotArmorSet extends EffectArmorSet {
+public class PeridotArmorSet extends FullEffectArmorSet {
     public PeridotArmorSet() {
-        super(getLoc("peridot_set"));
+        super(getLoc("peridot_set"),
+                PeridotArmorSet::getActualEffects,
+                PeridotArmorSet::getFiller,
+                PeridotArmorSet::getFiller);
     }
 
-    @Override
-    public EffectList getEffectsWhenWearing(LivingEntity entity) {
+    private static EffectList getActualEffects(LivingEntity entity) {
         PeridotData data = MUConfigHelper.getPeridotValues();
         return new EffectList.Builder()
-                .addPartiallyVisibleEffect(POISONOUS_THORNS,
-                        MobEffectInstance.INFINITE_DURATION,
-                        data.poisonous_thorns_amplifier())
+                .addInfiniteEffect(POISONOUS_THORNS, data.poisonous_thorns_amplifier(),
+                        true, false, true)
                 .build();
     }
 
-    @Override
-    public EffectList getEffectsForSelfWhenHit(DamageSource source, float amount) {
-        return EffectList.EMPTY;
-    }
-
-    @Override
-    public EffectList getEffectsForAttackerWhenHit(DamageSource source, float amount) {
-        return EffectList.EMPTY;
+    private static EffectList getFiller(DamageSource source, LivingEntity target, float amount) {
+        return EffectList.getEmptyList();
     }
 }

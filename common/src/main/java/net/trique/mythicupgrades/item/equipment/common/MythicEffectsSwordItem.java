@@ -17,20 +17,20 @@ import java.util.function.Supplier;
 
 public class MythicEffectsSwordItem extends SwordItem implements IEffectHandHeldItem {
     protected final Supplier<EffectList> whenInHand;
-    protected final Supplier<EffectList> forSelfWhenHit;
-    protected final Supplier<EffectList> forTargetWhenHit;
+    protected final Supplier<EffectList> forSelfOnAttack;
+    protected final Supplier<EffectList> forTargetOnAttack;
     protected final String tooltipKey;
     protected final ChatFormatting color;
 
     public MythicEffectsSwordItem(Tier material, Properties settings,
                                   String tooltipKey, ChatFormatting color,
                                   Supplier<EffectList> whenInHand,
-                                  Supplier<EffectList> forSelfWhenHit,
-                                  Supplier<EffectList> forTargetWhenHit) {
+                                  Supplier<EffectList> forSelfOnAttack,
+                                  Supplier<EffectList> forTargetOnAttack) {
         super(material, settings);
         this.whenInHand = whenInHand;
-        this.forSelfWhenHit = forSelfWhenHit;
-        this.forTargetWhenHit = forTargetWhenHit;
+        this.forSelfOnAttack = forSelfOnAttack;
+        this.forTargetOnAttack = forTargetOnAttack;
         this.tooltipKey = tooltipKey;
         this.color = color;
     }
@@ -47,12 +47,12 @@ public class MythicEffectsSwordItem extends SwordItem implements IEffectHandHeld
     }
 
     @Override
-    public EffectList getEffectsForSelfWhenHit(DamageSource source, float amount) {
-        return forSelfWhenHit.get();
+    public EffectList getEffectsForSelfOnAttack(DamageSource source, LivingEntity owner, float amount) {
+        return forSelfOnAttack.get();
     }
 
     @Override
-    public EffectList getEffectsForTargetWhenHit(DamageSource source, float amount) {
-        return forTargetWhenHit.get();
+    public EffectList getEffectsForTargetOnAttack(DamageSource source, LivingEntity owner, float amount) {
+        return forTargetOnAttack.get();
     }
 }
