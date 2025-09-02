@@ -18,32 +18,32 @@ import net.trique.mythicupgrades.Constants;
 public class MUBiomeModifiers {
 
     public static final ResourceKey<BiomeModifier> ADD_AQUAMARINE_ORE = registerKey("add_aquamarine_ore");
-    public static final ResourceKey<BiomeModifier> ADD_AQUAMARINE_CRYSTAL_CLUSTER =
-            registerKey("add_aquamarine_crystal_cluster");
+    public static final ResourceKey<BiomeModifier> ADD_AQUAMARINE_CRYSTAL_GEODE =
+            registerKey("add_aquamarine_crystal_geode");
 
     public static final ResourceKey<BiomeModifier> ADD_PERIDOT_ORE = registerKey("add_peridot_ore");
-    public static final ResourceKey<BiomeModifier> ADD_PERIDOT_CRYSTAL_CLUSTER =
-            registerKey("add_peridot_crystal_cluster");
+    public static final ResourceKey<BiomeModifier> ADD_PERIDOT_CRYSTAL_GEODE =
+            registerKey("add_peridot_crystal_geode");
 
     public static final ResourceKey<BiomeModifier> ADD_TOPAZ_ORE = registerKey("add_topaz_ore");
-    public static final ResourceKey<BiomeModifier> ADD_TOPAZ_CRYSTAL_CLUSTER =
-            registerKey("add_topaz_crystal_cluster");
+    public static final ResourceKey<BiomeModifier> ADD_TOPAZ_CRYSTAL_GEODE =
+            registerKey("add_topaz_crystal_geode");
 
     public static final ResourceKey<BiomeModifier> ADD_SAPPHIRE_ORE = registerKey("add_sapphire_ore");
-    public static final ResourceKey<BiomeModifier> ADD_SAPPHIRE_CRYSTAL_CLUSTER =
-            registerKey("add_sapphire_crystal_cluster");
+    public static final ResourceKey<BiomeModifier> ADD_SAPPHIRE_CRYSTAL_GEODE =
+            registerKey("add_sapphire_crystal_geode");
 
     public static final ResourceKey<BiomeModifier> ADD_RUBY_ORE = registerKey("add_ruby_ore");
-    public static final ResourceKey<BiomeModifier> ADD_RUBY_CRYSTAL_CLUSTER =
-            registerKey("add_ruby_crystal_cluster");
+    public static final ResourceKey<BiomeModifier> ADD_RUBY_CRYSTAL_GEODE =
+            registerKey("add_ruby_crystal_geode");
 
     public static final ResourceKey<BiomeModifier> ADD_AMETRINE_ORE = registerKey("add_ametrine_ore");
-    public static final ResourceKey<BiomeModifier> ADD_AMETRINE_CRYSTAL_CLUSTER =
-            registerKey("add_ametrine_crystal_cluster");
+    public static final ResourceKey<BiomeModifier> ADD_AMETRINE_CRYSTAL_GEODE =
+            registerKey("add_ametrine_crystal_geode");
 
     public static final ResourceKey<BiomeModifier> ADD_JADE_ORE = registerKey("add_jade_ore");
-    public static final ResourceKey<BiomeModifier> ADD_JADE_CRYSTAL_CLUSTER =
-            registerKey("add_jade_crystal_cluster");
+    public static final ResourceKey<BiomeModifier> ADD_JADE_CRYSTAL_GEODE =
+            registerKey("add_jade_crystal_geode");
 
     public static final ResourceKey<BiomeModifier> ADD_NECOIUM_ORE = registerKey("add_necoium_ore");
 
@@ -85,31 +85,31 @@ public class MUBiomeModifiers {
                 GenerationStep.Decoration.UNDERGROUND_ORES));
 
 
-        context.register(ADD_AQUAMARINE_CRYSTAL_CLUSTER, new BiomeModifiers.AddFeaturesBiomeModifier(
+        context.register(ADD_AQUAMARINE_CRYSTAL_GEODE, new BiomeModifiers.AddFeaturesBiomeModifier(
                 biomes.getOrThrow(BiomeTags.IS_OVERWORLD),
                 HolderSet.direct(placedFeatures.getOrThrow(MUPlacedFeatures.AQUAMARINE_CRYSTAL_GEODE_PLACED_KEY)),
                 GenerationStep.Decoration.LOCAL_MODIFICATIONS));
-        context.register(ADD_TOPAZ_CRYSTAL_CLUSTER, new BiomeModifiers.AddFeaturesBiomeModifier(
+        context.register(ADD_TOPAZ_CRYSTAL_GEODE, new BiomeModifiers.AddFeaturesBiomeModifier(
                 biomes.getOrThrow(BiomeTags.IS_OVERWORLD),
                 HolderSet.direct(placedFeatures.getOrThrow(MUPlacedFeatures.TOPAZ_CRYSTAL_GEODE_PLACED_KEY)),
                 GenerationStep.Decoration.LOCAL_MODIFICATIONS));
-        context.register(ADD_PERIDOT_CRYSTAL_CLUSTER, new BiomeModifiers.AddFeaturesBiomeModifier(
+        context.register(ADD_PERIDOT_CRYSTAL_GEODE, new BiomeModifiers.AddFeaturesBiomeModifier(
                 biomes.getOrThrow(BiomeTags.IS_OVERWORLD),
                 HolderSet.direct(placedFeatures.getOrThrow(MUPlacedFeatures.PERIDOT_CRYSTAL_GEODE_PLACED_KEY)),
                 GenerationStep.Decoration.LOCAL_MODIFICATIONS));
-        context.register(ADD_SAPPHIRE_CRYSTAL_CLUSTER, new BiomeModifiers.AddFeaturesBiomeModifier(
+        context.register(ADD_SAPPHIRE_CRYSTAL_GEODE, new BiomeModifiers.AddFeaturesBiomeModifier(
                 biomes.getOrThrow(BiomeTags.IS_NETHER),
                 HolderSet.direct(placedFeatures.getOrThrow(MUPlacedFeatures.SAPPHIRE_CRYSTAL_GEODE_PLACED_KEY)),
                 GenerationStep.Decoration.LOCAL_MODIFICATIONS));
-        context.register(ADD_RUBY_CRYSTAL_CLUSTER, new BiomeModifiers.AddFeaturesBiomeModifier(
+        context.register(ADD_RUBY_CRYSTAL_GEODE, new BiomeModifiers.AddFeaturesBiomeModifier(
                 biomes.getOrThrow(BiomeTags.IS_NETHER),
                 HolderSet.direct(placedFeatures.getOrThrow(MUPlacedFeatures.RUBY_CRYSTAL_GEODE_PLACED_KEY)),
                 GenerationStep.Decoration.LOCAL_MODIFICATIONS));
-        context.register(ADD_AMETRINE_CRYSTAL_CLUSTER, new BiomeModifiers.AddFeaturesBiomeModifier(
+        context.register(ADD_AMETRINE_CRYSTAL_GEODE, new BiomeModifiers.AddFeaturesBiomeModifier(
                 biomes.getOrThrow(BiomeTags.IS_END),
                 HolderSet.direct(placedFeatures.getOrThrow(MUPlacedFeatures.AMETRINE_CRYSTAL_GEODE_PLACED_KEY)),
                 GenerationStep.Decoration.LOCAL_MODIFICATIONS));
-        context.register(ADD_JADE_CRYSTAL_CLUSTER, new BiomeModifiers.AddFeaturesBiomeModifier(
+        context.register(ADD_JADE_CRYSTAL_GEODE, new BiomeModifiers.AddFeaturesBiomeModifier(
                 biomes.getOrThrow(BiomeTags.IS_END),
                 HolderSet.direct(placedFeatures.getOrThrow(MUPlacedFeatures.JADE_CRYSTAL_GEODE_PLACED_KEY)),
                 GenerationStep.Decoration.LOCAL_MODIFICATIONS));
