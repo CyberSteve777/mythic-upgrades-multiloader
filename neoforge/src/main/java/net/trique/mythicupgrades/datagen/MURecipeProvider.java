@@ -10,7 +10,6 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.conditions.IConditionBuilder;
 import net.trique.mythicupgrades.Constants;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -99,34 +98,14 @@ public class MURecipeProvider extends RecipeProvider implements IConditionBuilde
         nineBlockStorageRecipes(recipeOutput, RecipeCategory.MISC, RAW_NECOIUM.get(), RecipeCategory.BUILDING_BLOCKS, RAW_NECOIUM_BLOCK.get(),
                 getId("raw_necoium_block"), "raw_necoium_block", getId("raw_necoium_from_raw_necoium_block"), "necoium_ingot");
 
-        offerGemIngotRecipe(recipeOutput, AQUAMARINE_INGOT::get, List.of(AQUAMARINE.get(), AQUAMARINE.get(),
-                        AQUAMARINE.get(), AQUAMARINE.get(), NECOIUM_INGOT.get(), NECOIUM_INGOT.get(),
-                        NECOIUM_INGOT.get(), NECOIUM_INGOT.get()),
-                AQUAMARINE.get(), "aquamarine_ingot", 1);
+        offerGemIngotRecipe(recipeOutput, NECOIUM_INGOT.get(), AQUAMARINE.get(), AQUAMARINE_INGOT.get());
+        offerGemIngotRecipe(recipeOutput, NECOIUM_INGOT.get(), TOPAZ.get(), TOPAZ_INGOT.get());
+        offerGemIngotRecipe(recipeOutput, NECOIUM_INGOT.get(), PERIDOT.get(), PERIDOT_INGOT.get());
+        offerGemIngotRecipe(recipeOutput, NECOIUM_INGOT.get(), SAPPHIRE.get(), SAPPHIRE_INGOT.get());
+        offerGemIngotRecipe(recipeOutput, NECOIUM_INGOT.get(), RUBY.get(), RUBY_INGOT.get());
+        offerGemIngotRecipe(recipeOutput, NECOIUM_INGOT.get(), AMETRINE.get(), AMETRINE_INGOT.get());
+        offerGemIngotRecipe(recipeOutput, NECOIUM_INGOT.get(), JADE.get(), JADE_INGOT.get());
 
-        offerGemIngotRecipe(recipeOutput, PERIDOT_INGOT::get, List.of(PERIDOT.get(), PERIDOT.get(), PERIDOT.get(), PERIDOT.get(),
-                        NECOIUM_INGOT.get(), NECOIUM_INGOT.get(), NECOIUM_INGOT.get(), NECOIUM_INGOT.get()),
-                PERIDOT.get(), "peridot_ingot", 1);
-
-        offerGemIngotRecipe(recipeOutput, RUBY_INGOT::get, List.of(RUBY.get(), RUBY.get(), RUBY.get(), RUBY.get(),
-                        NECOIUM_INGOT.get(), NECOIUM_INGOT.get(), NECOIUM_INGOT.get(), NECOIUM_INGOT.get()),
-                RUBY.get(), "ruby_ingot", 1);
-
-        offerGemIngotRecipe(recipeOutput, SAPPHIRE_INGOT::get, List.of(SAPPHIRE.get(), SAPPHIRE.get(), SAPPHIRE.get(), SAPPHIRE.get(),
-                        NECOIUM_INGOT.get(), NECOIUM_INGOT.get(), NECOIUM_INGOT.get(), NECOIUM_INGOT.get()),
-                SAPPHIRE.get(), "sapphire_ingot", 1);
-
-        offerGemIngotRecipe(recipeOutput, TOPAZ_INGOT::get, List.of(TOPAZ.get(), TOPAZ.get(), TOPAZ.get(), TOPAZ.get(),
-                        NECOIUM_INGOT.get(), NECOIUM_INGOT.get(), NECOIUM_INGOT.get(), NECOIUM_INGOT.get()),
-                TOPAZ.get(), "topaz_ingot", 1);
-
-        offerGemIngotRecipe(recipeOutput, AMETRINE_INGOT::get, List.of(AMETRINE.get(), AMETRINE.get(), AMETRINE.get(), AMETRINE.get(),
-                        NECOIUM_INGOT.get(), NECOIUM_INGOT.get(), NECOIUM_INGOT.get(), NECOIUM_INGOT.get()),
-                AMETRINE.get(), "ametrine_ingot", 1);
-
-        offerGemIngotRecipe(recipeOutput, JADE_INGOT::get, List.of(JADE.get(), JADE.get(), JADE.get(), JADE.get(),
-                        NECOIUM_INGOT.get(), NECOIUM_INGOT.get(), NECOIUM_INGOT.get(), NECOIUM_INGOT.get()),
-                JADE.get(), "jade_ingot", 1);
 
         offerCustomSmithingTemplateCopyingRecipe(recipeOutput, AQUAMARINE_UPGRADE_SMITHING_TEMPLATE::get,
                 AQUAMARINE::get, () -> Items.STONE_BRICKS);
@@ -308,13 +287,13 @@ public class MURecipeProvider extends RecipeProvider implements IConditionBuilde
                 .pattern("#B#").unlockedBy(RecipeProvider.getHasName(gem), RecipeProvider.has(gem)).save(exporter);
     }
 
-    protected static void offerGemIngotRecipe(RecipeOutput exporter, ItemLike output, List<ItemLike> inputs, ItemLike gem, @Nullable String group, int outputCount) {
-        ShapelessRecipeBuilder builder = ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, output, outputCount);
-        for (ItemLike ingredient : inputs) {
-            builder = builder.requires(ingredient);
-        }
-        builder = builder.group(group).unlockedBy(RecipeProvider.getHasName(gem), RecipeProvider.has(gem));
-        builder.save(exporter);
+    protected static void offerGemIngotRecipe(RecipeOutput exporter, ItemLike baseIngot, ItemLike gem, ItemLike output) {
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, output, 2)
+                .requires(baseIngot, 4)
+                .requires(gem, 4)
+                .unlockedBy(RecipeProvider.getHasName(baseIngot), RecipeProvider.has(baseIngot))
+                .unlockedBy(RecipeProvider.getHasName(gem), RecipeProvider.has(gem))
+                .save(exporter);
     }
 
 }
