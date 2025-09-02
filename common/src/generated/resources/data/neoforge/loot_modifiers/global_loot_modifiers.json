@@ -1,0 +1,25 @@
+{
+  "entries": [
+    "mythicupgrades:add_peridot_potion",
+    "mythicupgrades:add_peridot_upgrade_smithing_template",
+    "mythicupgrades:add_topaz_potion",
+    "mythicupgrades:add_topaz_upgrade_smithing_template",
+    "mythicupgrades:add_aquamarine_potion",
+    "mythicupgrades:add_aquamarine_upgrade_smithing_template",
+    "mythicupgrades:add_ruby_potion_in_hoglin_stable",
+    "mythicupgrades:add_ruby_upgrade_smithing_template_in_hoglin_stable",
+    "mythicupgrades:add_ruby_potion_in_bridge",
+    "mythicupgrades:add_ruby_upgrade_smithing_template_in_bridge",
+    "mythicupgrades:add_ruby_potion_in_other",
+    "mythicupgrades:add_ruby_upgrade_smithing_template_in_other",
+    "mythicupgrades:add_ruby_potion_in_treasure",
+    "mythicupgrades:add_ruby_upgrade_smithing_template_in_treasure",
+    "mythicupgrades:add_sapphire_potion",
+    "mythicupgrades:add_sapphire_upgrade_smithing_template",
+    "mythicupgrades:add_ametrine_potion",
+    "mythicupgrades:add_ametrine_upgrade_smithing_template",
+    "mythicupgrades:add_jade_potion",
+    "mythicupgrades:add_jade_upgrade_smithing_template"
+  ],
+  "replace": false
+}

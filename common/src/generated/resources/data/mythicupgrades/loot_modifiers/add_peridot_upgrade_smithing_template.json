@@ -1,0 +1,14 @@
+{
+  "type": "mythicupgrades:add_item",
+  "conditions": [
+    {
+      "condition": "neoforge:loot_table_id",
+      "loot_table_id": "minecraft:chests/jungle_temple"
+    },
+    {
+      "chance": 0.1,
+      "condition": "minecraft:random_chance"
+    }
+  ],
+  "item": "mythicupgrades:peridot_upgrade_smithing_template"
+}
