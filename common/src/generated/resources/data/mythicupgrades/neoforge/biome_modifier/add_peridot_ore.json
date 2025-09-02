@@ -1,6 +1,0 @@
-{
-  "type": "neoforge:add_features",
-  "biomes": "#c:is_jungle",
-  "features": "mythicupgrades:peridot_ore_placed",
-  "step": "underground_ores"
-}
