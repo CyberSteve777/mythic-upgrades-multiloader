@@ -45,7 +45,7 @@ public class MUConfiguredFeatures {
     public static final ResourceKey<ConfiguredFeature<?, ?>> JADE_CRYSTAL_GEODE_KEY = registerKey("jade_crystal_geode");
 
 
-    public static void boostrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
+    public static void bootstrap(BootstrapContext<ConfiguredFeature<?, ?>> context) {
         RuleTest stoneReplaceables = new TagMatchTest(BlockTags.STONE_ORE_REPLACEABLES);
         RuleTest deepslateReplaceables = new TagMatchTest(BlockTags.DEEPSLATE_ORE_REPLACEABLES);
         RuleTest netherStoneReplaceables = new TagMatchTest(BlockTags.BASE_STONE_NETHER);

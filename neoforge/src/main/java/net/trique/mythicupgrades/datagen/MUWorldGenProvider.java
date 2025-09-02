@@ -14,8 +14,8 @@ import java.util.concurrent.CompletableFuture;
 public class MUWorldGenProvider extends DatapackBuiltinEntriesProvider {
 
     public static final RegistrySetBuilder BUILDER = new RegistrySetBuilder()
-            .add(Registries.CONFIGURED_FEATURE, MUConfiguredFeatures::boostrap)
-            .add(Registries.PLACED_FEATURE, MUPlacedFeatures::boostrap)
+            .add(Registries.CONFIGURED_FEATURE, MUConfiguredFeatures::bootstrap)
+            .add(Registries.PLACED_FEATURE, MUPlacedFeatures::bootstrap)
             .add(NeoForgeRegistries.Keys.BIOME_MODIFIERS, MUBiomeModifiers::bootstrap);
 
     public MUWorldGenProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> lookupProvider) {
