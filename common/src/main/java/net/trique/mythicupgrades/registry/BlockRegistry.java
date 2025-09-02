@@ -17,7 +17,7 @@ import java.util.function.Supplier;
 
 public class BlockRegistry {
 
-    public static final RegistrationProvider<Block> BLOCKS = RegistrationProvider.get(Registries.BLOCK, Constants.MOD_ID);
+    protected static final RegistrationProvider<Block> BLOCKS = RegistrationProvider.get(Registries.BLOCK, Constants.MOD_ID);
 
     public static final RegistryObject<Block, Block> AQUAMARINE_BLOCK = registerBlock("aquamarine_block", () ->
             new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.DIAMOND_BLOCK).mapColor(MapColor.COLOR_LIGHT_BLUE).strength(5.0f, 1200.0f).sound(SoundType.METAL)));
@@ -142,5 +142,9 @@ public class BlockRegistry {
         var reg = BLOCKS.register(name, block);
         ItemRegistry.ITEMS.register(name, () -> item.apply(reg).get());
         return reg;
+    }
+
+    public static Iterable<Block> getModBlocks() {
+        return BlockRegistry.BLOCKS.getEntries().stream().map((blockRegistryObject -> (Block) blockRegistryObject.get()))::iterator;
     }
 }
