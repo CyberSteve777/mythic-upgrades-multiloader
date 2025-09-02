@@ -76,14 +76,14 @@ public class MUBlockStateProvider extends BlockStateProvider {
                 .texture("cross", blockTexture(block));
         // Generate blockstate with variants for each facing direction
         getVariantBuilder(block)
-                .forAllStates(state -> {
+                .forAllStatesExcept(state -> {
                     Direction facing = state.getValue(BlockStateProperties.FACING);
                     return ConfiguredModel.builder()
                             .modelFile(model)
                             .rotationX(facing == Direction.DOWN ? 180 : facing.getAxis().isHorizontal() ? 90 : 0)
                             .rotationY(facing.getAxis().isVertical() ? 0 : ((int) facing.toYRot() + 180) % 360)
                             .build();
-                });
+                }, BlockStateProperties.WATERLOGGED);
 
         itemModels().getBuilder(pathname)
                 .parent(new ModelFile.UncheckedModelFile("item/generated"))
