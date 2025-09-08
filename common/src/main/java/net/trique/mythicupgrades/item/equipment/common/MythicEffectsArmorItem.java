@@ -1,7 +1,7 @@
 package net.trique.mythicupgrades.item.equipment.common;
 
 import me.cybersteve.equiplib.armorset.base.EffectArmorSet;
-import me.cybersteve.equiplib.item.armor.base.IEffectArmorItemExtension;
+import me.cybersteve.equiplib.item.armor.base.IEffectArmorItem;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -16,7 +16,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 import java.util.function.Supplier;
 
-public class MythicEffectsArmorItem extends ArmorItem implements IEffectArmorItemExtension {
+public class MythicEffectsArmorItem extends ArmorItem implements IEffectArmorItem {
 
     protected final EffectArmorSet effectArmorSet;
     protected final String tooltipSB;
