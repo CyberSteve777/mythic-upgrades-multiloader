@@ -24,6 +24,7 @@ import net.trique.mythicupgrades.item.misc.potion.MUPotions;
 import net.trique.mythicupgrades.item.misc.MythicPotionItem;
 import net.trique.mythicupgrades.registration.RegistrationProvider;
 import net.trique.mythicupgrades.registration.RegistryObject;
+import net.trique.mythicupgrades.util.CommonFunctions;
 
 import java.util.List;
 
@@ -179,7 +180,7 @@ public class ItemRegistry {
         return new EffectList.Builder().build();
     }
 
-    public static final ResourceLocation AQUAMARINE_UNDERWATER_MINING_ID = Constants.id("aquamarine_underwater_mining");
+    public static final ResourceLocation AQUAMARINE_UNDERWATER_MINING_ID = CommonFunctions.getLoc("aquamarine_underwater_mining");
 
     public static ItemAttributeModifiers createSapphireAttributes(Tier tier, float attackDamage, float attackSpeed) {
         return ItemAttributeModifiers.builder()

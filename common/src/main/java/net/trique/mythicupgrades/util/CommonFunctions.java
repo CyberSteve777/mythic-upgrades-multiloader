@@ -6,12 +6,16 @@ import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.trique.mythicupgrades.Constants;
+import net.trique.mythicupgrades.item.materials.MUToolMaterials;
 import net.trique.mythicupgrades.registry.EffectRegistry;
 
 import java.util.*;
@@ -54,5 +58,16 @@ public class CommonFunctions {
 
     public static ResourceLocation getLoc(String key) {
         return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, key);
+    }
+
+    public static float getIncomingDamage(float original, LivingEntity target, DamageSource source) {
+        Entity attacker = source.getEntity();
+        if (attacker instanceof LivingEntity livingAttacker) {
+            ItemStack weapon = livingAttacker.getMainHandItem();
+            if (weapon.getItem() instanceof TieredItem tieredItem && tieredItem.getTier() == MUToolMaterials.AQUAMARINE && target.isInWaterRainOrBubble()) {
+                original += 2;
+            }
+        }
+        return original;
     }
 }

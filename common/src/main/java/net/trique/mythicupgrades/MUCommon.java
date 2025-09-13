@@ -1,12 +1,6 @@
 package net.trique.mythicupgrades;
 
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.TieredItem;
 import net.trique.mythicupgrades.config.MUConfigHelper;
-import net.trique.mythicupgrades.item.materials.MUToolMaterials;
 import net.trique.mythicupgrades.util.MUArmorSets;
 import net.trique.mythicupgrades.item.materials.MUArmorMaterials;
 import net.trique.mythicupgrades.platform.Services;
@@ -42,16 +36,5 @@ public class MUCommon {
         if (Services.PLATFORM.isModLoaded(Constants.MOD_ID)) {
             Constants.LOGGER.info("Mythic Upgrades was loaded successfully!");
         }
-    }
-
-    public static float getIncomingDamage(float original, LivingEntity target, DamageSource source) {
-        Entity attacker = source.getEntity();
-        if (attacker instanceof LivingEntity livingAttacker) {
-            ItemStack weapon = livingAttacker.getMainHandItem();
-            if (weapon.getItem() instanceof TieredItem tieredItem && tieredItem.getTier() == MUToolMaterials.AQUAMARINE && target.isInWaterRainOrBubble()) {
-                original += 2;
-            }
-        }
-        return original;
     }
 }

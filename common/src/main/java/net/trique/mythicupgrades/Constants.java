@@ -16,8 +16,4 @@ public class Constants {
 	public static String getTranslationKey(String key) {
 		return Constants.MOD_ID + "." + key;
 	}
-	public static ResourceLocation id(String path) {
-		return ResourceLocation.fromNamespaceAndPath(MOD_ID,path);
-	}
-
 }

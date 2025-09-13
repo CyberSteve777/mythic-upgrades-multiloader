@@ -132,5 +132,6 @@ public class MUBlockTagProvider extends BlockTagsProvider {
         ).add(
                 Blocks.DECORATED_POT
         );
+        tag(MUBlockTags.CAN_VEINMINE).addTag(MUBlockTags.SPELUNKER_OUTLINED);
     }
 }
