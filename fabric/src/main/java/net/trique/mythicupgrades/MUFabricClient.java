@@ -16,7 +16,7 @@ import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.trique.mythicupgrades.config.MUConfigHelper;
 import net.trique.mythicupgrades.networking.packet.MUConfigPacket;
-import net.trique.mythicupgrades.networking.packet.PercentAnimationPacket;
+import net.trique.mythicupgrades.networking.packet.S2CPercentAnimationPacket;
 import net.trique.mythicupgrades.particle.PercentParticle;
 import net.trique.mythicupgrades.registry.ParticleRegistry;
 import net.trique.mythicupgrades.util.SpelunkerEffectRenderer;
@@ -35,7 +35,7 @@ public class MUFabricClient implements ClientModInitializer {
                 SAPPHIRE_CRYSTAL_CLUSTER.get(), TOPAZ_CRYSTAL_CLUSTER.get())) {
             BlockRenderLayerMap.INSTANCE.putBlock(crystal, RenderType.cutout());
         }
-        ClientPlayNetworking.registerGlobalReceiver(PercentAnimationPacket.TYPE, (payload, context) -> {
+        ClientPlayNetworking.registerGlobalReceiver(S2CPercentAnimationPacket.TYPE, (payload, context) -> {
             LocalPlayer player = context.player();
             if (player != null && player.level().getEntity(payload.Id()) instanceof Entity entity) {
                 context.client().particleEngine.createTrackingEmitter(entity, ParticleRegistry.PERCENT_PARTICLE.get());
