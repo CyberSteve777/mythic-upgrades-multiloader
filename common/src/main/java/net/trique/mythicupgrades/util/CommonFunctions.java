@@ -4,6 +4,8 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
@@ -47,6 +49,20 @@ public class CommonFunctions {
 
         }
         return result.toString();
+    }
+
+    public static <B extends FriendlyByteBuf, V extends Enum<V>> StreamCodec<B, V> enumStreamCodec(final Class<V> enumClass) {
+        return new StreamCodec<>() {
+            @Override
+            public V decode(B buf) {
+                return buf.readEnum(enumClass);
+            }
+
+            @Override
+            public void encode(B buf, V value) {
+                buf.writeEnum(value);
+            }
+        };
     }
 
     public static  <T extends LivingEntity> boolean applyItemMasteryChance(T user) {

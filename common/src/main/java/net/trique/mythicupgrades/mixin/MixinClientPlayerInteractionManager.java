@@ -6,7 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.trique.mythicupgrades.networking.packet.C2SStartExcavatePacket;
-import net.trique.mythicupgrades.registry.ItemRegistry;
+import net.trique.mythicupgrades.registry.EffectRegistry;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -23,13 +23,13 @@ public abstract class MixinClientPlayerInteractionManager {
     private Minecraft minecraft;
 
     @Inject(method = "destroyBlock", at = @At(value = "HEAD"))
-    private void DIGGUS$BREAKBLOCK(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
-        if (minecraft.player.getMainHandItem().is(ItemRegistry.RUBY_PICKAXE.get()))
-            DIGGUS$activate(pos, Direction.NORTH, -1);
+    private void onBreakBlock(BlockPos pos, CallbackInfoReturnable<Boolean> cir) {
+        if (minecraft.player.hasEffect(EffectRegistry.VEINMINER))
+            sendVeinminePacket(pos, Direction.NORTH, -1);
     }
 
     @Unique
-    private void DIGGUS$activate(BlockPos pos, Direction facing, int shapeSelection) {
+    private void sendVeinminePacket(BlockPos pos, Direction facing, int shapeSelection) {
        C2SStartExcavatePacket.sendExcavatePacket(pos, BuiltInRegistries.BLOCK.getKey(this.minecraft.level.getBlockState(pos).getBlock()), facing, shapeSelection);
     }
 }

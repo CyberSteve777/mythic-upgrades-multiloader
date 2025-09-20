@@ -9,11 +9,8 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
-import net.trique.mythicupgrades.platform.Services;
 import net.trique.mythicupgrades.util.CommonFunctions;
 import net.trique.mythicupgrades.util.veinmine.Excavate;
-
-import java.util.Optional;
 
 public record C2SStartExcavatePacket(BlockPos pos, ResourceLocation id, Direction facing, int shape) implements C2SModPacket<RegistryFriendlyByteBuf> {
 
@@ -42,6 +39,6 @@ public record C2SStartExcavatePacket(BlockPos pos, ResourceLocation id, Directio
     }
 
     public static void sendExcavatePacket(BlockPos pos, ResourceLocation id, Direction facing, int shape) {
-        Services.PLATFORM.sendToServer(new C2SStartExcavatePacket(pos, id, facing, shape));
+        PacketHandler.sendToServer(new C2SStartExcavatePacket(pos, id, facing, shape));
     }
 }

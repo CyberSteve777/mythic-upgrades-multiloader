@@ -37,7 +37,6 @@ public class NeoForgePlatformHelper implements IPlatformHelper {
 
     @Override
     public boolean isDevelopmentEnvironment() {
-
         return !FMLLoader.isProduction();
     }
 
@@ -54,6 +53,9 @@ public class NeoForgePlatformHelper implements IPlatformHelper {
         }
         if (attachment.isCopyOnDeath()) {
             builder.copyOnDeath();
+        }
+        if (attachment.canSync()) {
+            builder.sync(attachment.getStreamCodec());
         }
         AttachmentType<T> type = builder.build();
         Registry.register(NeoForgeRegistries.ATTACHMENT_TYPES, attachment.getName(), type);

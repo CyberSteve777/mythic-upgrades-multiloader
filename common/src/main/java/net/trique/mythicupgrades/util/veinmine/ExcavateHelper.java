@@ -81,6 +81,6 @@ public class ExcavateHelper {
     }
 
     private static boolean isTool(ItemStack stack) {
-        return stack.getItem() instanceof TieredItem tieredItem && tieredItem.getTier() == MUToolMaterials.RUBY;
+        return stack.getItem() instanceof TieredItem;
     }
 }

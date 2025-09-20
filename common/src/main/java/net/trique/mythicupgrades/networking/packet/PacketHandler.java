@@ -10,13 +10,14 @@ public class PacketHandler {
         Services.PLATFORM.registerClientPlayPacket(MUConfigPacket.TYPE, MUConfigPacket.CODEC);
 
         Services.PLATFORM.registerServerPlayPacket(C2SStartExcavatePacket.PACKET_ID, C2SStartExcavatePacket.CODEC);
+        Services.PLATFORM.registerServerPlayPacket(C2SKeybindPacket.PACKET_ID, C2SKeybindPacket.CODEC);
     }
 
     public static void sendToServer(C2SModPacket<?> packet) {
         Services.PLATFORM.sendToServer(packet);
     }
 
-    public static void sendTo(S2CModPacket<?> packet, ServerPlayer player) {
+    public static void sendToClient(S2CModPacket<?> packet, ServerPlayer player) {
             Services.PLATFORM.sendToClient(packet, player);
     }
 }

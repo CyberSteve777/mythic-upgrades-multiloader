@@ -4,6 +4,7 @@ import me.cybersteve.equiplib.armorset.impl.FullEffectArmorSet;
 import me.cybersteve.equiplib.util.EffectList;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.LivingEntity;
+import net.trique.mythicupgrades.attachments.CommonDataAttachments;
 import net.trique.mythicupgrades.config.MUConfigHelper;
 import net.trique.mythicupgrades.config.gem_data.RubyData;
 import net.trique.mythicupgrades.registry.EffectRegistry;
@@ -19,8 +20,11 @@ public class RubyArmorSet extends FullEffectArmorSet {
 
     private static EffectList getActualEffects(LivingEntity entity) {
         RubyData data = MUConfigHelper.getRubyValues();
+
+        boolean useAlternative = CommonDataAttachments.useAlternativeRubyAbility(entity);
+
         return new EffectList.Builder()
-                .addInfiniteEffect(EffectRegistry.VEINMINER, 0,
+                .addInfiniteEffect(useAlternative ? EffectRegistry.SPELUNKER: EffectRegistry.VEINMINER, 0,
                         true, false, true)
                 .build();
     }

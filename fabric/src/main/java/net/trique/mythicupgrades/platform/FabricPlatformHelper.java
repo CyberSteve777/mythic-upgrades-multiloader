@@ -81,6 +81,9 @@ public class FabricPlatformHelper implements IPlatformHelper {
         if (attachment.getCodec() != null) {
             builder.persistent(attachment.getCodec());
         }
+        if (attachment.canSync()) {
+            builder.syncWith(attachment.getStreamCodec(),(attachmentTarget, player) -> true);//who to notify of value
+        }
         return builder.buildAndRegister(attachment.getName());
     }
 
