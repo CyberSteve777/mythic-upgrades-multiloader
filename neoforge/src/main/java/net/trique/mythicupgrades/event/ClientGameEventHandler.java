@@ -15,7 +15,7 @@ import net.trique.mythicupgrades.util.SpelunkerEffectRenderer;
 @EventBusSubscriber(modid = Constants.MOD_ID, value = Dist.CLIENT)
 public class ClientGameEventHandler {
 
-        @SubscribeEvent
+    @SubscribeEvent
     public static void renderList(final RenderLevelStageEvent event) {
         if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_TRANSLUCENT_BLOCKS) return;
         PoseStack stack = event.getPoseStack();
