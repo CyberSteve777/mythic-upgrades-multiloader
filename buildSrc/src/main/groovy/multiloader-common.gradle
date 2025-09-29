@@ -107,7 +107,7 @@ processResources {
             'credits'                      : credits,
             'java_version'                 : java_version,
             'configApiVer'                 : configApiVer,
-            'equipLibVer'                  : equipLibVer,
+            'equipLibVer'                  : equipLibVer
     ]
 
     filesMatching(['pack.mcmeta', 'fabric.mod.json', 'META-INF/mods.toml', 'META-INF/neoforge.mods.toml', '*.mixins.json']) {
