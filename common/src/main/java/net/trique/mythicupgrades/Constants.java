@@ -13,7 +13,4 @@ public class Constants {
 	public static final Logger LOGGER = LoggerFactory.getLogger(MOD_NAME);
 	public static final Random RANDOM = new Random();
 
-	public static String getTranslationKey(String key) {
-		return Constants.MOD_ID + "." + key;
-	}
 }
