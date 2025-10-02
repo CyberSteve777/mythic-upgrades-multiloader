@@ -75,7 +75,7 @@ public class CommonFunctions {
     public static ResourceLocation getLoc(String key) {
         return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, key);
     }
-    
+
     public static float getIncomingDamage(float original, LivingEntity target, DamageSource source) {
         Entity attacker = source.getEntity();
         if (attacker instanceof LivingEntity livingAttacker) {
