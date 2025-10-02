@@ -7,6 +7,7 @@
   "mixins": [
     "BanEnchantmentMixin",
     "ItemStackMixin",
+    "LivingEntityMixinFabric",
     "ServerPlayerMixin"
   ],
   "client": [

@@ -3,11 +3,19 @@ package net.trique.mythicupgrades.registry;
 import me.cybersteve.equiplib.util.EffectList;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.entity.EquipmentSlotGroup;
+import net.minecraft.world.entity.ai.attributes.AttributeModifier;
+import net.minecraft.world.entity.ai.attributes.Attributes;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Tier;
+import net.minecraft.world.item.component.ItemAttributeModifiers;
 import net.trique.mythicupgrades.Constants;
+import net.trique.mythicupgrades.MUCommon;
 import net.trique.mythicupgrades.config.MUConfigHelper;
 import net.trique.mythicupgrades.config.gem_data.*;
+import net.trique.mythicupgrades.item.equipment.ruby.RubyPickaxeItem;
 import net.trique.mythicupgrades.item.materials.MUArmorMaterials;
 import net.trique.mythicupgrades.item.materials.MUToolMaterials;
 import net.trique.mythicupgrades.item.misc.MUTemplateItem;
@@ -17,12 +25,12 @@ import net.trique.mythicupgrades.item.misc.potion.MUPotions;
 import net.trique.mythicupgrades.item.misc.MythicPotionItem;
 import net.trique.mythicupgrades.registration.RegistrationProvider;
 import net.trique.mythicupgrades.registration.RegistryObject;
+import net.trique.mythicupgrades.util.CommonFunctions;
 
 import java.util.List;
 
 import static net.minecraft.world.effect.MobEffects.*;
 import static net.trique.mythicupgrades.util.MUArmorSets.*;
-import static net.trique.mythicupgrades.registry.EffectRegistry.*;
 
 public class ItemRegistry {
 
@@ -101,7 +109,7 @@ public class ItemRegistry {
     public static final RegistryObject<Item, MythicEffectsArmorItem> PERIDOT_BOOTS = ITEMS.register("peridot_boots", () -> new MythicEffectsArmorItem(MUArmorMaterials.PERIDOT, ArmorItem.Type.BOOTS, getFireResistantProperties().durability(ArmorItem.Type.LEGGINGS.getDurability(50)), "peridot_armor.description", ItemRegistry::getPeridotArmorAmplifierList, ChatFormatting.GREEN, PERIDOT_SET));
 
     public static final RegistryObject<Item, MythicEffectsShovelItem> RUBY_SHOVEL = ITEMS.register("ruby_shovel", () -> new MythicEffectsShovelItem(MUToolMaterials.RUBY, getFireResistantProperties().attributes(MythicEffectsShovelItem.createAttributes(MUToolMaterials.RUBY, 2, -2.1f)), "ruby_tool.description", ChatFormatting.RED, ItemRegistry::getRubyToolEffectList, EffectList::getEmptyList, EffectList::getEmptyList));
-    public static final RegistryObject<Item, MythicEffectsPickaxeItem> RUBY_PICKAXE = ITEMS.register("ruby_pickaxe", () -> new MythicEffectsPickaxeItem(MUToolMaterials.RUBY, getFireResistantProperties().attributes(MythicEffectsPickaxeItem.createAttributes(MUToolMaterials.RUBY, 1, -1.9f)), "ruby_tool.description", ChatFormatting.RED, ItemRegistry::getRubyToolEffectList, EffectList::getEmptyList, EffectList::getEmptyList));
+    public static final RegistryObject<Item, MythicEffectsPickaxeItem> RUBY_PICKAXE = ITEMS.register("ruby_pickaxe", () -> new RubyPickaxeItem(getFireResistantProperties().attributes(MythicEffectsPickaxeItem.createAttributes(MUToolMaterials.RUBY, 1, -1.9f)), "ruby_tool.description", ChatFormatting.RED, ItemRegistry::getRubyToolEffectList, EffectList::getEmptyList, EffectList::getEmptyList));
     public static final RegistryObject<Item, MythicEffectsAxeItem> RUBY_AXE = ITEMS.register("ruby_axe", () -> new MythicEffectsAxeItem(MUToolMaterials.RUBY, getFireResistantProperties().attributes(MythicEffectsAxeItem.createAttributes(MUToolMaterials.RUBY, 5, -2.1f)), "ruby_tool.description", ChatFormatting.RED, ItemRegistry::getRubyToolEffectList, EffectList::getEmptyList, EffectList::getEmptyList));
     public static final RegistryObject<Item, MythicEffectsHoeItem> RUBY_HOE = ITEMS.register("ruby_hoe", () -> new MythicEffectsHoeItem(MUToolMaterials.RUBY, getFireResistantProperties().attributes(MythicEffectsHoeItem.createAttributes(MUToolMaterials.RUBY, -4, 0.9f)), "ruby_tool.description", ChatFormatting.RED, ItemRegistry::getRubyToolEffectList, EffectList::getEmptyList, EffectList::getEmptyList));
     public static final RegistryObject<Item, MythicEffectsSwordItem> RUBY_SWORD = ITEMS.register("ruby_sword", () -> new MythicEffectsSwordItem(MUToolMaterials.RUBY, getFireResistantProperties().attributes(MythicEffectsSwordItem.createAttributes(MUToolMaterials.RUBY, 3, -1.5f)), "ruby_tool.description", ChatFormatting.RED, ItemRegistry::getRubyToolEffectList, EffectList::getEmptyList, EffectList::getEmptyList));
@@ -110,11 +118,11 @@ public class ItemRegistry {
     public static final RegistryObject<Item, MythicEffectsArmorItem> RUBY_LEGGINGS = ITEMS.register("ruby_leggings", () -> new MythicEffectsArmorItem(MUArmorMaterials.RUBY, ArmorItem.Type.LEGGINGS, getFireResistantProperties().durability(ArmorItem.Type.LEGGINGS.getDurability(50)), "ruby_armor.description", ItemRegistry::getRubyArmorAmplifierList, ChatFormatting.RED, RUBY_SET));
     public static final RegistryObject<Item, MythicEffectsArmorItem> RUBY_BOOTS = ITEMS.register("ruby_boots", () -> new MythicEffectsArmorItem(MUArmorMaterials.RUBY, ArmorItem.Type.BOOTS, getFireResistantProperties().durability(ArmorItem.Type.LEGGINGS.getDurability(50)), "ruby_armor.description", ItemRegistry::getRubyArmorAmplifierList, ChatFormatting.RED, RUBY_SET));
 
-    public static final RegistryObject<Item, SapphireHoeItem> SAPPHIRE_HOE = ITEMS.register("sapphire_hoe", () -> new SapphireHoeItem(getFireResistantProperties().attributes(SapphireHoeItem.createAttributes(MUToolMaterials.SAPPHIRE, -4, 0.1f)), "sapphire_tool.description", ChatFormatting.DARK_BLUE, EffectList::getEmptyList, EffectList::getEmptyList, EffectList::getEmptyList));
-    public static final RegistryObject<Item, SapphireShovelItem> SAPPHIRE_SHOVEL = ITEMS.register("sapphire_shovel", () -> new SapphireShovelItem(getFireResistantProperties().attributes(MythicEffectsShovelItem.createAttributes(MUToolMaterials.SAPPHIRE, 2, -2.9f)), "sapphire_tool.description", ChatFormatting.DARK_BLUE, EffectList::getEmptyList, EffectList::getEmptyList, EffectList::getEmptyList));
-    public static final RegistryObject<Item, SapphirePickaxeItem> SAPPHIRE_PICKAXE = ITEMS.register("sapphire_pickaxe", () -> new SapphirePickaxeItem(getFireResistantProperties().attributes(MythicEffectsPickaxeItem.createAttributes(MUToolMaterials.SAPPHIRE, 1, -2.7f)), "sapphire_tool.description", ChatFormatting.DARK_BLUE, EffectList::getEmptyList, EffectList::getEmptyList, EffectList::getEmptyList));
-    public static final RegistryObject<Item, SapphireAxeItem> SAPPHIRE_AXE = ITEMS.register("sapphire_axe", () -> new SapphireAxeItem(getFireResistantProperties().attributes(MythicEffectsAxeItem.createAttributes(MUToolMaterials.SAPPHIRE, 5, -2.9f)), "sapphire_tool.description", ChatFormatting.DARK_BLUE, EffectList::getEmptyList, EffectList::getEmptyList, EffectList::getEmptyList));
-    public static final RegistryObject<Item, SapphireSwordItem> SAPPHIRE_SWORD = ITEMS.register("sapphire_sword", () -> new SapphireSwordItem(getFireResistantProperties().attributes(MythicEffectsSwordItem.createAttributes(MUToolMaterials.SAPPHIRE, 3, -2.3f)), "sapphire_tool.description", ChatFormatting.DARK_BLUE, EffectList::getEmptyList, EffectList::getEmptyList, EffectList::getEmptyList));
+    public static final RegistryObject<Item, SapphireHoeItem> SAPPHIRE_HOE = ITEMS.register("sapphire_hoe", () -> new SapphireHoeItem(getFireResistantProperties().attributes(createSapphireAttributes(MUToolMaterials.SAPPHIRE, -4, 0.1f)), "sapphire_tool.description", ChatFormatting.DARK_BLUE, EffectList::getEmptyList, EffectList::getEmptyList, EffectList::getEmptyList));
+    public static final RegistryObject<Item, SapphireShovelItem> SAPPHIRE_SHOVEL = ITEMS.register("sapphire_shovel", () -> new SapphireShovelItem(getFireResistantProperties().attributes(createSapphireAttributes(MUToolMaterials.SAPPHIRE, 2, -2.9f)), "sapphire_tool.description", ChatFormatting.DARK_BLUE, EffectList::getEmptyList, EffectList::getEmptyList, EffectList::getEmptyList));
+    public static final RegistryObject<Item, SapphirePickaxeItem> SAPPHIRE_PICKAXE = ITEMS.register("sapphire_pickaxe", () -> new SapphirePickaxeItem(getFireResistantProperties().attributes(createSapphireAttributes(MUToolMaterials.SAPPHIRE, 1, -2.7f)), "sapphire_tool.description", ChatFormatting.DARK_BLUE, EffectList::getEmptyList, EffectList::getEmptyList, EffectList::getEmptyList));
+    public static final RegistryObject<Item, SapphireAxeItem> SAPPHIRE_AXE = ITEMS.register("sapphire_axe", () -> new SapphireAxeItem(getFireResistantProperties().attributes(createSapphireAttributes(MUToolMaterials.SAPPHIRE, 5, -2.9f)), "sapphire_tool.description", ChatFormatting.DARK_BLUE, EffectList::getEmptyList, EffectList::getEmptyList, EffectList::getEmptyList));
+    public static final RegistryObject<Item, SapphireSwordItem> SAPPHIRE_SWORD = ITEMS.register("sapphire_sword", () -> new SapphireSwordItem(getFireResistantProperties().attributes(createSapphireAttributes(MUToolMaterials.SAPPHIRE, 3, -2.3f)), "sapphire_tool.description", ChatFormatting.DARK_BLUE, EffectList::getEmptyList, EffectList::getEmptyList, EffectList::getEmptyList));
     public static final RegistryObject<Item, MythicEffectsArmorItem> SAPPHIRE_HELMET = ITEMS.register("sapphire_helmet", () -> new MythicEffectsArmorItem(MUArmorMaterials.SAPPHIRE, ArmorItem.Type.HELMET, getFireResistantProperties().durability(ArmorItem.Type.HELMET.getDurability(50)), "sapphire_armor.description", ItemRegistry::getSapphireArmorAmplifierList, ChatFormatting.DARK_BLUE, SAPPHIRE_SET));
     public static final RegistryObject<Item, MythicEffectsArmorItem> SAPPHIRE_CHESTPLATE = ITEMS.register("sapphire_chestplate", () -> new MythicEffectsArmorItem(MUArmorMaterials.SAPPHIRE, ArmorItem.Type.CHESTPLATE, getFireResistantProperties().durability(ArmorItem.Type.CHESTPLATE.getDurability(50)), "sapphire_armor.description", ItemRegistry::getSapphireArmorAmplifierList, ChatFormatting.DARK_BLUE, SAPPHIRE_SET));
     public static final RegistryObject<Item, MythicEffectsArmorItem> SAPPHIRE_LEGGINGS = ITEMS.register("sapphire_leggings", () -> new MythicEffectsArmorItem(MUArmorMaterials.SAPPHIRE, ArmorItem.Type.LEGGINGS, getFireResistantProperties().durability(ArmorItem.Type.LEGGINGS.getDurability(50)), "sapphire_armor.description", ItemRegistry::getSapphireArmorAmplifierList, ChatFormatting.DARK_BLUE, SAPPHIRE_SET));
@@ -169,10 +177,32 @@ public class ItemRegistry {
     }
 
     private static EffectList getAquamarineToolEffectList() {
-        AquamarineData data = MUConfigHelper.getAquamarineValues();
-        return new EffectList.Builder().addEffect(FREEZE, (int) (data.tools_freeze_duration() * 20), 0,
-                false, false, true).build();
+       // AquamarineData data = MUConfigHelper.getAquamarineValues();
+        return new EffectList.Builder().build();
     }
+
+    public static final ResourceLocation AQUAMARINE_UNDERWATER_MINING_ID = CommonFunctions.getLoc("aquamarine_underwater_mining");
+
+    public static ItemAttributeModifiers createSapphireAttributes(Tier tier, float attackDamage, float attackSpeed) {
+        return ItemAttributeModifiers.builder()
+                .add(
+                        Attributes.ATTACK_DAMAGE,
+                        new AttributeModifier(Item.BASE_ATTACK_DAMAGE_ID, attackDamage + tier.getAttackDamageBonus(), AttributeModifier.Operation.ADD_VALUE),
+                        EquipmentSlotGroup.MAINHAND
+                )
+                .add(
+                        Attributes.ATTACK_SPEED,
+                        new AttributeModifier(Item.BASE_ATTACK_SPEED_ID, attackSpeed, AttributeModifier.Operation.ADD_VALUE),
+                        EquipmentSlotGroup.MAINHAND
+                )
+                .add(
+                        Attributes.SUBMERGED_MINING_SPEED,
+                        new AttributeModifier(AQUAMARINE_UNDERWATER_MINING_ID, 4, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL),
+                        EquipmentSlotGroup.MAINHAND
+                )
+                .build();
+    }
+
 
     private static List<Integer> getAquamarineArmorAmplifierList() {
         AquamarineData data = MUConfigHelper.getAquamarineValues();
@@ -223,7 +253,7 @@ public class ItemRegistry {
     private static EffectList getJadeToolEffectList() {
         JadeData data = MUConfigHelper.getJadeValues();
         return new EffectList.Builder()
-                .addInfiniteEffect(BOUNCER, data.tools_bouncer_amplifier(),
+                .addInfiniteEffect(EffectRegistry.BOUNCER, data.tools_bouncer_amplifier(),
                         true, false, true)
                 .build();
     }

@@ -20,6 +20,7 @@ public class EffectRegistry {
     public static final Holder<MobEffect> ARCANE_AURA;
     public static final Holder<MobEffect> BOUNCER;
     public static final Holder<MobEffect> SPELUNKER;
+    public static final Holder<MobEffect> VEINMINER;
 
     protected static final RegistrationProvider<MobEffect> EFFECTS = RegistrationProvider.get(Registries.MOB_EFFECT, Constants.MOD_ID);
 
@@ -43,5 +44,6 @@ public class EffectRegistry {
         ARCANE_AURA = registerEffect("arcane_aura", () -> new ArcaneAuraEffect(MobEffectCategory.BENEFICIAL, 12525567));
         BOUNCER = registerEffect("bouncer", () -> new BouncerEffect(MobEffectCategory.BENEFICIAL, 3652380));
         SPELUNKER = registerEffect("spelunker", () -> new SpelunkerEffect(MobEffectCategory.BENEFICIAL, 6317));
+        VEINMINER = registerEffect("veinminer", () -> new SpelunkerEffect(MobEffectCategory.BENEFICIAL, 6317));
     }
 }

@@ -9,6 +9,7 @@ import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import net.trique.mythicupgrades.Constants;
+import net.trique.mythicupgrades.client.MUKeybinds;
 import net.trique.mythicupgrades.util.ClientFunctions;
 import net.trique.mythicupgrades.util.SpelunkerEffectRenderer;
 
@@ -24,7 +25,6 @@ public class ClientGameEventHandler {
 
     @SubscribeEvent
     public static void clientFillRenderPositions(final ClientTickEvent.Pre event) {
-        LocalPlayer player = ClientFunctions.getLocalPlayer();
-        SpelunkerEffectRenderer.clientFillRenderPositions(player);
+        ClientFunctions.handleClientTick();
     }
 }

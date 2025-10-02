@@ -7,11 +7,13 @@
   "mixins": [
     "BlockBehaviourMixin",
     "LivingEntityMixin",
+    "MixinServerPlayerInteractionManager",
     "MobEntityMixin",
     "PlayerEntityMixin"
   ],
   "client": [
     "LocalPlayerMixin",
+    "MixinClientPlayerInteractionManager",
     "MixinMinecraft"
   ],
   "server": [],

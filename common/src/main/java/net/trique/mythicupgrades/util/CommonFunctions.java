@@ -4,14 +4,20 @@ import net.minecraft.core.Holder;
 import net.minecraft.core.Registry;
 import net.minecraft.core.RegistryAccess;
 import net.minecraft.core.registries.Registries;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.world.damagesource.DamageSource;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import net.trique.mythicupgrades.Constants;
+import net.trique.mythicupgrades.item.materials.MUToolMaterials;
 import net.trique.mythicupgrades.registry.EffectRegistry;
 
 import java.util.*;
@@ -45,6 +51,20 @@ public class CommonFunctions {
         return result.toString();
     }
 
+    public static <B extends FriendlyByteBuf, V extends Enum<V>> StreamCodec<B, V> enumStreamCodec(final Class<V> enumClass) {
+        return new StreamCodec<>() {
+            @Override
+            public V decode(B buf) {
+                return buf.readEnum(enumClass);
+            }
+
+            @Override
+            public void encode(B buf, V value) {
+                buf.writeEnum(value);
+            }
+        };
+    }
+
     public static  <T extends LivingEntity> boolean applyItemMasteryChance(T user) {
         if (user != null && user.hasEffect(EffectRegistry.ITEM_MASTERY)) {
             return RANDOM.nextFloat() <= 0.1f * (user.getEffect(EffectRegistry.ITEM_MASTERY).getAmplifier() + 1);
@@ -56,6 +76,16 @@ public class CommonFunctions {
         return ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, key);
     }
 
+    public static float getIncomingDamage(float original, LivingEntity target, DamageSource source) {
+        Entity attacker = source.getEntity();
+        if (attacker instanceof LivingEntity livingAttacker) {
+            ItemStack weapon = livingAttacker.getMainHandItem();
+            if (weapon.getItem() instanceof TieredItem tieredItem && tieredItem.getTier() == MUToolMaterials.AQUAMARINE && target.isInWaterRainOrBubble()) {
+                original += 2;
+            }
+        }
+        return original;
+    }
     public static String getTranslationKey(String key) {
         return Constants.MOD_ID + "." + key;
     }

@@ -27,6 +27,7 @@ public class MUBlockTags {
     public static TagKey<Block> STORAGE_BLOCKS_RAW_NECOIUM = create("storage_blocks/raw_necoium");
 
     public static TagKey<Block> SPELUNKER_OUTLINED = create("spelunker_outlined");
+    public static TagKey<Block> CAN_VEINMINE = create("can_veinmine");
 
 
     private static TagKey<Block> create(String string) {

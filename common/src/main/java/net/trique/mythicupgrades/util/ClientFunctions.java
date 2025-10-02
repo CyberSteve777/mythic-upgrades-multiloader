@@ -7,8 +7,14 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorMaterial;
 import net.minecraft.world.item.ItemStack;
+import net.trique.mythicupgrades.client.MUKeybinds;
+import net.trique.mythicupgrades.networking.packet.C2SKeybindPacket;
+import net.trique.mythicupgrades.networking.packet.S2CPercentAnimationPacket;
+import net.trique.mythicupgrades.registry.ParticleRegistry;
 
 import java.util.List;
 
@@ -29,5 +35,21 @@ public class ClientFunctions {
     }
     public static LocalPlayer getLocalPlayer() {
         return Minecraft.getInstance().player;
+    }
+
+
+    public static void handlePercentPacket(S2CPercentAnimationPacket packet) {
+        Player player = getLocalPlayer();
+        if (player.level().getEntity(packet.Id()) instanceof Entity entity) {
+            Minecraft.getInstance().particleEngine.createTrackingEmitter(entity, ParticleRegistry.PERCENT_PARTICLE.get());
+        }
+    }
+
+    public static void handleClientTick() {
+        LocalPlayer player = ClientFunctions.getLocalPlayer();
+        SpelunkerEffectRenderer.clientFillRenderPositions(player);
+        while (MUKeybinds.TOGGLE_RUBY_ABILITY.consumeClick()) {
+            C2SKeybindPacket.sendToServer(KeyAction.CHANGE_RUBY_SET_BONUS);
+        }
     }
 }

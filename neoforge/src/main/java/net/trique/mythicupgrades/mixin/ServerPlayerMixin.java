@@ -7,7 +7,7 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.level.Level;
-import net.trique.mythicupgrades.networking.packet.PercentAnimationPacket;
+import net.trique.mythicupgrades.networking.packet.S2CPercentAnimationPacket;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 
@@ -21,6 +21,6 @@ public abstract class ServerPlayerMixin extends PlayerEntityMixin {
 
     @Override
     protected void percentHit(Entity entity) {
-        this.serverLevel().getChunkSource().broadcastAndSend(this, new PercentAnimationPacket(entity.getId()));
+        this.serverLevel().getChunkSource().broadcastAndSend(this, new S2CPercentAnimationPacket(entity.getId()));
     }
 }

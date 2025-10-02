@@ -10,8 +10,10 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.neoforged.fml.config.ModConfig;
+import net.trique.mythicupgrades.attachments.CommonDataAttachments;
 import net.trique.mythicupgrades.networking.packet.MUConfigPacket;
-import net.trique.mythicupgrades.networking.packet.PercentAnimationPacket;
+import net.trique.mythicupgrades.networking.packet.PacketHandler;
+import net.trique.mythicupgrades.networking.packet.S2CPercentAnimationPacket;
 import net.trique.mythicupgrades.util.MULootTableModifiers;
 import net.trique.mythicupgrades.util.MUResourcePacks;
 import net.trique.mythicupgrades.util.MinecraftServerInstance;
@@ -37,10 +39,10 @@ public class MUFabric implements ModInitializer {
         MUFeatureGeneration.generateFeatures();
         MULootTableModifiers.modifyLootTables();
         MUResourcePacks.addPacks();
-        PayloadTypeRegistry.playS2C().register(PercentAnimationPacket.TYPE, PercentAnimationPacket.CODEC);
-        PayloadTypeRegistry.playS2C().register(MUConfigPacket.TYPE, MUConfigPacket.CODEC);
         setupSyncOnChange();
         setupSyncOnJoin();
+        CommonDataAttachments.init();
+        PacketHandler.registerPackets();
     }
 
     public static void setupSyncOnChange() {

@@ -14,14 +14,17 @@ import net.neoforged.neoforge.client.gui.ConfigurationScreen;
 import net.neoforged.neoforge.client.gui.IConfigScreenFactory;
 import net.neoforged.neoforge.event.AddPackFindersEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
-import net.neoforged.neoforge.network.registration.PayloadRegistrar;
+import net.neoforged.neoforge.registries.RegisterEvent;
 import net.neoforged.neoforgespi.locating.IModFile;
+import net.trique.mythicupgrades.attachments.CommonDataAttachments;
 import net.trique.mythicupgrades.client.HiResPackSource;
 import net.trique.mythicupgrades.config.MUConfig;
 import net.trique.mythicupgrades.config.MUConfigHelper;
 import net.trique.mythicupgrades.loot.ModLootModifiers;
 import net.trique.mythicupgrades.networking.packet.MUConfigPacket;
-import net.trique.mythicupgrades.networking.packet.PercentAnimationPacket;
+import net.trique.mythicupgrades.networking.packet.PacketHandler;
+import net.trique.mythicupgrades.networking.packet.S2CPercentAnimationPacket;
+import net.trique.mythicupgrades.platform.NeoForgePlatformHelper;
 import net.trique.mythicupgrades.platform.Services;
 import net.trique.mythicupgrades.registry.ParticleRegistry;
 
@@ -46,24 +49,19 @@ public class MUNeoForge {
                 event.addRepositorySource(new HiResPackSource(modFile, PackType.CLIENT_RESOURCES, "32x", Component.translatable("pack.mythicupgrades.32x")));
             }
         });
+        eventBus.addListener(this::registerAttachments);
 //        NeoForge.EVENT_BUS.addListener(this::syncOnJoin);
         if (Services.PLATFORM.isClient()) {
             ModLoadingContext.get().getActiveContainer().registerExtensionPoint(IConfigScreenFactory.class, ConfigurationScreen::new);
         }
     }
 
+    private void registerAttachments(RegisterEvent event) {
+        CommonDataAttachments.init();
+    }
+
     private void setupPackets(final RegisterPayloadHandlersEvent event) {
-        PayloadRegistrar registrar = event.registrar(Constants.MOD_ID).versioned("1").optional();
-        registrar.playToClient(PercentAnimationPacket.TYPE, PercentAnimationPacket.CODEC, (message, context) -> {
-            context.enqueueWork(() -> {
-                Player player = context.player();
-                if (player.level().getEntity(message.Id()) instanceof Entity entity) {
-                    Minecraft.getInstance().particleEngine.createTrackingEmitter(entity, ParticleRegistry.PERCENT_PARTICLE.get());
-                }
-            });
-        });
-        registrar.playToClient(MUConfigPacket.TYPE, MUConfigPacket.CODEC, ((packet, ctx) -> {
-            ctx.enqueueWork(() -> MUConfigHelper.updateValuesOnJoin(packet));
-        }));
+        NeoForgePlatformHelper.registrar = event.registrar(Constants.MOD_ID).versioned("1").optional();
+        PacketHandler.registerPackets();
     }
 }

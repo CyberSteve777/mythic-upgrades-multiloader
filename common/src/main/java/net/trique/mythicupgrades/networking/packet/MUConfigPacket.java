@@ -2,11 +2,13 @@ package net.trique.mythicupgrades.networking.packet;
 
 
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.trique.mythicupgrades.Constants;
 import net.trique.mythicupgrades.config.MUConfig;
+import net.trique.mythicupgrades.config.MUConfigHelper;
 
 
 public record MUConfigPacket(double tools_freeze_duration, double ice_shield_slowness_duration,
@@ -19,7 +21,7 @@ public record MUConfigPacket(double tools_freeze_duration, double ice_shield_slo
                              int damage_deflection_amplifier, double tools_levitation_duration,
                              int tools_levitation_amplifier, double arcane_aura_levitation_duration,
                              int arcane_aura_amplifier, double tools_bouncer_jump_boost_duration,
-                             int tools_bouncer_amplifier, int speed_amplifier, int jump_boost_amplifier) implements CustomPacketPayload {
+                             int tools_bouncer_amplifier, int speed_amplifier, int jump_boost_amplifier) implements S2CModPacket<RegistryFriendlyByteBuf> {
 
 
     public MUConfigPacket(MUConfig config) {
@@ -44,7 +46,7 @@ public record MUConfigPacket(double tools_freeze_duration, double ice_shield_slo
             )
     );
 
-    public static final StreamCodec<FriendlyByteBuf, MUConfigPacket> CODEC = StreamCodec.ofMember(
+    public static final StreamCodec<RegistryFriendlyByteBuf, MUConfigPacket> CODEC = StreamCodec.ofMember(
             MUConfigPacket::write, MUConfigPacket::new
     );
 
@@ -86,6 +88,11 @@ public record MUConfigPacket(double tools_freeze_duration, double ice_shield_slo
         buf.writeInt(tools_bouncer_amplifier);
         buf.writeInt(speed_amplifier);
         buf.writeInt(jump_boost_amplifier);
+    }
+
+    @Override
+    public void handleClient() {
+        MUConfigHelper.updateValuesOnJoin(this);
     }
 
     @Override
