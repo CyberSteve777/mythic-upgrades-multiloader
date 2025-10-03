@@ -14,6 +14,7 @@ import net.minecraft.world.item.ItemStack;
 import net.trique.mythicupgrades.client.MUKeybinds;
 import net.trique.mythicupgrades.networking.packet.C2SKeybindPacket;
 import net.trique.mythicupgrades.networking.packet.S2CPercentAnimationPacket;
+import net.trique.mythicupgrades.registry.EffectRegistry;
 import net.trique.mythicupgrades.registry.ParticleRegistry;
 
 import java.util.List;
@@ -46,10 +47,15 @@ public class ClientFunctions {
     }
 
     public static void handleClientTick() {
-        LocalPlayer player = ClientFunctions.getLocalPlayer();
-        SpelunkerEffectRenderer.clientFillRenderPositions(player);
         while (MUKeybinds.TOGGLE_RUBY_ABILITY.consumeClick()) {
             C2SKeybindPacket.sendToServer(KeyAction.CHANGE_RUBY_SET_BONUS);
+        }
+
+        LocalPlayer player = Minecraft.getInstance().player;
+
+        if (player != null) {
+            if (SpelunkerEffectRenderer.setActive(player.hasEffect(EffectRegistry.SPELUNKER)))
+                SpelunkerEffectRenderer.clear();
         }
     }
 }

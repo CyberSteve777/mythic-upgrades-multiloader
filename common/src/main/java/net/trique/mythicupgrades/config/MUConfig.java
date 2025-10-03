@@ -1,9 +1,26 @@
 package net.trique.mythicupgrades.config;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.RegistryFriendlyByteBuf;
+import net.minecraft.network.codec.ByteBufCodecs;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraft.tags.BlockTags;
+import net.minecraft.tags.TagKey;
+import net.minecraft.world.level.block.Block;
 import net.neoforged.neoforge.common.ModConfigSpec;
 import net.trique.mythicupgrades.util.CommonFunctions;
+import net.trique.mythicupgrades.util.MUBlockTags;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public final class MUConfig {
+    private static final Map<String, ChunkBlockConfig> DEFAULT_BLOCK_CONFIGS = new HashMap<>();
+    public static final ChunkBlockConfig NONE_BLOCK_CONFIG = new ChunkBlockConfig(0, false, 0);
 
     public static final ModConfigSpec CONFIG_SPEC;
     public static final MUConfig CONFIG;
@@ -37,6 +54,10 @@ public final class MUConfig {
     public final ModConfigSpec.IntValue tools_bouncer_amplifier;
     public final ModConfigSpec.IntValue speed_amplifier;
     public final ModConfigSpec.IntValue jump_boost_amplifier;
+
+    public final ModConfigSpec.IntValue chunk_radius;
+
+    public final ConfigHelper.ConfigObject<Map<String,ChunkBlockConfig>> block_configs;
 
     private MUConfig(ModConfigSpec.Builder builder) {
         tools_freeze_duration = builder.comment("Duration in seconds of freezing effect that tools apply on hit")
@@ -114,6 +135,122 @@ public final class MUConfig {
         jump_boost_amplifier = builder.comment("Jump boost amplifier on jade armor")
                 .translation(CommonFunctions.getTranslationKey("jade_jump_boost_amplifier"))
                 .defineInRange("speed_amplififer", 2, 0, 4);
+
+        chunk_radius = builder.defineInRange("chunk_radius",1,1,64);
+
+        block_configs = ConfigHelper.defineObject(builder,"block_configs",Codec.unboundedMap(Codec.STRING,ChunkBlockConfig.CODEC),DEFAULT_BLOCK_CONFIGS);
+    }
+
+
+    static {
+        // Coal
+        DEFAULT_BLOCK_CONFIGS.put(BlockTags.COAL_ORES.location().toString(), new ChunkBlockConfig(0x505050, true, 16));
+
+        // Iron
+        DEFAULT_BLOCK_CONFIGS.put(BlockTags.IRON_ORES.location().toString(), new ChunkBlockConfig(0xffd1bd, true, 8));
+
+        // Copper
+        DEFAULT_BLOCK_CONFIGS.put(BlockTags.COPPER_ORES.location().toString(), new ChunkBlockConfig(0xeb5e34, true, 12));
+
+        // Gold
+        DEFAULT_BLOCK_CONFIGS.put(BlockTags.GOLD_ORES.location().toString(), new ChunkBlockConfig(0xfff52e, true, 8));
+
+        // Diamond
+        DEFAULT_BLOCK_CONFIGS.put(BlockTags.DIAMOND_ORES.location().toString(), new ChunkBlockConfig(0x2ee0ff, true, 5));
+
+        // Emerald
+        DEFAULT_BLOCK_CONFIGS.put(BlockTags.EMERALD_ORES.location().toString(), new ChunkBlockConfig(0x2eff35, true, 7));
+
+        // Lapis
+        DEFAULT_BLOCK_CONFIGS.put(BlockTags.LAPIS_ORES.location().toString(), new ChunkBlockConfig(0x312eff, true, 8));
+
+        // Redstone
+        DEFAULT_BLOCK_CONFIGS.put(BlockTags.REDSTONE_ORES.location().toString(), new ChunkBlockConfig(0xff2e2e, true, 8));
+
+        // Quartz
+        DEFAULT_BLOCK_CONFIGS.put(MUBlockTags.QUARTZ_ORES.location().toString(), new ChunkBlockConfig(0xffffff, true, 14));
+    }
+
+    public static String findTag(Block block) {
+        for (Map.Entry<String, ChunkBlockConfig> config : CONFIG.block_configs.get().entrySet()) {
+            TagKey<Block> tag = TagKey.create(Registries.BLOCK, ResourceLocation.parse(config.getKey()));
+            if (block.builtInRegistryHolder().is(tag)) {
+                return config.getKey();
+            }
+        }
+        return null;
+    }
+
+    public static class ChunkBlockConfig {
+
+        private Block block;
+
+        private final int color;
+        private final boolean transition;
+        private final int effectRadius;
+
+        private int blockRadiusMax;
+        private int blockRadiusMin;
+
+        public static final Codec<ChunkBlockConfig> CODEC = RecordCodecBuilder.create(
+                chunkBlockConfigInstance ->
+                        chunkBlockConfigInstance.group(
+                                Codec.INT.fieldOf("highlightColor").forGetter(ChunkBlockConfig::getColor),
+                                Codec.BOOL.fieldOf("transition").forGetter(ChunkBlockConfig::isTransition),
+                                Codec.INT.fieldOf("effectRadius").forGetter(ChunkBlockConfig::getEffectRadius)
+                                ).apply(chunkBlockConfigInstance,ChunkBlockConfig::new)
+        );
+
+        public static final StreamCodec<RegistryFriendlyByteBuf,ChunkBlockConfig> STREAM_CODEC = StreamCodec.composite(
+                ByteBufCodecs.INT,ChunkBlockConfig::getColor,
+                ByteBufCodecs.BOOL,ChunkBlockConfig::isTransition,
+                ByteBufCodecs.INT,ChunkBlockConfig::getEffectRadius,
+                ChunkBlockConfig::new
+        );
+
+        public ChunkBlockConfig(int color, boolean transition, int effectRadius) {
+            this.color = color;
+            this.transition = transition;
+            this.effectRadius = effectRadius;
+            parseEffectRadius();
+        }
+
+        public ChunkBlockConfig(FriendlyByteBuf buf) {
+            this(buf.readInt(), buf.readBoolean(), buf.readVarInt());
+        }
+
+        public void write(FriendlyByteBuf buf) {
+            buf.writeInt(color);
+            buf.writeBoolean(transition);
+            buf.writeVarInt(effectRadius);
+        }
+
+        private void parseEffectRadius() {
+            int chunkRadius = (int) Math.ceil(effectRadius / 16f);
+
+            blockRadiusMax = (int) Math.pow(effectRadius, 2);
+            blockRadiusMin = (int) Math.pow(effectRadius - 1, 2);
+        }
+
+        public int getColor() {
+            return color;
+        }
+
+        public boolean isTransition() {
+            return transition;
+        }
+
+        public int getEffectRadius() {
+            return effectRadius;
+        }
+
+        public int getBlockRadiusMax() {
+            return blockRadiusMax;
+        }
+
+        public int getBlockRadiusMin() {
+            return blockRadiusMin;
+        }
     }
 
 

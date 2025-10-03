@@ -6,12 +6,15 @@
   "compatibilityLevel": "JAVA_18",
   "mixins": [
     "BlockBehaviourMixin",
+    "ChunkMapAccess",
     "LivingEntityMixin",
     "MixinServerPlayerInteractionManager",
     "MobEntityMixin",
     "PlayerEntityMixin"
   ],
   "client": [
+    "LevelRendererAccess",
+    "LevelRendererMixin",
     "LocalPlayerMixin",
     "MixinClientPlayerInteractionManager",
     "MixinMinecraft"

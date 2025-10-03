@@ -7,9 +7,4 @@ public class SpelunkerEffect extends MobEffect {
     public SpelunkerEffect(MobEffectCategory mobEffectCategory, int i) {
         super(mobEffectCategory, i);
     }
-
-    @Override
-    public boolean shouldApplyEffectTickThisTick(int i, int j) {
-        return true;
-    }
 }

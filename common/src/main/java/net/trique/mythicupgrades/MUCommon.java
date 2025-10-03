@@ -1,6 +1,5 @@
 package net.trique.mythicupgrades;
 
-import net.trique.mythicupgrades.config.MUConfigHelper;
 import net.trique.mythicupgrades.util.MUArmorSets;
 import net.trique.mythicupgrades.item.materials.MUArmorMaterials;
 import net.trique.mythicupgrades.platform.Services;
@@ -19,7 +18,6 @@ public class MUCommon {
     public static void init() {
         Constants.LOGGER.info("Hello from Common init on {}! we are currently in a {} environment!", Services.PLATFORM.getPlatformName(), Services.PLATFORM.getEnvironmentName());
 //        DataComponentRegistry.init();
-        MUConfigHelper.initCaches();
         EffectRegistry.init();
         MUArmorSets.init();
         ItemRegistry.init();

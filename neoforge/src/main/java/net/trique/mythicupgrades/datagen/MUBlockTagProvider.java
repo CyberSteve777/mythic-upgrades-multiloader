@@ -102,36 +102,6 @@ public class MUBlockTagProvider extends BlockTagsProvider {
                         MUBlockTags.STORAGE_BLOCKS_NECOIUM,
                         MUBlockTags.STORAGE_BLOCKS_RAW_NECOIUM
                 );
-
-        tag(MUBlockTags.SPELUNKER_OUTLINED).addTags(
-                Tags.Blocks.ORES,
-                Tags.Blocks.CHESTS,
-                Tags.Blocks.BARRELS,
-                Tags.Blocks.CLUSTERS,
-                Tags.Blocks.STORAGE_BLOCKS_COAL,
-                Tags.Blocks.STORAGE_BLOCKS_EMERALD,
-                Tags.Blocks.STORAGE_BLOCKS_DIAMOND,
-                Tags.Blocks.STORAGE_BLOCKS_COPPER,
-                Tags.Blocks.STORAGE_BLOCKS_GOLD,
-                Tags.Blocks.STORAGE_BLOCKS_REDSTONE,
-                Tags.Blocks.STORAGE_BLOCKS_IRON,
-                Tags.Blocks.STORAGE_BLOCKS_LAPIS,
-                Tags.Blocks.STORAGE_BLOCKS_NETHERITE,
-                Tags.Blocks.STORAGE_BLOCKS_RAW_COPPER,
-                Tags.Blocks.STORAGE_BLOCKS_RAW_GOLD,
-                Tags.Blocks.STORAGE_BLOCKS_RAW_IRON,
-                MUBlockTags.STORAGE_BLOCKS_AQUAMARINE,
-                MUBlockTags.STORAGE_BLOCKS_TOPAZ,
-                MUBlockTags.STORAGE_BLOCKS_PERIDOT,
-                MUBlockTags.STORAGE_BLOCKS_RUBY,
-                MUBlockTags.STORAGE_BLOCKS_SAPPHIRE,
-                MUBlockTags.STORAGE_BLOCKS_JADE,
-                MUBlockTags.STORAGE_BLOCKS_AMETRINE,
-                MUBlockTags.STORAGE_BLOCKS_NECOIUM,
-                MUBlockTags.STORAGE_BLOCKS_RAW_NECOIUM
-        ).add(
-                Blocks.DECORATED_POT
-        );
-        tag(MUBlockTags.CAN_VEINMINE).addTag(MUBlockTags.SPELUNKER_OUTLINED);
+        tag(MUBlockTags.CAN_VEINMINE).addTag( Tags.Blocks.ORES);
     }
 }

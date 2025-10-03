@@ -1,6 +1,8 @@
 package net.trique.mythicupgrades.attachments;
 
 import com.mojang.serialization.Codec;
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Vec3i;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.LivingEntity;
@@ -21,6 +23,20 @@ public class CommonDataAttachments {
                     .codec(Codec.BOOL)
                     .networkSynchronized(ByteBufCodecs.BOOL)
                     .build("alternative_ruby_ability"));
+
+    ///transient attachments, don't sync or save
+
+    public static final CommonDataAttachment<HashSet<BlockPos>> SPELUNKER_POS =
+            register(CommonDataAttachment.<HashSet<BlockPos>>create(o -> new HashSet<>())
+                    .build("spelunker_pos"));
+
+    public static final CommonDataAttachment<Boolean> FORCE_ORE_CHUNK_UPDATE =
+            register(CommonDataAttachment.create(o -> false)
+                    .build("force_ore_chunk_update"));
+
+    public static final CommonDataAttachment<Vec3i> LAST_CHUNK =
+            register(CommonDataAttachment.<Vec3i>create(o -> Vec3i.ZERO)
+                    .build("last_chunk"));
 
     public static CommonDataAttachment<?> lookup(ResourceLocation location) {
         return MAP.get(location);

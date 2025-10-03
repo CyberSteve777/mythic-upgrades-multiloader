@@ -13,12 +13,10 @@ public class ClientConfigEventHandler {
 
     @SubscribeEvent
     private static void cacheClientValues(ClientPlayerNetworkEvent.LoggingIn event) {
-        MUConfigHelper.cacheValuesBeforeJoin();
     }
 
 
     @SubscribeEvent
     private static void loadClientValues(ClientPlayerNetworkEvent.LoggingOut event) {
-        MUConfigHelper.restoreClientValues();
     }
 }

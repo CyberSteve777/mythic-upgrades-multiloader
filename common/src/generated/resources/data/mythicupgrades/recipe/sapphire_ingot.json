@@ -1,21 +1,8 @@
 {
   "type": "minecraft:crafting_shapeless",
   "category": "misc",
-  "group": "sapphire_ingot",
   "ingredients": [
     {
-      "item": "mythicupgrades:sapphire"
-    },
-    {
-      "item": "mythicupgrades:sapphire"
-    },
-    {
-      "item": "mythicupgrades:sapphire"
-    },
-    {
-      "item": "mythicupgrades:sapphire"
-    },
-    {
       "item": "mythicupgrades:necoium_ingot"
     },
     {
@@ -26,10 +13,22 @@
     },
     {
       "item": "mythicupgrades:necoium_ingot"
+    },
+    {
+      "item": "mythicupgrades:sapphire"
+    },
+    {
+      "item": "mythicupgrades:sapphire"
+    },
+    {
+      "item": "mythicupgrades:sapphire"
+    },
+    {
+      "item": "mythicupgrades:sapphire"
     }
   ],
   "result": {
-    "count": 1,
+    "count": 2,
     "id": "mythicupgrades:sapphire_ingot"
   }
 }
