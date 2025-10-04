@@ -28,6 +28,7 @@ public class MUBlockTags {
     public static TagKey<Block> STORAGE_BLOCKS_RAW_NECOIUM = create("storage_blocks/raw_necoium");
 
     public static final TagKey<Block> QUARTZ_ORES = common("ores/quartz");
+    public static final TagKey<Block> ORES = common("ores");
 
     public static TagKey<Block> CAN_VEINMINE = create("can_veinmine");
 

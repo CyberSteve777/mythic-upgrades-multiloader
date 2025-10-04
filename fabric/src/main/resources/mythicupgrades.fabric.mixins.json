@@ -8,10 +8,10 @@
     "BanEnchantmentMixin",
     "ItemStackMixin",
     "LivingEntityMixinFabric",
+    "PlayerMixinFabric",
     "ServerPlayerMixin"
   ],
   "client": [
-    "MixinTitleScreen"
   ],
   "server": [],
   "injectors": {

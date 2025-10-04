@@ -143,6 +143,9 @@ public final class MUConfig {
 
 
     static {
+        // all ores
+        DEFAULT_BLOCK_CONFIGS.put(MUBlockTags.ORES.location().toString(), new ChunkBlockConfig(0xff2e2e, true, 16));
+        /*
         // Coal
         DEFAULT_BLOCK_CONFIGS.put(BlockTags.COAL_ORES.location().toString(), new ChunkBlockConfig(0x505050, true, 16));
 
@@ -168,17 +171,30 @@ public final class MUConfig {
         DEFAULT_BLOCK_CONFIGS.put(BlockTags.REDSTONE_ORES.location().toString(), new ChunkBlockConfig(0xff2e2e, true, 8));
 
         // Quartz
-        DEFAULT_BLOCK_CONFIGS.put(MUBlockTags.QUARTZ_ORES.location().toString(), new ChunkBlockConfig(0xffffff, true, 14));
+        DEFAULT_BLOCK_CONFIGS.put(MUBlockTags.QUARTZ_ORES.location().toString(), new ChunkBlockConfig(0xffffff, true, 14));*/
     }
 
+    static final Map<Block,String> CACHE = new HashMap<>();
+
     public static String findTag(Block block) {
+
+        if (CACHE.containsKey(block)) {
+            return CACHE.get(block);
+        }
+
         for (Map.Entry<String, ChunkBlockConfig> config : CONFIG.block_configs.get().entrySet()) {
             TagKey<Block> tag = TagKey.create(Registries.BLOCK, ResourceLocation.parse(config.getKey()));
             if (block.builtInRegistryHolder().is(tag)) {
+                CACHE.put(block,config.getKey());
                 return config.getKey();
             }
         }
+        CACHE.put(block,null);
         return null;
+    }
+
+    public static void clearCache() {
+        CACHE.clear();
     }
 
     public static class ChunkBlockConfig {

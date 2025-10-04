@@ -1,8 +1,6 @@
 package net.trique.mythicupgrades.util;
 
-import net.minecraft.core.Holder;
-import net.minecraft.core.Registry;
-import net.minecraft.core.RegistryAccess;
+import net.minecraft.core.*;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -11,14 +9,20 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.item.enchantment.Enchantment;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.chunk.LevelChunkSection;
 import net.trique.mythicupgrades.Constants;
+import net.trique.mythicupgrades.attachments.CommonDataAttachments;
 import net.trique.mythicupgrades.item.materials.MUToolMaterials;
+import net.trique.mythicupgrades.platform.Services;
 import net.trique.mythicupgrades.registry.EffectRegistry;
+import net.trique.mythicupgrades.util.spelunker.ChunkOres;
+import net.trique.mythicupgrades.util.spelunker.SpelunkerEffectManager;
 
 import java.util.*;
 
@@ -86,6 +90,58 @@ public class CommonFunctions {
         }
         return original;
     }
+
+    public static void playerTickPre(Player player) {
+        Level world = player.level();
+        HashSet<BlockPos> spelunkerEffectChunks = Services.PLATFORM.getOrCreateAttachedValue(player, CommonDataAttachments.SPELUNKER_POS);
+        boolean forceOreChunkUpdate = Services.PLATFORM.getOrCreateAttachedValue(player,CommonDataAttachments.FORCE_ORE_CHUNK_UPDATE);
+
+        if(!player.hasEffect(EffectRegistry.SPELUNKER)) {
+            if(!spelunkerEffectChunks.isEmpty())
+                spelunkerEffectChunks.clear();
+            Services.PLATFORM.setAttachedValue(player,CommonDataAttachments.FORCE_ORE_CHUNK_UPDATE,true);
+            Services.PLATFORM.setAttachedValue(player, CommonDataAttachments.SPELUNKER_POS,spelunkerEffectChunks);
+            return;
+        }
+
+        int cx = SectionPos.posToSectionCoord(player.getX());
+        int cy = SectionPos.posToSectionCoord(player.getY());
+        int cz = SectionPos.posToSectionCoord(player.getZ());
+
+        Vec3i lastChunkSectionPos = Services.PLATFORM.getAttachedValue(player, CommonDataAttachments.LAST_CHUNK);
+
+        // update if player crosses chunk border
+        if (!new Vec3i(cx,cy,cz).equals(lastChunkSectionPos) || forceOreChunkUpdate) {
+            Services.PLATFORM.setAttachedValue(player,CommonDataAttachments.FORCE_ORE_CHUNK_UPDATE,false);
+            HashMap<BlockPos, LevelChunkSection> newChunks = SpelunkerEffectManager.getSurroundingChunkSections(world, player.position());
+
+            // calc difference and find ores
+            HashSet<BlockPos> remove = new HashSet<>();
+            spelunkerEffectChunks.removeIf(p -> {
+                if (!newChunks.containsKey(p)) {
+                    remove.add(p);
+                    return true;
+                }
+                return false;
+            });
+            ArrayList<ChunkOres> add = new ArrayList<>();
+            for (Map.Entry<BlockPos, LevelChunkSection> section : newChunks.entrySet()) {
+                BlockPos pos = section.getKey();
+                if (!spelunkerEffectChunks.contains(pos)) {
+                    add.add(SpelunkerEffectManager.findOresInChunk(world, pos));
+                    spelunkerEffectChunks.add(pos);
+                }
+            }
+
+            // handle new and removed chunk sections
+            if(world.isClientSide()) {
+                SpelunkerEffectRenderer.updateChunks(world, remove, add);
+            }
+        }
+        Services.PLATFORM.setAttachedValue(player, CommonDataAttachments.SPELUNKER_POS,spelunkerEffectChunks);
+        Services.PLATFORM.setAttachedValue(player, CommonDataAttachments.LAST_CHUNK,new Vec3i(cx,cy,cz));
+    }
+
     public static String getTranslationKey(String key) {
         return Constants.MOD_ID + "." + key;
     }
