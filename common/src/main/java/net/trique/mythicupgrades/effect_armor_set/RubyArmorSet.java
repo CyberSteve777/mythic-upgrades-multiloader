@@ -22,11 +22,15 @@ public class RubyArmorSet extends FullEffectArmorSet {
         RubyData data = MUConfigHelper.getRubyValues();
 
         boolean useAlternative = CommonDataAttachments.useAlternativeRubyAbility(entity);
-
-        return new EffectList.Builder()
-                .addInfiniteEffect(useAlternative ? EffectRegistry.SPELUNKER: EffectRegistry.VEINMINER, 0,
-                        true, false, true)
-                .build();
+        var builder = new EffectList.Builder();
+        if (useAlternative) {
+            builder = builder.addInfiniteEffect(EffectRegistry.SPELUNKER, data.spelunker_amplifier(),
+                    true, false, true);
+        } else {
+            builder = builder.addInfiniteEffect(EffectRegistry.VEINMINER, 0, true, false,
+                    true);
+        }
+        return builder.build();
     }
 
     private static EffectList getFiller(DamageSource source, LivingEntity target, float amount) {

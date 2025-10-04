@@ -1,6 +1,7 @@
 package net.trique.mythicupgrades.util.veinmine;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.EntitySelector;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -11,7 +12,7 @@ import net.minecraft.world.item.TieredItem;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.phys.AABB;
-import net.trique.mythicupgrades.item.materials.MUToolMaterials;
+import net.trique.mythicupgrades.util.MUBlockTags;
 
 import java.util.List;
 
@@ -45,7 +46,7 @@ public class ExcavateHelper {
                 newID = startID;
 
         } */
-        return startID.equals(newID);
+        return startID.equals(newID) && BuiltInRegistries.BLOCK.get(newID).defaultBlockState().is(MUBlockTags.CAN_VEINMINE);
     }
 
 
