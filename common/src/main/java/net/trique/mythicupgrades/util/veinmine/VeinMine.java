@@ -16,7 +16,7 @@ import java.util.Deque;
 /**
  * credit to <a href="https://github.com/qyl27/DiggusMaximus/tree/1.21.1">...</a>
  */
-public class Excavate {
+public class VeinMine {
     private final BlockPos startPos;
     private final Player player;
     private ResourceLocation startID;
@@ -30,7 +30,7 @@ public class Excavate {
 
     private static final int airHash = ResourceLocation.withDefaultNamespace("air").hashCode();
 
-    public Excavate(BlockPos pos, ResourceLocation blockID, Player player, Direction facing) {
+    public VeinMine(BlockPos pos, ResourceLocation blockID, Player player, Direction facing) {
         this.startPos = pos;
         this.player = player;
         this.world = player.level();
@@ -51,16 +51,16 @@ public class Excavate {
     }
 
     private void spread(BlockPos pos) {
-        for (BlockPos dirPos : ExcavateTypes.getSpreadType(shapeSelection, facing, startPos, pos)) {
-            if (ExcavateHelper.isValidPos(dirPos))
+        for (BlockPos dirPos : VeinMineTypes.getSpreadType(shapeSelection, facing, startPos, pos)) {
+            if (VeinMineHelper.isValidPos(dirPos))
                 excavateAt(pos.offset(dirPos));
         }
     }
 
     private void excavateAt(BlockPos pos) {
-        if (mined >= ExcavateHelper.maxMined) return;
-        ResourceLocation block = BuiltInRegistries.BLOCK.getKey(ExcavateHelper.getBlockAt(world, pos));
-        if (block.hashCode() != airHash && ExcavateHelper.isTheSameBlock(startID, block, world, shapeSelection) && ExcavateHelper.canMine(player, startTool, world, startPos, pos) && isExcavatingAllowed(pos)) {
+        if (mined >= VeinMineHelper.maxMined) return;
+        ResourceLocation block = BuiltInRegistries.BLOCK.getKey(VeinMineHelper.getBlockAt(world, pos));
+        if (block.hashCode() != airHash && VeinMineHelper.isTheSameBlock(startID, block, world, shapeSelection) && VeinMineHelper.canMine(player, startTool, world, startPos, pos) && isExcavatingAllowed(pos)) {
             forceExcavateAt(pos);
         }
     }
@@ -73,6 +73,6 @@ public class Excavate {
     private void forceExcavateAt(BlockPos pos) {
         points.add(pos);
         mined++;
-        ExcavateHelper.pickupDrops(world, pos, player);
+        VeinMineHelper.pickupDrops(world, pos, player);
     }
 }

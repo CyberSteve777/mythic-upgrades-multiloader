@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class ExcavateTypes {
+public class VeinMineTypes {
     public final static List<BlockPos> standard = new ArrayList<>();
     public final static List<BlockPos> standardDiag = new ArrayList<>();
 
@@ -23,6 +23,6 @@ public class ExcavateTypes {
     }
 
     public static List<BlockPos> getSpreadType(int shapeSelection, Direction facing, BlockPos startPos, BlockPos pos) {
-        return ExcavateTypes.standard;
+        return VeinMineTypes.standard;
     }
 }

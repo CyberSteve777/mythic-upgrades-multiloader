@@ -16,7 +16,7 @@ import net.trique.mythicupgrades.util.MUBlockTags;
 
 import java.util.List;
 
-public class ExcavateHelper {
+public class VeinMineHelper {
     static int maxMined = 2048;//Math.min(DiggusMaximusMod.getOptions().maxMinedBlocks, 2048);
     private static double maxDistance = 128;//Math.min(DiggusMaximusMod.getOptions().maxMineDistance + 1, 128);
 

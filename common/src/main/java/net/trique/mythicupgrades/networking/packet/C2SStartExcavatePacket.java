@@ -10,7 +10,7 @@ import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.trique.mythicupgrades.util.CommonFunctions;
-import net.trique.mythicupgrades.util.veinmine.Excavate;
+import net.trique.mythicupgrades.util.veinmine.VeinMine;
 
 public record C2SStartExcavatePacket(BlockPos pos, ResourceLocation id, Direction facing, int shape) implements C2SModPacket<RegistryFriendlyByteBuf> {
 
@@ -29,7 +29,7 @@ public record C2SStartExcavatePacket(BlockPos pos, ResourceLocation id, Directio
     @Override
     public void handleServer(ServerPlayer player) {
         if (pos.closerThan(player.blockPosition(), 10)) {
-            new Excavate(pos, id, player, facing).startExcavate(shape);
+            new VeinMine(pos, id, player, facing).startExcavate(shape);
         }
     }
 
