@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_column",
+  "textures": {
+    "end": "mythicupgrades:block/peridot_pillar_top",
+    "side": "mythicupgrades:block/cut_peridot_pillar"
+  }
+}
