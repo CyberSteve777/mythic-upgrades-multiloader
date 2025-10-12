@@ -144,7 +144,8 @@ public final class MUConfig {
 
     static {
         // all ores
-        DEFAULT_BLOCK_CONFIGS.put(MUBlockTags.ORES.location().toString(), new ChunkBlockConfig(0xff2e2e, true, 16));
+        DEFAULT_BLOCK_CONFIGS.put(MUBlockTags.SPELUNKER_OUTLINED.location().toString(),
+                new ChunkBlockConfig(0xff2e2e, true, 16));
         /*
         // Coal
         DEFAULT_BLOCK_CONFIGS.put(BlockTags.COAL_ORES.location().toString(), new ChunkBlockConfig(0x505050, true, 16));

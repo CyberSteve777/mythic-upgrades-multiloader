@@ -31,6 +31,7 @@ public class MUBlockTags {
     public static final TagKey<Block> ORES = common("ores");
 
     public static TagKey<Block> CAN_VEINMINE = create("can_veinmine");
+    public static TagKey<Block> SPELUNKER_OUTLINED = create("spelunker_outlined");
 
 
     private static TagKey<Block> common(String string) {
