@@ -27,39 +27,67 @@ public class CreativeTabRegistry {
                         output.accept(RUBY_ORE.get());
                         output.accept(RUBY_CRYSTAL_BLOCK.get());
                         output.accept(RUBY_CRYSTAL_CLUSTER.get());
+                        output.accept(RUBY_CRYSTAL_BRICKS.get());
+                        output.accept(POLISHED_RUBY_CRYSTAL_BLOCK.get());
+                        output.accept(RUBY_PILLAR.get());
+                        output.accept(CUT_RUBY_PILLAR.get());
 
                         output.accept(TOPAZ_BLOCK.get());
                         output.accept(TOPAZ_ORE.get());
                         output.accept(DEEPSLATE_TOPAZ_ORE.get());
                         output.accept(TOPAZ_CRYSTAL_BLOCK.get());
                         output.accept(TOPAZ_CRYSTAL_CLUSTER.get());
+                        output.accept(TOPAZ_CRYSTAL_BRICKS.get());
+                        output.accept(POLISHED_TOPAZ_CRYSTAL_BLOCK.get());
+                        output.accept(TOPAZ_PILLAR.get());
+                        output.accept(CUT_TOPAZ_PILLAR.get());
 
                         output.accept(PERIDOT_BLOCK.get());
                         output.accept(PERIDOT_ORE.get());
                         output.accept(DEEPSLATE_PERIDOT_ORE.get());
                         output.accept(PERIDOT_CRYSTAL_BLOCK.get());
                         output.accept(PERIDOT_CRYSTAL_CLUSTER.get());
+                        output.accept(PERIDOT_CRYSTAL_BRICKS.get());
+                        output.accept(POLISHED_PERIDOT_CRYSTAL_BLOCK.get());
+                        output.accept(PERIDOT_PILLAR.get());
+                        output.accept(CUT_PERIDOT_PILLAR.get());
 
                         output.accept(JADE_BLOCK.get());
                         output.accept(JADE_ORE.get());
                         output.accept(JADE_CRYSTAL_BLOCK.get());
                         output.accept(JADE_CRYSTAL_CLUSTER.get());
+                        output.accept(JADE_CRYSTAL_BRICKS.get());
+                        output.accept(POLISHED_JADE_CRYSTAL_BLOCK.get());
+                        output.accept(JADE_PILLAR.get());
+                        output.accept(CUT_JADE_PILLAR.get());
 
                         output.accept(AQUAMARINE_BLOCK.get());
                         output.accept(AQUAMARINE_ORE.get());
                         output.accept(DEEPSLATE_AQUAMARINE_ORE.get());
                         output.accept(AQUAMARINE_CRYSTAL_BLOCK.get());
                         output.accept(AQUAMARINE_CRYSTAL_CLUSTER.get());
+                        output.accept(AQUAMARINE_CRYSTAL_BRICKS.get());
+                        output.accept(POLISHED_AQUAMARINE_CRYSTAL_BLOCK.get());
+                        output.accept(AQUAMARINE_PILLAR.get());
+                        output.accept(CUT_AQUAMARINE_PILLAR.get());
 
                         output.accept(SAPPHIRE_BLOCK.get());
                         output.accept(SAPPHIRE_ORE.get());
                         output.accept(SAPPHIRE_CRYSTAL_BLOCK.get());
                         output.accept(SAPPHIRE_CRYSTAL_CLUSTER.get());
+                        output.accept(SAPPHIRE_CRYSTAL_BRICKS.get());
+                        output.accept(POLISHED_SAPPHIRE_CRYSTAL_BLOCK.get());
+                        output.accept(SAPPHIRE_PILLAR.get());
+                        output.accept(CUT_SAPPHIRE_PILLAR.get());
 
                         output.accept(AMETRINE_BLOCK.get());
                         output.accept(AMETRINE_ORE.get());
                         output.accept(AMETRINE_CRYSTAL_BLOCK.get());
                         output.accept(AMETRINE_CRYSTAL_CLUSTER.get());
+                        output.accept(AMETRINE_CRYSTAL_BRICKS.get());
+                        output.accept(POLISHED_AMETRINE_CRYSTAL_BLOCK.get());
+                        output.accept(AMETRINE_PILLAR.get());
+                        output.accept(CUT_AMETRINE_PILLAR.get());
 
                         output.accept(RAW_NECOIUM_BLOCK.get());
                         output.accept(NECOIUM_BLOCK.get());
