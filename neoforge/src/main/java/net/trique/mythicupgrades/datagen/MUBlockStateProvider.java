@@ -3,7 +3,6 @@ package net.trique.mythicupgrades.datagen;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.server.packs.PackType;
 import net.minecraft.world.item.ItemDisplayContext;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.RotatedPillarBlock;
@@ -105,7 +104,6 @@ public class MUBlockStateProvider extends BlockStateProvider {
     protected void cutPillarBlockWithItem(RegistryObject<Block, RotatedPillarBlock> cutPillarBlock,
                                           RegistryObject<Block, RotatedPillarBlock> relatedBlock) {
         ResourceLocation blockPath = cutPillarBlock.getId();
-        this.models().existingFileHelper.trackGenerated(blockPath, PackType.CLIENT_RESOURCES, ".png", "assets/mythicupgrades/textures");
         axisBlock(cutPillarBlock.get(), blockTexture(cutPillarBlock.get()),
                 blockTexture(relatedBlock.get()).withSuffix("_top"));
         itemModels().getBuilder(blockPath.getPath()).parent(new ModelFile.UncheckedModelFile(blockTexture(cutPillarBlock.get())));
