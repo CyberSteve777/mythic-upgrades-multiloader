@@ -89,8 +89,6 @@ public class SpelunkerEffectRenderer {
             Vec3i pos = ore.getKey();
             double squareDistance = toSquaredDistanceFromCenter(pos, playerPos.x, playerPos.y, playerPos.z);
             MUConfig.ChunkBlockConfig block = ore.getValue();
-            if (squareDistance > block.getBlockRadiusMax() && false)
-                continue;
             float fade;
             if (MUClientConfig.CONFIG.globalTransition.get() && block.isTransition()) {
                 fade = Math.min(1 - (float) ((squareDistance - block.getBlockRadiusMin()) / (block.getBlockRadiusMax() - block.getBlockRadiusMin())), 1);
