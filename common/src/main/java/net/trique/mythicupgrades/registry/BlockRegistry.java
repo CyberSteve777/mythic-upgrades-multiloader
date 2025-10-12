@@ -40,10 +40,10 @@ public class BlockRegistry {
     public static final RegistryObject<Block, Block> POLISHED_AQUAMARINE_CRYSTAL_BLOCK = registerBlock("polished_aquamarine_crystal_block", () ->
             new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_BLOCK).mapColor(MapColor.COLOR_LIGHT_BLUE).sound(SoundType.AMETHYST).strength(3.5f, 1200.0f)));
 
-    public static final RegistryObject<Block, Block> AQUAMARINE_PILLAR = registerBlock("aquamarine_pillar", () ->
+    public static final RegistryObject<Block, RotatedPillarBlock> AQUAMARINE_PILLAR = registerBlock("aquamarine_pillar", () ->
             new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_BLOCK).mapColor(MapColor.COLOR_LIGHT_BLUE).sound(SoundType.AMETHYST).strength(3.5f, 1200.0f)));
 
-    public static final RegistryObject<Block, Block> CUT_AQUAMARINE_PILLAR = registerBlock("cut_aquamarine_pillar", () ->
+    public static final RegistryObject<Block, RotatedPillarBlock> CUT_AQUAMARINE_PILLAR = registerBlock("cut_aquamarine_pillar", () ->
             new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_BLOCK).mapColor(MapColor.COLOR_LIGHT_BLUE).sound(SoundType.AMETHYST).strength(3.5f, 1200.0f)));
 
     public static final RegistryObject<Block, Block> PERIDOT_BLOCK = registerBlock("peridot_block", () ->
@@ -67,10 +67,10 @@ public class BlockRegistry {
     public static final RegistryObject<Block, Block> POLISHED_PERIDOT_CRYSTAL_BLOCK = registerBlock("polished_peridot_crystal_block", () ->
             new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_BLOCK).mapColor(MapColor.COLOR_LIGHT_GREEN).sound(SoundType.AMETHYST).strength(3.5f, 1200.0f)));
 
-    public static final RegistryObject<Block, Block> PERIDOT_PILLAR = registerBlock("peridot_pillar", () ->
+    public static final RegistryObject<Block, RotatedPillarBlock> PERIDOT_PILLAR = registerBlock("peridot_pillar", () ->
             new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_BLOCK).mapColor(MapColor.COLOR_LIGHT_GREEN).sound(SoundType.AMETHYST).strength(3.5f, 1200.0f)));
 
-    public static final RegistryObject<Block, Block> CUT_PERIDOT_PILLAR = registerBlock("cut_peridot_pillar", () ->
+    public static final RegistryObject<Block, RotatedPillarBlock> CUT_PERIDOT_PILLAR = registerBlock("cut_peridot_pillar", () ->
             new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_BLOCK).mapColor(MapColor.COLOR_LIGHT_GREEN).sound(SoundType.AMETHYST).strength(3.5f, 1200.0f)));
 
     public static final RegistryObject<Block, Block> RUBY_BLOCK = registerBlock("ruby_block", () ->
@@ -91,10 +91,10 @@ public class BlockRegistry {
     public static final RegistryObject<Block, Block> POLISHED_RUBY_CRYSTAL_BLOCK = registerBlock("polished_ruby_crystal_block", () ->
             new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_BLOCK).mapColor(MapColor.NETHER).sound(SoundType.AMETHYST).strength(3.5f, 1200.0f)));
 
-    public static final RegistryObject<Block, Block> RUBY_PILLAR = registerBlock("ruby_pillar", () ->
+    public static final RegistryObject<Block, RotatedPillarBlock> RUBY_PILLAR = registerBlock("ruby_pillar", () ->
             new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_BLOCK).mapColor(MapColor.NETHER).sound(SoundType.AMETHYST).strength(3.5f, 1200.0f)));
 
-    public static final RegistryObject<Block, Block> CUT_RUBY_PILLAR = registerBlock("cut_ruby_pillar", () ->
+    public static final RegistryObject<Block, RotatedPillarBlock> CUT_RUBY_PILLAR = registerBlock("cut_ruby_pillar", () ->
             new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_BLOCK).mapColor(MapColor.NETHER).sound(SoundType.AMETHYST).strength(3.5f, 1200.0f)));
 
     public static final RegistryObject<Block, Block> SAPPHIRE_BLOCK = registerBlock("sapphire_block", () ->
@@ -115,10 +115,10 @@ public class BlockRegistry {
     public static final RegistryObject<Block, Block> POLISHED_SAPPHIRE_CRYSTAL_BLOCK = registerBlock("polished_sapphire_crystal_block", () ->
             new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_BLOCK).mapColor(MapColor.LAPIS).sound(SoundType.AMETHYST).strength(3.5f, 1200.0f)));
 
-    public static final RegistryObject<Block, Block> SAPPHIRE_PILLAR = registerBlock("sapphire_pillar", () ->
+    public static final RegistryObject<Block, RotatedPillarBlock> SAPPHIRE_PILLAR = registerBlock("sapphire_pillar", () ->
             new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_BLOCK).mapColor(MapColor.LAPIS).sound(SoundType.AMETHYST).strength(3.5f, 1200.0f)));
 
-    public static final RegistryObject<Block, Block> CUT_SAPPHIRE_PILLAR = registerBlock("cut_sapphire_pillar", () ->
+    public static final RegistryObject<Block, RotatedPillarBlock> CUT_SAPPHIRE_PILLAR = registerBlock("cut_sapphire_pillar", () ->
             new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_BLOCK).mapColor(MapColor.LAPIS).sound(SoundType.AMETHYST).strength(3.5f, 1200.0f)));
 
     public static final RegistryObject<Block, Block> TOPAZ_BLOCK = registerBlock("topaz_block", () ->
@@ -142,10 +142,10 @@ public class BlockRegistry {
     public static final RegistryObject<Block, Block> POLISHED_TOPAZ_CRYSTAL_BLOCK = registerBlock("polished_topaz_crystal_block", () ->
             new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_BLOCK).mapColor(MapColor.TERRACOTTA_ORANGE).sound(SoundType.AMETHYST).strength(3.5f, 1200.0f)));
 
-    public static final RegistryObject<Block, Block> TOPAZ_PILLAR = registerBlock("topaz_pillar", () ->
+    public static final RegistryObject<Block, RotatedPillarBlock> TOPAZ_PILLAR = registerBlock("topaz_pillar", () ->
             new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_BLOCK).mapColor(MapColor.COLOR_LIGHT_BLUE).sound(SoundType.AMETHYST).strength(3.5f, 1200.0f)));
 
-    public static final RegistryObject<Block, Block> CUT_TOPAZ_PILLAR = registerBlock("cut_topaz_pillar", () ->
+    public static final RegistryObject<Block, RotatedPillarBlock> CUT_TOPAZ_PILLAR = registerBlock("cut_topaz_pillar", () ->
             new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_BLOCK).mapColor(MapColor.COLOR_LIGHT_BLUE).sound(SoundType.AMETHYST).strength(3.5f, 1200.0f)));
 
     public static final RegistryObject<Block, Block> AMETRINE_BLOCK = registerBlock("ametrine_block", () ->
@@ -166,10 +166,10 @@ public class BlockRegistry {
     public static final RegistryObject<Block, Block> POLISHED_AMETRINE_CRYSTAL_BLOCK = registerBlock("polished_ametrine_crystal_block", () ->
             new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_BLOCK).mapColor(MapColor.COLOR_PURPLE).sound(SoundType.AMETHYST).strength(3.5f, 1200.0f)));
 
-    public static final RegistryObject<Block, Block> AMETRINE_PILLAR = registerBlock("ametrine_pillar", () ->
+    public static final RegistryObject<Block, RotatedPillarBlock> AMETRINE_PILLAR = registerBlock("ametrine_pillar", () ->
             new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_BLOCK).mapColor(MapColor.COLOR_LIGHT_BLUE).sound(SoundType.AMETHYST).strength(3.5f, 1200.0f)));
 
-    public static final RegistryObject<Block, Block> CUT_AMETRINE_PILLAR = registerBlock("cut_ametrine_pillar", () ->
+    public static final RegistryObject<Block, RotatedPillarBlock> CUT_AMETRINE_PILLAR = registerBlock("cut_ametrine_pillar", () ->
             new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_BLOCK).mapColor(MapColor.COLOR_LIGHT_BLUE).sound(SoundType.AMETHYST).strength(3.5f, 1200.0f)));
 
     public static final RegistryObject<Block, Block> JADE_BLOCK = registerBlock("jade_block", () ->
@@ -190,10 +190,10 @@ public class BlockRegistry {
     public static final RegistryObject<Block, Block> POLISHED_JADE_CRYSTAL_BLOCK = registerBlock("polished_jade_crystal_block", () ->
             new Block(BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_BLOCK).mapColor(MapColor.PLANT).sound(SoundType.AMETHYST).strength(3.5f, 1200.0f)));
 
-    public static final RegistryObject<Block, Block> JADE_PILLAR = registerBlock("jade_pillar", () ->
+    public static final RegistryObject<Block, RotatedPillarBlock> JADE_PILLAR = registerBlock("jade_pillar", () ->
             new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_BLOCK).mapColor(MapColor.COLOR_LIGHT_BLUE).sound(SoundType.AMETHYST).strength(3.5f, 1200.0f)));
 
-    public static final RegistryObject<Block, Block> CUT_JADE_PILLAR = registerBlock("cut_jade_pillar", () ->
+    public static final RegistryObject<Block, RotatedPillarBlock> CUT_JADE_PILLAR = registerBlock("cut_jade_pillar", () ->
             new RotatedPillarBlock(BlockBehaviour.Properties.ofFullCopy(Blocks.AMETHYST_BLOCK).mapColor(MapColor.COLOR_LIGHT_BLUE).sound(SoundType.AMETHYST).strength(3.5f, 1200.0f)));
 
     public static final RegistryObject<Block, Block> RAW_NECOIUM_BLOCK = registerBlock("raw_necoium_block", () ->
