@@ -25,6 +25,8 @@
     "#mythicupgrades:storage_blocks/ametrine",
     "#mythicupgrades:storage_blocks/necoium",
     "#mythicupgrades:storage_blocks/raw_necoium",
-    "minecraft:decorated_pot"
+    "minecraft:decorated_pot",
+    "minecraft:suspicious_gravel",
+    "minecraft:suspicious_sand"
   ]
 }
