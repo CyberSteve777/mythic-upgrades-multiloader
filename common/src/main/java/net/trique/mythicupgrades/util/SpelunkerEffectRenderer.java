@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.Vec3i;
+import net.minecraft.util.FastColor;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.Vec3;
 import net.trique.mythicupgrades.config.MUClientConfig;
@@ -108,7 +109,7 @@ public class SpelunkerEffectRenderer {
     }
 
     private static VertexConsumer setOutlineColor(int color, OutlineBufferSource vertexConsumers) {
-        vertexConsumers.setColor(color >> 16 & 255, color >> 8 & 255, color & 255, 255);
+        vertexConsumers.setColor(FastColor.ARGB32.red(color), FastColor.ARGB32.green(color), FastColor.ARGB32.blue(color), 255);
         return vertexConsumers.getBuffer(RENDER_LAYER);
     }
 
