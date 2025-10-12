@@ -31,34 +31,62 @@ public class MUBlockLootTableProvider extends BlockLootSubProvider {
     protected void generate() {
         dropSelf(AQUAMARINE_BLOCK.get());
         dropSelf(AQUAMARINE_CRYSTAL_BLOCK.get());
+        dropSelf(POLISHED_AQUAMARINE_CRYSTAL_BLOCK.get());
+        dropSelf(AQUAMARINE_CRYSTAL_BRICKS.get());
+        dropSelf(AQUAMARINE_PILLAR.get());
+        dropSelf(CUT_AQUAMARINE_PILLAR.get());
         add(AQUAMARINE_ORE.get(), createOreDrop(AQUAMARINE_ORE.get(), AQUAMARINE.get()));
         add(DEEPSLATE_AQUAMARINE_ORE.get(), createOreDrop(DEEPSLATE_AQUAMARINE_ORE.get(), AQUAMARINE.get()));
 
         dropSelf(PERIDOT_BLOCK.get());
         dropSelf(PERIDOT_CRYSTAL_BLOCK.get());
+        dropSelf(POLISHED_PERIDOT_CRYSTAL_BLOCK.get());
+        dropSelf(PERIDOT_CRYSTAL_BRICKS.get());
+        dropSelf(PERIDOT_PILLAR.get());
+        dropSelf(CUT_PERIDOT_PILLAR.get());
         add(PERIDOT_ORE.get(), createOreDrop(PERIDOT_ORE.get(), PERIDOT.get()));
         add(DEEPSLATE_PERIDOT_ORE.get(), createOreDrop(DEEPSLATE_PERIDOT_ORE.get(), PERIDOT.get()));
 
 
         dropSelf(RUBY_BLOCK.get());
         dropSelf(RUBY_CRYSTAL_BLOCK.get());
+        dropSelf(POLISHED_RUBY_CRYSTAL_BLOCK.get());
+        dropSelf(RUBY_CRYSTAL_BRICKS.get());
+        dropSelf(RUBY_PILLAR.get());
+        dropSelf(CUT_RUBY_PILLAR.get());
         add(RUBY_ORE.get(), createOreDrop(RUBY_ORE.get(), RUBY.get()));
 
         dropSelf(SAPPHIRE_BLOCK.get());
         dropSelf(SAPPHIRE_CRYSTAL_BLOCK.get());
+        dropSelf(POLISHED_SAPPHIRE_CRYSTAL_BLOCK.get());
+        dropSelf(SAPPHIRE_CRYSTAL_BRICKS.get());
+        dropSelf(SAPPHIRE_PILLAR.get());
+        dropSelf(CUT_SAPPHIRE_PILLAR.get());
         add(SAPPHIRE_ORE.get(), createOreDrop(SAPPHIRE_ORE.get(), SAPPHIRE.get()));
 
         dropSelf(TOPAZ_BLOCK.get());
         dropSelf(TOPAZ_CRYSTAL_BLOCK.get());
+        dropSelf(POLISHED_TOPAZ_CRYSTAL_BLOCK.get());
+        dropSelf(TOPAZ_CRYSTAL_BRICKS.get());
+        dropSelf(TOPAZ_PILLAR.get());
+        dropSelf(CUT_TOPAZ_PILLAR.get());
         add(TOPAZ_ORE.get(), createOreDrop(TOPAZ_ORE.get(), TOPAZ.get()));
         add(DEEPSLATE_TOPAZ_ORE.get(), createOreDrop(DEEPSLATE_TOPAZ_ORE.get(), TOPAZ.get()));
 
         dropSelf(AMETRINE_BLOCK.get());
         dropSelf(AMETRINE_CRYSTAL_BLOCK.get());
+        dropSelf(POLISHED_AMETRINE_CRYSTAL_BLOCK.get());
+        dropSelf(AMETRINE_CRYSTAL_BRICKS.get());
+        dropSelf(AMETRINE_PILLAR.get());
+        dropSelf(CUT_AMETRINE_PILLAR.get());
         add(AMETRINE_ORE.get(), createOreDrop(AMETRINE_ORE.get(), AMETRINE.get()));
 
         dropSelf(JADE_BLOCK.get());
         dropSelf(JADE_CRYSTAL_BLOCK.get());
+        dropSelf(POLISHED_JADE_CRYSTAL_BLOCK.get());
+        dropSelf(JADE_CRYSTAL_BRICKS.get());
+        dropSelf(JADE_PILLAR.get());
+        dropSelf(CUT_JADE_PILLAR.get());
         add(JADE_ORE.get(), createOreDrop(JADE_ORE.get(), JADE.get()));
 
         dropSelf(NECOIUM_BLOCK.get());
