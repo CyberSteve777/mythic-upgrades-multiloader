@@ -10,6 +10,7 @@ import net.neoforged.neoforge.client.event.ClientTickEvent;
 import net.neoforged.neoforge.client.event.RenderLevelStageEvent;
 import net.trique.mythicupgrades.Constants;
 import net.trique.mythicupgrades.client.MUKeybinds;
+import net.trique.mythicupgrades.mixin.LevelRendererAccess;
 import net.trique.mythicupgrades.util.ClientFunctions;
 import net.trique.mythicupgrades.util.SpelunkerEffectRenderer;
 
@@ -18,9 +19,10 @@ public class ClientGameEventHandler {
 
     @SubscribeEvent
     public static void renderList(final RenderLevelStageEvent event) {
-        if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_TRANSLUCENT_BLOCKS) return;
+        if (event.getStage() != RenderLevelStageEvent.Stage.AFTER_ENTITIES) return;
         PoseStack stack = event.getPoseStack();
-        SpelunkerEffectRenderer.renderOres(stack);
+        var worldRenderer = (LevelRendererAccess)event.getLevelRenderer();
+        SpelunkerEffectRenderer.render(stack,event.getCamera(),worldRenderer.getRenderBuffers().outlineBufferSource());
     }
 
     @SubscribeEvent

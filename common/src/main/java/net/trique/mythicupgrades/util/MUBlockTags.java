@@ -3,6 +3,7 @@ package net.trique.mythicupgrades.util;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.level.block.Block;
 import net.trique.mythicupgrades.Constants;
 
@@ -26,9 +27,15 @@ public class MUBlockTags {
     public static TagKey<Block> STORAGE_BLOCKS_NECOIUM = create("storage_blocks/necoium");
     public static TagKey<Block> STORAGE_BLOCKS_RAW_NECOIUM = create("storage_blocks/raw_necoium");
 
-    public static TagKey<Block> SPELUNKER_OUTLINED = create("spelunker_outlined");
+    public static final TagKey<Block> QUARTZ_ORES = common("ores/quartz");
+    public static final TagKey<Block> ORES = common("ores");
+
     public static TagKey<Block> CAN_VEINMINE = create("can_veinmine");
 
+
+    private static TagKey<Block> common(String string) {
+        return TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath("c", string));
+    }
 
     private static TagKey<Block> create(String string) {
         return TagKey.create(Registries.BLOCK, ResourceLocation.fromNamespaceAndPath(Constants.MOD_ID, string));

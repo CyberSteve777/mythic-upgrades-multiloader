@@ -1,5 +1,6 @@
 package net.trique.mythicupgrades.platform;
 
+import fuzs.forgeconfigapiport.fabric.impl.network.ConfigSync;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentRegistry;
 import net.fabricmc.fabric.api.attachment.v1.AttachmentTarget;
@@ -10,13 +11,19 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
+import net.neoforged.fml.config.ModConfig;
 import net.trique.mythicupgrades.attachments.CommonDataAttachment;
 import net.trique.mythicupgrades.networking.packet.C2SModPacket;
+import net.trique.mythicupgrades.networking.packet.S2CConfigFilePayload;
 import net.trique.mythicupgrades.networking.packet.S2CModPacket;
 import net.trique.mythicupgrades.platform.services.IPlatformHelper;
 import net.fabricmc.loader.api.FabricLoader;
 import org.spongepowered.asm.mixin.MixinEnvironment;
+
+import java.io.IOException;
+import java.nio.file.Files;
 
 public class FabricPlatformHelper implements IPlatformHelper {
 
@@ -109,6 +116,25 @@ public class FabricPlatformHelper implements IPlatformHelper {
     @Override
     public void sendToServer(C2SModPacket<?> msg) {
         ClientPlayNetworking.send(msg);
+    }
+
+    @Override
+    public void receiveSyncedConfig(byte[] contents, String fileName) {
+        ConfigSync.receiveSyncedConfig(contents, fileName);
+    }
+
+    public static ModConfig SYNCABLE_CONFIG;
+
+    @Override
+    public void sendSyncedConfig(MinecraftServer server) {
+        try {
+            var packet = new S2CConfigFilePayload(SYNCABLE_CONFIG.getFileName(), Files.readAllBytes(SYNCABLE_CONFIG.getFullPath()));
+            for (ServerPlayer player : server.getPlayerList().getPlayers()) {
+                sendToClient(packet, player);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

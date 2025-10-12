@@ -1,111 +1,128 @@
 package net.trique.mythicupgrades.util;
 
-import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.*;
 import net.minecraft.client.Camera;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.player.LocalPlayer;
-import net.minecraft.client.renderer.GameRenderer;
+import net.minecraft.client.model.geom.ModelPart;
+import net.minecraft.client.renderer.OutlineBufferSource;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.texture.OverlayTexture;
+
 import net.minecraft.core.BlockPos;
-
+import net.minecraft.core.Direction;
+import net.minecraft.core.Vec3i;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.state.BlockState;
-import org.joml.Matrix4fStack;
-import org.joml.Vector3f;
+import net.minecraft.world.phys.Vec3;
+import net.trique.mythicupgrades.config.MUClientConfig;
+import net.trique.mythicupgrades.config.MUConfig;
+import net.trique.mythicupgrades.util.spelunker.ChunkOres;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static net.trique.mythicupgrades.registry.EffectRegistry.SPELUNKER;
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 
 public class SpelunkerEffectRenderer {
-    private static final List<BlockPos> ORES_HIGHLIGHT_POSITIONS = new ArrayList<>();
 
-    public static void clientFillRenderPositions(LocalPlayer player) {
-        if (player != null) {
-            if (player.hasEffect(SPELUNKER)) {
-                updateOresList(player.getOnPos().above(), player.level(), player.getEffect(SPELUNKER).getAmplifier());
-            } else {
-                ORES_HIGHLIGHT_POSITIONS.clear();
-            }
+    private static final ConcurrentMap<Vec3i, ChunkOres> chunkSections = new ConcurrentHashMap<>();
+    private static boolean active = false;
+    private static final ModelPart.Cube CUBE = new ModelPart.Cube(0, 0, 0.0F, 0.0F, 0.0F, 16.0F, 16.0F, 16.0F, 0.0F, 0.0F, 0.0F, false, 0.0F, 0.0F, EnumSet.allOf(Direction.class));
+    private static final RenderType RENDER_LAYER = RenderType.outline(CommonFunctions.getLoc("textures/none.png"));
+
+    public SpelunkerEffectRenderer() {
+    }
+
+    public static void render(PoseStack matrices, Camera camera, OutlineBufferSource vertexConsumers) {
+        Vec3 pos = camera.getPosition();
+        matrices.pushPose();
+        matrices.translate(-pos.x, -pos.y, -pos.z);
+
+        for (Map.Entry<Vec3i, ChunkOres> vec3iChunkOresEntry : chunkSections.entrySet()) {
+            Map.Entry<Vec3i, ChunkOres> chunkSection = vec3iChunkOresEntry;
+            renderChunk(chunkSection.getValue(), matrices, pos, vertexConsumers);
+        }
+
+        matrices.popPose();
+    }
+
+    public static boolean setActive(boolean value) {
+        boolean init = value && !SpelunkerEffectRenderer.active;
+        SpelunkerEffectRenderer.active = value;
+        return init;
+    }
+
+    public static boolean isActive() {
+        return SpelunkerEffectRenderer.active;
+    }
+
+    public static void clear() {
+        chunkSections.clear();
+    }
+
+    public static void updateChunks(Level world, Collection<BlockPos> remove, Collection<ChunkOres> add) {
+        for (Vec3i v : remove)
+            chunkSections.remove(v);
+        for (ChunkOres chunk : add) {
+            chunkSections.put(chunk.getPos(), chunk
+                    .remapToBlockCoordinates(world.getMinSection())
+            );
         }
     }
 
+    public static void removeChunk(Vec3i pos) {
+        chunkSections.remove(pos);
+    }
 
-    private static void updateOresList(BlockPos startPos, Level level, int amplifier) {
-        ORES_HIGHLIGHT_POSITIONS.clear();
-        int radius = getRadius(amplifier);
-        for (int x = -radius; x <= radius; x++) {
-            for (int y = -radius; y <= radius; y++) {
-                for (int z = -radius; z <= radius; z++) {
-                    BlockPos pos = startPos.offset(x, y, z);
-                    BlockState state = level.getBlockState(pos);
-                    if (state.is(MUBlockTags.SPELUNKER_OUTLINED)) {
-                        ORES_HIGHLIGHT_POSITIONS.add(pos);
-                    }
-                }
+    public static ChunkOres get(Vec3i pos) {
+        return chunkSections.get(pos);
+    }
+
+    public static void addChunks(int bottomSectionCord, Collection<ChunkOres> chunks) {
+
+        for (ChunkOres chunk : chunks) {
+            chunkSections.put(chunk.getPos(), chunk.remapToBlockCoordinates(bottomSectionCord));
+        }
+
+    }
+
+    public static void renderChunk(ChunkOres chunk, PoseStack matrices, Vec3 playerPos, OutlineBufferSource vertexConsumers) {
+        for (Map.Entry<BlockPos, MUConfig.ChunkBlockConfig> ore : chunk.entrySet()) {
+            Vec3i pos = ore.getKey();
+            double squareDistance = toSquaredDistanceFromCenter(pos, playerPos.x, playerPos.y, playerPos.z);
+            MUConfig.ChunkBlockConfig block = ore.getValue();
+            if (squareDistance > block.getBlockRadiusMax() && false)
+                continue;
+            float fade;
+            if (MUClientConfig.CONFIG.globalTransition.get() && block.isTransition()) {
+                fade = Math.min(1 - (float) ((squareDistance - block.getBlockRadiusMin()) / (block.getBlockRadiusMax() - block.getBlockRadiusMin())), 1);
+                fade = easeOutCirc(fade);
+            } else fade = 1;
+            matrices.pushPose();
+            matrices.translate(pos.getX() + 0.5, pos.getY() + 0.5, pos.getZ() + 0.5);
+            matrices.scale(fade, fade, fade);
+            {
+                matrices.pushPose();
+                matrices.translate(-0.5, -0.5, -0.5);
+                CUBE.compile(matrices.last(), setOutlineColor(block.getColor(), vertexConsumers), 0, OverlayTexture.NO_OVERLAY, 0);
+                matrices.popPose();
             }
+            matrices.popPose();
         }
     }
 
-
-    public static void renderOres(PoseStack stack) {
-        if (stack != null && !ORES_HIGHLIGHT_POSITIONS.isEmpty()) {
-            Camera cam = Minecraft.getInstance().gameRenderer.getMainCamera();
-            RenderSystem.disableDepthTest();
-            RenderSystem.disableCull();
-            Matrix4fStack posestack = RenderSystem.getModelViewStack();
-            posestack.pushMatrix();
-            posestack.mul(stack.last().pose());
-            RenderSystem.applyModelViewMatrix();
-            RenderSystem.setShader(GameRenderer::getRendertypeLinesShader);
-            BufferBuilder bufferBuilder = Tesselator.getInstance().begin(VertexFormat.Mode.LINES, DefaultVertexFormat.POSITION_COLOR_NORMAL);
-            RenderSystem.lineWidth(2f);
-            for (BlockPos pos : ORES_HIGHLIGHT_POSITIONS) {
-                Vector3f cameraPos = cam.getPosition().toVector3f();
-                float posx = pos.getX() - cameraPos.x();
-                float posy = pos.getY() - cameraPos.y();
-                float posz = pos.getZ() - cameraPos.z();
-                renderBlock(bufferBuilder, posx, posy, posz);
-            }
-            MeshData data = bufferBuilder.build();
-            if (data != null) {
-                BufferUploader.drawWithShader(data);
-            }
-            posestack.popMatrix();
-            RenderSystem.applyModelViewMatrix();
-        }
+    private static VertexConsumer setOutlineColor(int color, OutlineBufferSource vertexConsumers) {
+        vertexConsumers.setColor(color >> 16 & 255, color >> 8 & 255, color & 255, 255);
+        return vertexConsumers.getBuffer(RENDER_LAYER);
     }
 
-    private static void renderBlock(BufferBuilder builder, float x, float y, float z) {
-        int [][] offsets = {
-                {0, 0, 0}, {0, 1, 0}, {0, 0, 0}, {1, 0, 0},
-                {0, 0, 0}, {0, 0, 1}, {0, 1, 0}, {0, 1, 1},
-                {0, 1, 0}, {1, 1, 0}, {1, 1, 1}, {1, 1, 0},
-                {1, 1, 1}, {0, 1, 1}, {1, 1, 1}, {1, 0, 1},
-                {1, 0, 1}, {0, 0, 1}, {1, 0, 1}, {1, 0, 0},
-                {0, 0, 1}, {0, 1, 1}, {1, 0, 0}, {1, 1, 0}
-        };
-
-        int [][] normals = {
-                {0, 1, 0}, {0, -1, 0}, {1, 0, 0}, {-1, 0, 0},
-                {0, 0, 1}, {0, 0, -1}, {0, 0, 1}, {0, 0, -1},
-                {1, 0, 0}, {-1, 0, 0}, {0, 0, -1}, {0, 0, 1},
-                {-1, 0, 0}, {1, 0, 0}, {0, -1, 0}, {0, 1, 0},
-                {-1, 0, 0}, {1, 0, 0}, {0, 0, -1}, {0, 0, 1},
-                {0, 1, 0}, {0, -1, 0}, {0, 1, 0}, {0, -1, 0}
-        };
-
-        for (int i = 0; i < offsets.length; i++) {
-            builder.addVertex(x + offsets[i][0], y + offsets[i][1], z + offsets[i][2])
-                    .setColor(255, 0, 0, 255)
-                    .setNormal(normals[i][0], normals[i][1], normals[i][2]);
-        }
+    private static float easeOutCirc(float x) {
+        return (float)Math.sqrt(1.0 - Math.pow(x - 1.0F, 2.0));
     }
 
-
-    public static int getRadius(int amplifier) {
-        return 2 * (amplifier + 1);
+    private static double toSquaredDistanceFromCenter(Vec3i pos, double x, double y, double z) {
+        double d = (double)pos.getX() + 0.5 - x;
+        double e = (double)pos.getY() + 0.5 - y;
+        double f = (double)pos.getZ() + 0.5 - z;
+        return d * d + e * e + f * f;
     }
+
 }

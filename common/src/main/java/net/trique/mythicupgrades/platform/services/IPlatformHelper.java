@@ -3,6 +3,7 @@ package net.trique.mythicupgrades.platform.services;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
 import net.trique.mythicupgrades.attachments.CommonDataAttachment;
@@ -67,4 +68,7 @@ public interface IPlatformHelper {
     void sendToClient(S2CModPacket<?> msg, ServerPlayer player);
     void sendToServer(C2SModPacket<?> msg);
 
+    void receiveSyncedConfig(byte[] contents, String fileName);
+
+    void sendSyncedConfig(MinecraftServer server);
 }
