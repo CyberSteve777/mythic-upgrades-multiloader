@@ -23,6 +23,7 @@ public class MUCommon {
         ItemRegistry.init();
         BlockRegistry.init();
         MUArmorMaterials.init();
+        TrimMaterialRegistry.init();
         CreativeTabRegistry.init();
         ParticleRegistry.init();
         MUDamageTypes.init();

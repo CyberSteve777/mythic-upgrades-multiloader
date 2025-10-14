@@ -29,6 +29,11 @@ public class MUItemTagProvider extends ItemTagsProvider {
                         AMETRINE_HELMET.get(), AMETRINE_CHESTPLATE.get(), AMETRINE_LEGGINGS.get(), AMETRINE_BOOTS.get(),
                         JADE_HELMET.get(), JADE_CHESTPLATE.get(), JADE_LEGGINGS.get(), JADE_BOOTS.get(),
                         RUBY_HELMET.get(), RUBY_CHESTPLATE.get(), RUBY_LEGGINGS.get(), RUBY_BOOTS.get());
+        tag(ItemTags.TRIM_MATERIALS)
+                .add(AQUAMARINE_CRYSTAL_SHARD.get(), TOPAZ_CRYSTAL_SHARD.get(),
+                        PERIDOT_CRYSTAL_SHARD.get(), SAPPHIRE_CRYSTAL_SHARD.get(),
+                        RUBY_CRYSTAL_SHARD.get(), JADE_CRYSTAL_SHARD.get(),
+                        AMETRINE_CRYSTAL_SHARD.get(), NECOIUM_INGOT.get());
         tag(ItemTags.CLUSTER_MAX_HARVESTABLES).add(
                 RUBY_PICKAXE.get(), TOPAZ_PICKAXE.get(), SAPPHIRE_PICKAXE.get(), JADE_PICKAXE.get(), AMETRINE_PICKAXE.get(),
                 AQUAMARINE_PICKAXE.get(), PERIDOT_PICKAXE.get()
